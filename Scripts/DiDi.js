@@ -50,7 +50,7 @@ hostname = as.xiaojukeji.com
 获取完 Token 后可不注释 rewrite / hostname，Token 更新时会弹窗。若因 MitM 导致该软件或小程序网络不稳定，可注释掉 hostname。
 */
 
-const aff = true //若不想提供 aff 请改为 false。
+const aff = false //若不想提供 aff 请改为 false。
 const mainURL = 'https://bosp-api.xiaojukeji.com/wechat/benefit/public/index?'
 const TokenName = '滴滴出行'
 const TokenKey = 'DiDi'
