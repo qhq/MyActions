@@ -43,7 +43,7 @@ function inquire() {
 
 function showmsg() {
   return new Promise((resolve) => {
-    const { paraFieldResult, totalBalanceAvailable } = $.resData;
+    const { paraFieldResult, totalBalanceAvailable, result, msg } = $.resData;
 
     console.log('====================================');
     console.log('电信余额提醒');
@@ -51,14 +51,14 @@ function showmsg() {
     console.log('====================================');
     const balance = totalBalanceAvailable / 100;
 
-    if ((paraFieldResult === '查询成功' || paraFieldResult === 'SUCCESS') && balance <= lowestBalance) {
+    if (result === 0 && balance <= lowestBalance) {
       $.subt = '余额过低，请及时充值';
       $.desc = `当前余额：${balance}元`;
       $.msg($.name, $.subt, $.desc);
     }
-    if (paraFieldResult !== '查询成功' && paraFieldResult !== 'SUCCESS') {
+    if (result !== 0 && paraFieldResult !== 'SUCCESS') {
       $.subt = '查询失败';
-      $.desc = '进入【天翼账号中心】公众号，点【查询充值-查余额】；获取Cookie';
+      $.desc = `失败原因：${msg}\n进入【天翼账号中心】公众号，点【查询充值-查余额】；获取Cookie重新尝试`;
       $.msg($.name, $.subt, $.desc);
     }
     resolve();
