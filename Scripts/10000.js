@@ -51,12 +51,12 @@ function showmsg() {
     console.log('====================================');
     const balance = totalBalanceAvailable / 100;
 
-    if ((paraFieldResult === '成功' || paraFieldResult === 'SUCCESS') && balance <= lowestBalance) {
+    if ((paraFieldResult === '查询成功' || paraFieldResult === 'SUCCESS') && balance <= lowestBalance) {
       $.subt = '余额过低，请及时充值';
       $.desc = `当前余额：${balance}元`;
       $.msg($.name, $.subt, $.desc);
     }
-    if (paraFieldResult !== '成功' && paraFieldResult !== 'SUCCESS') {
+    if (paraFieldResult !== '查询成功' && paraFieldResult !== 'SUCCESS') {
       $.subt = '查询失败';
       $.desc = '进入【天翼账号中心】公众号，点【查询充值-查余额】；获取Cookie';
       $.msg($.name, $.subt, $.desc);
