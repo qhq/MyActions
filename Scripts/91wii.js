@@ -1,14 +1,32 @@
-const cookieName = '平安金管家'
-const signurlKey = 'chavy_signurl_pingan'
-const signheaderKey = 'chavy_signheader_pingan'
-const chavy = init()
+const cookieName = '91wii'
+const cookie = 'qhq_91wii_cookie'
+const signurlVal = 'https://www.91wii.com/plugin.php'
+const signheaderVal = 'id=dc_signin:sign&infloat=yes&handlekey=sign&inajax=1&ajaxtarget=fwin_content_sign'
+const qhq = init()
 
-if ($request && $request.method != 'OPTIONS') {
-  const signurlVal = $request.url
-  const signheaderVal = JSON.stringify($request.headers)
-  if (signurlVal) chavy.setdata(signurlVal, signurlKey)
-  if (signheaderVal) chavy.setdata(signheaderVal, signheaderKey)
-  chavy.msg(cookieName, `获取Cookie: 成功`, ``)
+sign()
+
+function sign() {
+  const url = { url: signurlVal, headers: JSON.parse(signheaderVal) }
+  url.body = '{}'
+  qhq.post(url, (error, response, data) => {
+    qhq.log(`${cookieName}, data: ${data}`)
+    const title = `${cookieName}`
+    let subTitle = ''
+    let detail = ''
+    const result = JSON.parse(data.match(/\(([^\)]*)\)/)[1])
+    if (result.code == 200) {
+      subTitle = `签到结果: 成功`
+      detail = `共签: ${result.ssdb_code}天`
+    } else if (result.code == 1002) {
+      subTitle = `签到结果: 成功 (重复签到)`
+    } else {
+      subTitle = `签到结果: 失败`
+      detail = `编码: ${result.code}, 说明: ${result.msg}`
+    }
+    qhq.msg(title, subTitle, detail)
+    qhq.done()
+  })
 }
 
 function init() {
@@ -54,4 +72,3 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
-chavy.done()

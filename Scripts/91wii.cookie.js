@@ -1,34 +1,14 @@
-const cookieName = '平安金管家'
-const signurlKey = 'chavy_signurl_pingan'
-const signheaderKey = 'chavy_signheader_pingan'
-const chavy = init()
-const signurlVal = chavy.getdata(signurlKey)
-const signheaderVal = chavy.getdata(signheaderKey)
+// www.91wii.com
 
-sign()
+const cookieName = '91wii'
+const cookie = 'qhq_91wii_cookie'
+const qhq = init()
 
-function sign() {
-  const url = { url: signurlVal, headers: JSON.parse(signheaderVal) }
-  url.body = '{}'
-  chavy.post(url, (error, response, data) => {
-    chavy.log(`${cookieName}, data: ${data}`)
-    const title = `${cookieName}`
-    let subTitle = ''
-    let detail = ''
-    const result = JSON.parse(data.match(/\(([^\)]*)\)/)[1])
-    if (result.code == 200) {
-      subTitle = `签到结果: 成功`
-      detail = `共签: ${result.ssdb_code}天`
-    } else if (result.code == 1002) {
-      subTitle = `签到结果: 成功 (重复签到)`
-    } else {
-      subTitle = `签到结果: 失败`
-      detail = `编码: ${result.code}, 说明: ${result.msg}`
-    }
-    chavy.msg(title, subTitle, detail)
-    chavy.done()
-  })
-}
+const cookieVal = $request.headers['Cookie']
+
+    if (cookieVal) qhq.setdata(cookieVal, cookieKey)
+    qhq.msg(`${cookieName}`, ' 获取 Cookie: 成功', '')
+    qhq.log(`[${cookieName}] 获取 Cookie: 成功，Cookie: ${cookieVal}`)
 
 function init() {
   isSurge = () => {
@@ -73,3 +53,4 @@ function init() {
   }
   return { isSurge, isQuanX, msg, log, getdata, setdata, get, post, done }
 }
+qhq.done()
