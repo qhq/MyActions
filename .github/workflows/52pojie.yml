@@ -24,6 +24,7 @@ jobs:
       - name: npm install
         run: |
           npm install
+          npm install got tough-cookie -g
       - name: ' 运行 【52破解签到】'
         run: |
           node 52pojie.js
