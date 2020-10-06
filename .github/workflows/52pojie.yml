@@ -27,7 +27,7 @@ jobs:
           npm install got tough-cookie -g
       - name: ' 运行 【52破解签到】'
         run: |
-          node 52pojie.js
+          node Scripts/52pojie.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
