@@ -21,8 +21,31 @@ Node.js说明:
 抓取Cookie说明:
 浏览器打开 https://www.52pojie.cn/home.php 登录账号后, 开启抓包软件并刷新页面.
 抓取该URL请求头下的Cookie字段, 填入以下CookieWA的单引号内即可. */
+ let CookieWA = [
+  '',// 账号一 ck
+  '',// 账号二 ck, 如有更多，依次类推
+]
+// 判断 github action 里面是否有京东 ck
+if (process.env.COOKIE_52POJIE && process.env.COOKIE_52POJIE.split('&') && process.env.COOKIE_52POJIE.split('&').length > 0) {
+  if (process.env.COOKIE_52POJIE.indexOf('&') > -1) {
+    console.log(`您的 cookie 选择的是用 & 隔开 \n`)
+    CookieWA = process.env.COOKIE_52POJIE.split('&');
+  } else if (process.env.COOKIE_52POJIE.indexOf('\n') > -1) {
+    console.log(`您的 cookie 选择的是用换行隔开 \n`)
+    CookieWA = process.env.COOKIE_52POJIE.split('\n');
+  } else {
+    CookieWA = process.env.COOKIE_52POJIE.split();
+  }
+  console.log(`\n================== 脚本执行来自 github action=====================\n`)
+  console.log(`================== 脚本执行 - 国际标准时间 (UTC)：${new Date().toLocaleString()}=====================\n`)
+  console.log(`================== 脚本执行 - 北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}=====================\n`)
+}
+for (let i = 0; i < CookieWA.length; i++) {
+  const index = (i + 1 === 1) ? '' : (i + 1);
+  exports['CookieJD' + index] = CookieWA[i];
+}
 
-const CookieWA = 'htVD_2132_connect_is_bind=0; htVD_2132_smile=1D1; KF4=i1Tf6I; htVD_2132_visitedfid=16D2D8D66D74; htVD_2132_saltkey=P3SoQXBs; htVD_2132_lastvisit=1601682427; __gads=ID=8a4bb57c6fb9ced2:T=1601686035:S=ALNI_MbCgVfGoM3j9B1L1iniPGhq1vw5pg; htVD_2132_auth=5219ZPZgU7I0Gcy6u3uiDirnJbEBRgfkvruUHO%2FTuuMhI8J%2Fe%2BbM7dXWsDjkLkeeUKMYJOUgFbJ3LUjQRouEzB4ydYk; Hm_lvt_46d556462595ed05e05f009cdafff31a=1601686023,1601772904; htVD_2132_sid=0; htVD_2132_ulastactivity=1601943318%7C0; htVD_2132_lastcheckfeed=615620%7C1601943318; htVD_2132_lastact=1601943641%09forum.php%09';
+// const CookieWA = 'htVD_2132_connect_is_bind=0; htVD_2132_smile=1D1; KF4=i1Tf6I; htVD_2132_visitedfid=16D2D8D66D74; htVD_2132_saltkey=P3SoQXBs; htVD_2132_lastvisit=1601682427; __gads=ID=8a4bb57c6fb9ced2:T=1601686035:S=ALNI_MbCgVfGoM3j9B1L1iniPGhq1vw5pg; htVD_2132_auth=5219ZPZgU7I0Gcy6u3uiDirnJbEBRgfkvruUHO%2FTuuMhI8J%2Fe%2BbM7dXWsDjkLkeeUKMYJOUgFbJ3LUjQRouEzB4ydYk; Hm_lvt_46d556462595ed05e05f009cdafff31a=1601686023,1601772904; htVD_2132_sid=0; htVD_2132_ulastactivity=1601943318%7C0; htVD_2132_lastcheckfeed=615620%7C1601943318; htVD_2132_lastact=1601943641%09forum.php%09';
 
 /***********************
 Surge 4.2.0+ 脚本配置:
