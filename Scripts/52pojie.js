@@ -97,32 +97,34 @@ if (typeof $request != "undefined") {
 }
 
 function checkin() {
-  for (let i =0; i < CookieWAs.length; i++) {
-    CookieWA = CookieWAs[i];
-    if (CookieWA) {
-  $.get({
-    url: 'https://www.52pojie.cn/home.php?mod=task&do=apply&id=2&mobile=no',
-    headers: {
-      Cookie: CookieWA || $.getdata("CookieWA"),
+    for (let i = 0; i < CookieWAs.length; i++) {
+        CookieWA = CookieWAs[i];
+        if (CookieWA) {
+            $.get({
+                url: 'https://www.52pojie.cn/home.php?mod=task&do=apply&id=2&mobile=no',
+                headers: {
+                    Cookie: CookieWA || $.getdata("CookieWA"),
+                }
+            },
+            function(error, response, data) {
+                if (error) {
+                    $.log(error);
+                    $.msg("吾爱破解", "签到请求失败 ‼️‼️", error)
+                } else {
+                    if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|��̳΢�š��ᰮ�ƽ�)/)) {
+                        $.msg("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日，签到成功 🎉")
+                    } else if (data.match(/(ÄúÒÑ|\u4e0b\u671f\u518d\u6765|>��Ǹ������)/)) {
+                        $.msg("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
+                    } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�)/)) {
+                        $.msg("吾爱破解", "", "签到失败，Cookie 失效 ‼️‼️")
+                    } else {
+                        $.msg("吾爱破解", "", "脚本待更新 ‼️‼️")
+                    }
+                }
+                $.done();
+            })
+        }
     }
-  }, function(error, response, data) {
-    if (error) {
-      $.log(error);
-      $.msg("吾爱破解", "签到请求失败 ‼️‼️", error)
-    } else {
-      if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|��̳΢�š��ᰮ�ƽ�)/)) {
-        $.msg("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日, 签到成功 🎉")
-      } else if (data.match(/(ÄúÒÑ|\u4e0b\u671f\u518d\u6765|>��Ǹ������)/)) {
-        $.msg("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日, 已签过 ⚠️")
-      } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�)/)) {
-        $.msg("吾爱破解", "", "签到失败, Cookie失效 ‼️‼️")
-      } else {
-        $.msg("吾爱破解", "", "脚本待更新 ‼️‼️")
-      }
-    }
-    $.done();
-  })
-}}
 }
 
 function GetCookie() {
