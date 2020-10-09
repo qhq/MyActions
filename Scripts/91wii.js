@@ -36,7 +36,7 @@ function checkin() {
         CookieMe = Cookies[i];
         if (CookieMe) {
             $.get({
-                url: 'https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1',
+                url: 'https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1&formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid=1&signpn=true',
                 headers: {
                     Cookie: CookieMe || $.getdata("CookieMe"),
                 }
