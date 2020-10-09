@@ -32,16 +32,24 @@ if (typeof $request != "undefined") {
 }
 
 function checkin() {
+   const options = {
+    "url": `https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1`,
+    "body": `formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid=1&signpn=true`,
+    "headers": {
+      //"Host": "rdcseason.m.jd.com",
+      //"Accept": "application/json, text/plain, */*",
+      "Connection": "keep-alive",
+      "Cookie": CookieMe || $.getdata("CookieMe"),
+      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1",
+      //"Accept-Language": "zh-cn",
+      "Referer": "https://www.91wii.com/home.php?mod=space&do=notice&view=mypost",
+      "Accept-Encoding": "gzip, deflate, br"
+    }
+  }
     for (let i = 0; i < Cookies.length; i++) {
         CookieMe = Cookies[i];
         if (CookieMe) {
-            $.get({
-                url: 'https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1&formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid=1&signpn=true',
-                headers: {
-                    Cookie: CookieMe || $.getdata("CookieMe"),
-                }
-            },
-            function(error, response, data) {
+            $.get(options,function(error, response, data) {
                 if (error) {
                     $.log(error);
                     $.msg("91WII", "签到请求失败 ‼️‼️", error)
@@ -63,7 +71,24 @@ function checkin() {
         }
     }
 }
-
+/*
+    $.post(options, (err, resp, data) => {
+      try {
+        // console.log('getShopPrize', data);
+        if (err) {
+          console.log(`${JSON.stringify(err)}`)
+          console.log(`${$.name} API 请求失败，请检查网路重试 `)
+        } else {
+          data = JSON.parse(data);
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+  */
 function GetCookie() {
   try {
     if ($request.headers && $request.url.match(/www\.52pojie\.cn/)) {
