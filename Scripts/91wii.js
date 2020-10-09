@@ -32,6 +32,9 @@ if (typeof $request != "undefined") {
 }
 
 function checkin() {
+    for (let i = 0; i < Cookies.length; i++) {
+        CookieMe = Cookies[i];
+        if (CookieMe) {
    const options = {
     "url": `https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1`,
     "body": `formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid=1&signpn=true`,
@@ -46,9 +49,6 @@ function checkin() {
       "Accept-Encoding": "gzip, deflate, br"
     }
   }
-    for (let i = 0; i < Cookies.length; i++) {
-        CookieMe = Cookies[i];
-        if (CookieMe) {
             $.get(options,function(error, response, data) {
                 if (error) {
                     $.log(error);
