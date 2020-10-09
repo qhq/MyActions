@@ -49,7 +49,7 @@ function checkin() {
       "Accept-Encoding": "gzip, deflate, br"
     }
   }
-            $.get(options,function(error, response, data) {
+            $.post(options,function(error, response, data) {
                 if (error) {
                     $.log(error);
                     $.msg("91WII", "签到请求失败 ‼️‼️", error)
