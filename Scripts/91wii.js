@@ -39,13 +39,13 @@ function checkin() {
     "url": `https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1`,
     "body": `formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid=1&signpn=true`,
     "headers": {
-      //"Host": "rdcseason.m.jd.com",
-      //"Accept": "application/json, text/plain, */*",
+      "Host": "www.91wii.com",
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Connection": "keep-alive",
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       "Cookie": CookieMe || $.getdata("CookieMe"),
-      "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1",
-      //"Accept-Language": "zh-cn",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
+      "Accept-Language": "zh-cn",
       "Referer": "https://www.91wii.com/home.php?mod=space&do=notice&view=mypost",
       "Accept-Encoding": "gzip, deflate, br"
     }
@@ -57,7 +57,7 @@ function checkin() {
                 } else {
                  
             console.log(data)
-                    if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|��̳΢�š��ᰮ�ƽ�)/)) {
+                    if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|ǩ���ɹ�~�����������ֵ17)/)) {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，签到成功 🎉")
                     } else if (data.match(/(ÄúÒÑ|\u5DF2\u7ECF\u7B7E\u8FC7\u5230|�������Ѿ�ǩ����)/)) {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
