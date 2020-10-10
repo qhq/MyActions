@@ -62,7 +62,10 @@ function checkin() {
                     } else if (data.match(/(ÄúÒÑ|\u5DF2\u7ECF\u7B7E\u8FC7\u5230|�������Ѿ�ǩ����)/)) {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
                     } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�)/)) {
-                        $.msg("91WII", "", "签到失败，Cookie 失效 ‼️‼️")
+                        $.msg("91WII", "", "签到失败，Cookie 失效 ‼️‼️");                
+if ($.isNode()) {
+        await notify.sendNotify(`${$.name}cookie 已失效 `, `请重新登录获取 cookie`);
+      }
                     } else {
                         $.msg("91WII", "", "脚本待更新 ‼️‼️")
                     }
