@@ -6,7 +6,7 @@ name: 91wii
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 0 * * *'
   watch:
     types: started
 
