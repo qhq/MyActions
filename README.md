@@ -1,2 +1,1 @@
-# QuantumultX
-自用
+自动签到
