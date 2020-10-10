@@ -64,7 +64,7 @@ function checkin() {
                     } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�)/)) {
                         $.msg("91WII", "", "签到失败，Cookie 失效 ‼️‼️");                
 if ($.isNode()) {
-        await notify.sendNotify(`${$.name}cookie 已失效 `, `请重新登录获取 cookie`);
+      notify.sendNotify(`${$.name}cookie 已失效 `, `请重新登录获取 cookie`);
       }
                     } else {
                         $.msg("91WII", "", "脚本待更新 ‼️‼️")
