@@ -42,7 +42,7 @@ function checkin() {
       "Host": "www.91wii.com",
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Connection": "keep-alive",
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Content-Type": "application/x-www-form-urlencoded; charset=GBK",
       "Cookie": CookieMe || $.getdata("CookieMe"),
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
       "Accept-Language": "zh-cn",
@@ -56,7 +56,7 @@ function checkin() {
                     $.msg("91WII", "签到请求失败 ‼️‼️", error)
                 } else {
                  
-            console.log(URLDecoder(data))
+            console.log(data)
                     if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|ǩ���ɹ�~�����������ֵ)/)) {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，签到成功 🎉")
                     } else if (data.match(/(ÄúÒÑ|\u5DF2\u7ECF\u7B7E\u8FC7\u5230|�������Ѿ�ǩ����)/)) {
