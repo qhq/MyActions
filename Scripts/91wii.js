@@ -42,7 +42,7 @@ function checkin() {
       "Host": "www.91wii.com",
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Connection": "keep-alive",
-      "Content-Type": "application/x-www-form-urlencoded; charset=GBK",
+      "Content-Type": "application/x-www-form-urlencoded; charset=gb2312",
       "Cookie": CookieMe || $.getdata("CookieMe"),
       "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
       "Accept-Language": "zh-cn",
