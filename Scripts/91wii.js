@@ -24,7 +24,7 @@ for (let i = 0; i < Cookies.length; i++) {
 
 
 var $ = new Env('');
-const notify = $.isNode() ? require('././sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 var date = new Date();
 if (typeof $request != "undefined") {
   GetCookie()
