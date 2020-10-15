@@ -23,7 +23,7 @@ for (let i = 0; i < Cookies.length; i++) {
 }
 
 
-var $ = new Env('');
+var $ = new Env('91wii');
 const notify = $.isNode() ? require('../sendNotify') : '';
 var date = new Date();
 if (typeof $request != "undefined") {
@@ -65,9 +65,9 @@ function checkin() {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
                     } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�|系统拒绝|���ϵͳ�ܾ�)/)) {
                         $.msg("91WII", "", "签到失败，Cookie 失效 ‼️‼️");
-                        if ($.isNode()) {
+                        //if ($.isNode()) {
                            notify.sendNotify(`${$.name}cookie已失效`, `请重新登录获取cookie`);
-                        }
+                        //}
                     } else {
                         $.msg("91WII", "", "脚本待更新 ‼️‼️")
                     }
