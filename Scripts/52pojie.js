@@ -88,8 +88,9 @@ http-request https:\/\/www\.52pojie\.cn\/home\.php\? script-path=https://raw.git
 hostname= www.52pojie.cn
 */
 
-var $ = new Env('');
-var date = new Date()
+var $ = new Env('52破解');
+var date = new Date();
+const notify = $.isNode() ? require('../sendNotify') : '';
 if (typeof $request != "undefined") {
   GetCookie()
 } else {
@@ -116,7 +117,8 @@ function checkin() {
                     } else if (data.match(/(ÄúÒÑ|\u4e0b\u671f\u518d\u6765|>��Ǹ������)/)) {
                         $.msg("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
                     } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�)/)) {
-                        $.msg("吾爱破解", "", "签到失败，Cookie 失效 ‼️‼️")
+                        $.msg("吾爱破解", "", "签到失败，Cookie 失效 ‼️‼️");
+                     notify.sendNotify(`${$.name} cookie 已失效 `, `请重新登录获取 cookie`);
                     } else {
                         $.msg("吾爱破解", "", "脚本待更新 ‼️‼️")
                     }
