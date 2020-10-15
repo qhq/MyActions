@@ -7,11 +7,14 @@ if (process.env.COOKIE_91WII && process.env.COOKIE_91WII.split('&') && process.e
   if (process.env.COOKIE_91WII.indexOf('&') > -1) {
     console.log(`您的 cookie 选择的是用 & 隔开 \n`)
     Cookies = process.env.COOKIE_91WII.split('&');
+    formhashs = process.env.COOKIE_91WII_FORMHASH.split('&');
   } else if (process.env.COOKIE_91WII.indexOf('\n') > -1) {
     console.log(`您的 cookie 选择的是用换行隔开 \n`)
     Cookies = process.env.COOKIE_91WII.split('\n');
+    formhashs = process.env.COOKIE_91WII_FORMHASH.split('\n');
   } else {
     Cookies = process.env.COOKIE_91WII.split();
+    formhashs = process.env.COOKIE_91WII_FORMHASH.split('\n');
   }
   console.log(`\n================== 脚本执行来自 github action=====================\n`)
   console.log(`================== 脚本执行 - 国际标准时间 (UTC)：${new Date().toLocaleString()}=====================\n`)
@@ -20,11 +23,13 @@ if (process.env.COOKIE_91WII && process.env.COOKIE_91WII.split('&') && process.e
 for (let i = 0; i < Cookies.length; i++) {
   const index = (i + 1 === 1) ? '' : (i + 1);
   exports['CookieQ' + index] = Cookies[i];
+  exports['formhash' + index] = formhashs[i];
 }
 
 
 var $ = new Env('91wii');
 const notify = $.isNode() ? require('../sendNotify') : '';
+//const COOKIE_91WII_FORMHASH = process.env.COOKIE_91WII_FORMHASH;
 var date = new Date();
 if (typeof $request != "undefined") {
   GetCookie()
@@ -35,10 +40,11 @@ if (typeof $request != "undefined") {
 function checkin() {
     for (let i = 0; i < Cookies.length; i++) {
         CookieQ = Cookies[i];
+        formhash = formhashs[i];
         if (CookieQ) {
             const options = {
                 "url": `https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1`,
-                "body": `formhash=f346d06e&signsubmit=yes&handlekey=signin&emotid=1&signpn=true`,
+                "body": `formhash=${formhash}&signsubmit=yes&handlekey=signin&emotid=1&signpn=true`,
                 "headers": {
                     "Host": "www.91wii.com",
                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
