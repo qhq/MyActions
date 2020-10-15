@@ -14,7 +14,7 @@ if (process.env.COOKIE_91WII && process.env.COOKIE_91WII.split('&') && process.e
     formhashs = process.env.COOKIE_91WII_FORMHASH.split('\n');
   } else {
     Cookies = process.env.COOKIE_91WII.split();
-    formhashs = process.env.COOKIE_91WII_FORMHASH.split('\n');
+    formhashs = process.env.COOKIE_91WII_FORMHASH.split();
   }
   console.log(`\n================== 脚本执行来自 github action=====================\n`)
   console.log(`================== 脚本执行 - 国际标准时间 (UTC)：${new Date().toLocaleString()}=====================\n`)
@@ -29,7 +29,6 @@ for (let i = 0; i < Cookies.length; i++) {
 
 var $ = new Env('91wii');
 const notify = $.isNode() ? require('../sendNotify') : '';
-//const COOKIE_91WII_FORMHASH = process.env.COOKIE_91WII_FORMHASH;
 var date = new Date();
 if (typeof $request != "undefined") {
   GetCookie()
