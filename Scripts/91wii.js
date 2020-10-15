@@ -24,7 +24,8 @@ for (let i = 0; i < Cookies.length; i++) {
 
 
 var $ = new Env('');
-var date = new Date()
+const notify = $.isNode() ? require('././sendNotify') : '';
+var date = new Date();
 if (typeof $request != "undefined") {
   GetCookie()
 } else {
@@ -51,13 +52,13 @@ function checkin() {
                 }
             }
             $.post(options,
-            async function(error, response, data) {
+            function(error, response, data) {
                 if (error) {
                     $.log(error);
                     $.msg("91WII", "签到请求失败 ‼️‼️", error)
                 } else {
 
-                    console.log(data);
+                    //console.log(data);
                     if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|ǩ���ɹ�~�����������ֵ)/)) {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，签到成功 🎉")
                     } else if (data.match(/(ÄúÒÑ|\u5DF2\u7ECF\u7B7E\u8FC7\u5230|�������Ѿ�ǩ����)/)) {
@@ -65,7 +66,7 @@ function checkin() {
                     } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�|系统拒绝|���ϵͳ�ܾ�)/)) {
                         $.msg("91WII", "", "签到失败，Cookie 失效 ‼️‼️");
                         if ($.isNode()) {
-                          await notify.sendNotify(`${$.name}cookie已失效`, `请重新登录获取cookie`);
+                           notify.sendNotify(`${$.name}cookie已失效`, `请重新登录获取cookie`);
                         }
                     } else {
                         $.msg("91WII", "", "脚本待更新 ‼️‼️")
