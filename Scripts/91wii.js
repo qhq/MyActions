@@ -38,7 +38,7 @@ function checkin() {
         if (CookieQ) {
             const options = {
                 "url": `https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1`,
-                "body": `formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid =1&signpn=true`,
+                "body": `formhash=f346d06e&signsubmit=yes&handlekey=signin&emotid=1&signpn=true`,
                 "headers": {
                     "Host": "www.91wii.com",
                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
