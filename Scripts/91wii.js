@@ -19,7 +19,7 @@ if (process.env.COOKIE_91WII && process.env.COOKIE_91WII.split('&') && process.e
 }
 for (let i = 0; i < Cookies.length; i++) {
   const index = (i + 1 === 1) ? '' : (i + 1);
-  exports['CookieMe' + index] = Cookies[i];
+  exports['CookieQ' + index] = Cookies[i];
 }
 
 
@@ -33,39 +33,39 @@ if (typeof $request != "undefined") {
 
 function checkin() {
     for (let i = 0; i < Cookies.length; i++) {
-        CookieMe = Cookies[i];
-        if (CookieMe) {
-   const options = {
-    "url": `https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1`,
-    "body": `formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid=1&signpn=true`,
-    "headers": {
-      "Host": "www.91wii.com",
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "Connection": "keep-alive",
-      "Content-Type": "application/x-www-form-urlencoded; charset=gb2312",
-      "Cookie": CookieMe || $.getdata("CookieMe"),
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
-      "Accept-Language": "zh-cn",
-      "Referer": "https://www.91wii.com/home.php?mod=space&do=notice&view=mypost",
-      "Accept-Encoding": "gzip, deflate, br"
-    }
-  }
-            $.post(options,function(error, response, data) {
+        CookieQ = Cookies[i];
+        if (CookieQ) {
+            const options = {
+                "url": `https://www.91wii.com/plugin.php?id=dc_signin:sign&inajax=1`,
+                "body": `formhash=87fc869b&signsubmit=yes&handlekey=signin&emotid =1&signpn=true`,
+                "headers": {
+                    "Host": "www.91wii.com",
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    "Connection": "keep-alive",
+                    "Content-Type": "application/x-www-form-urlencoded; charset=gb2312",
+                    "Cookie": CookieQ || $.getdata("CookieQ"),
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
+                    "Accept-Language": "zh-cn",
+                    "Referer": "https://www.91wii.com/home.php?mod=space&do=notice&view=mypost",
+                    "Accept-Encoding": "gzip, deflate, br"
+                }
+            }
+            $.post(options,
+            function(error, response, data) {
                 if (error) {
                     $.log(error);
                     $.msg("91WII", "签到请求失败 ‼️‼️", error)
                 } else {
-                 
-            console.log(data)
-                    if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|ǩ���ɹ�~�����������ֵ)/)) {
+
+                    console.log(data) if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|ǩ���ɹ�~�����������ֵ)/)) {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，签到成功 🎉")
                     } else if (data.match(/(ÄúÒÑ|\u5DF2\u7ECF\u7B7E\u8FC7\u5230|�������Ѿ�ǩ����)/)) {
                         $.msg("91WII", "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
-                    } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�)/)) {
-                        $.msg("91WII", "", "签到失败，Cookie 失效 ‼️‼️");                
-if ($.isNode()) {
-      notify.sendNotify(`${$.name}cookie 已失效 `, `请重新登录获取 cookie`);
-      }
+                    } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�|系统拒绝|���ϵͳ�ܾ�)/)) {
+                        $.msg("91WII", "", "签到失败，Cookie 失效 ‼️‼️");
+                        if ($.isNode()) {
+                            notify.sendNotify(`$ {$.name}cookie已失效`, `请重新登录获取cookie`);
+                        }
                     } else {
                         $.msg("91WII", "", "脚本待更新 ‼️‼️")
                     }
