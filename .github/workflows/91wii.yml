@@ -6,7 +6,7 @@ name: 91wii
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 22 * * *'
   watch:
     types: started
 
@@ -15,6 +15,9 @@ jobs:
 
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
+    env:
+          COOKIE_91WII: ${{ secrets.COOKIE_91WII }}
+          COOKIE_91WII_FORMHASH: ${{ secrets.COOKIE_91WII_FORMHASH }}
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 10.x
@@ -29,7 +32,6 @@ jobs:
         run: |
           node Scripts/91wii.js
         env:
-          COOKIE_91WII: ${{ secrets.COOKIE_91WII }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
