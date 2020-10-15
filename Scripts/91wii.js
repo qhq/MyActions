@@ -51,7 +51,7 @@ function checkin() {
                 }
             }
             $.post(options,
-            function(error, response, data) {
+            async function(error, response, data) {
                 if (error) {
                     $.log(error);
                     $.msg("91WII", "签到请求失败 ‼️‼️", error)
