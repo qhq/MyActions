@@ -19,7 +19,7 @@ async function downFile () {
 
 async function changeFiele () {
     let content = await fs.readFileSync('./SXD.js', 'utf8')
-    content = content.replace(/JSON.parse($.getdata($.SESSION_KEY)/, `JSON.parse(${KEY}`)
+    //content = content.replace(/JSON.parse($.getdata($.SESSION_KEY)/, `JSON.parse(${KEY}`)
     await fs.writeFileSync( './SXD.js', content, 'utf8')
 }
 
