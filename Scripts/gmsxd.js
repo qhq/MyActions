@@ -62,8 +62,7 @@ if ($.isNode()) {
   //const content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
   for (let i =0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
-    
-console.log(cookie);
+
     if (cookie) {
       //UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
 
@@ -71,6 +70,7 @@ console.log(cookie);
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
 
       const opts = JSON.parse(cookie);
+      console.log(opts);
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
       opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
       $.post(opts, (err, resp, data) => {
