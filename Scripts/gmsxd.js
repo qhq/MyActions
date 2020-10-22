@@ -66,10 +66,11 @@ if ($.isNode()) {
 
       $.index = i + 1;
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
-console.log(JSON.stringify(cookie));
-      const opts = JSON.parse(JSON.stringify(cookie,null,4));
+
+      const opts = JSON.parse(JSON.stringify(cookie));
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
-      console.log(opts);
+      console.log(`1\n${opts}`);
+      console.log(`2\n${opts.headers}`);
       //uid = decodeURIComponent(cookie.match(/uid:(\d{11})/));
       opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
       $.post(opts, (err, resp, data) => {
