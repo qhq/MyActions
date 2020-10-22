@@ -70,6 +70,7 @@ if ($.isNode()) {
             const opts = cookie;
     opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
     opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
+            console.log(opts);
             $.post(opts, function(error, response, data) {
               try {
                 if (error) {
