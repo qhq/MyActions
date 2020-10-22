@@ -64,26 +64,49 @@ if ($.isNode()) {
     if (cookie) {
       //UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
 
+      function JingDongBean(s) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            const opts = cookie;
+            $.post(opts, function(error, response, data) {
+              try {
+                if (error) {
+                  throw new Error(error)
+                } else {
+                  const cc = JSON.parse(data)
+                }
+              } catch (eor) {
+                $.AnError("京东商城-京豆", "JDBean", eor, response, data)
+              } finally {
+                resolve()
+              }
+            })
+          }, s)
+          if (out) setTimeout(resolve, out + s)
+        });
+      }
+
+
+/*
       $.index = i + 1;
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
 
-      const opts = JSON.parse(cookie);
+      //const opts = JSON.parse(cookie);
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
       uid = decodeURIComponent(cookie.match(/uid:(\d{11})/));
       opts.body = `{"userLoginId":"${uid}"}`;
       $.post(opts, (err, resp, data) => {
         try {
           $.resData = JSON.parse(data);
-          console.log($.resData);
         } catch (e) {
           $.logErr(e, resp);
         } finally {
           resolve();
         }
       });
-      //if (!cookie.match(/uid:(\d{11})/)){
-        //$.msg($.name, ' 手机号码为空', ' 请登录后继续操作。');
-        //$.logErr('', resp);}
+      if ($.resData['uid'] == ''){
+        $.msg($.name, ' 手机号码为空', ' 请登录后继续操作。');
+        $.logErr('', resp);}
 
         const { result, msgCode,msgText } = $.resData;
 
@@ -102,7 +125,7 @@ if ($.isNode()) {
           $.msg($.name, $.subt, $.desc);
           await notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
         }
-
+*/
       
       //await changeFile(content);
       //console.log('替换变量完毕')
