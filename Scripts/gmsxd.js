@@ -75,7 +75,24 @@ if ($.isNode()) {
                 if (error) {
                   throw new Error(error)
                 } else {
-                  const cc = JSON.parse(data)
+                  const $.resData = JSON.parse(data);
+                          const { result, msgCode,msgText } = $.resData;
+
+        console.log('====================================');
+        console.log(JSON.stringify($.resData));
+        console.log('====================================');
+    
+        if (msgCode === '000') {
+          $.subt = ' 签到成功';
+          $.desc = ` V${result.grade} 成长值 ${result.growns}\n ${result.gradeNote.replace('\n','')}`;
+          $.msg($.name, $.subt, $.desc);
+        }
+        if (msgCode === '101') {
+          $.subt = ' 签到失败';
+          $.desc = ` ${msgText}`;
+          $.msg($.name, $.subt, $.desc);
+          await notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
+        }
                 }
               } catch (eor) {
                 $.AnError("京东商城-京豆", "JDBean", eor, response, data)
@@ -141,7 +158,7 @@ if ($.isNode()) {
           //await exec(`node JD_DailyBonus.js`, { stdio: "inherit" });
         }
 
-        console.log(`京东账号${$.index} ${UserName}京豆签到完成\n`);
+        //console.log(`京东账号${$.index} ${UserName}京豆签到完成\n`);
       } catch (e) {
         console.log("京东签到脚本执行异常:" + e);
       }
