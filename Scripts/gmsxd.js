@@ -19,7 +19,7 @@ async function downFile () {
 
 async function changeFiele () {
     let content = await fs.readFileSync('./gmsxd.js', 'utf8')
-    content = content.replace(/$.getdata($.SESSION_KEY)/, `${KEY}`)
+    content = content.replace(/JSON.parse($.getdata($.SESSION_KEY)/, `JSON.parse(${KEY}`)
     await fs.writeFileSync( './gmsxd.js', content, 'utf8')
 }
 
@@ -45,6 +45,7 @@ async function start() {
     await changeFiele();
     console.log('替换变量完毕')
     // 执行
+    console.log(KEY);
     await exec("node gmsxd.js >> result.txt");
     console.log('执行完毕')
     const path = "./result.txt";
