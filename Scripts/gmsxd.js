@@ -67,13 +67,13 @@ if ($.isNode()) {
       $.index = i + 1;
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
 
-      console.log(`${cookie}`);
-      console.log(cookie);
       const opts = JSON.parse(JSON.stringify(cookie));
+      console.log(`1\n${opts.url}`);
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
-      console.log(`1\n${opts}`);
-      console.log(`2\n${opts.headers}`);
-      //uid = decodeURIComponent(cookie.match(/uid:(\d{11})/));
+      console.log(`2\n${opts.url}`);
+      console.log(`3\n${opts.headers}`);
+      uid = decodeURIComponent(cookie.match(/uid:(\d{11})/));
+      console.log(uid);
       opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
       $.post(opts, (err, resp, data) => {
         try {
@@ -85,7 +85,7 @@ if ($.isNode()) {
           resolve();
         }
       });
-      if ($.resData['uid'] == ''){
+      if ($.resData['uid'] == ''|$.resData['uid']){
         $.msg($.name, ' 手机号码为空', ' 请登录后继续操作。');
         $.logErr('', resp);}
 
