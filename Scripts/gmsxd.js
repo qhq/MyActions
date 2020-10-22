@@ -51,12 +51,12 @@ if ($.isNode()) {
   })
   //if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
   
-console.log(cookiesArr[0]);
   console.log = () => {};
 }
 !(async() => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取cookie', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
+console.log(111);
     return;
   }
   // 下载最新代码
