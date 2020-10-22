@@ -10,7 +10,7 @@ const $ = new Env('随心订');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const KEY = process.env.COOKIE_GMSXD
-const SEND_KEY = process.env.SEND_KEY
+const SEND_KEY = ''//process.env.SEND_KEY
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/qhq/Actions/master/Scripts/sxd.js'
@@ -67,7 +67,7 @@ async function start() {
 
     //运行完成后，删除下载的文件
     console.log('运行完成后，删除下载的文件\n')
-    await deleteFile(path);
+    //await deleteFile(path);
 
 }
 
