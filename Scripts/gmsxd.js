@@ -50,6 +50,8 @@ if ($.isNode()) {
     cookiesArr.push(CookieNode[item])
   })
   //if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
+  
+console.log("3");
   console.log = () => {};
 }
 !(async() => {
