@@ -44,21 +44,22 @@ const download = require('download');
 const path = "./result.txt";
 //const JD_DailyBonusPath = "./JD_DailyBonus.js";
 let cookiesArr = [], cookie = '';
-console.log($.isNode());
+
 if ($.isNode()) {
   Object.keys(CookieNode).forEach((item) => {
     cookiesArr.push(CookieNode[item])
   })
-  //if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
-  
-  console.log = () => {};
+  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
+  //console.log = () => {};
 }
 !(async() => {
+console.log(1);
   if (!cookiesArr[0]) {
+console.log(3);
     $.msg($.name, '【提示】请先获取cookie', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
-console.log(111);
     return;
   }
+console.log(2);
   // 下载最新代码
   //await downFile();
   //const content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
