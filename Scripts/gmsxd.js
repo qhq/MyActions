@@ -10,7 +10,7 @@ const $ = new Env('随心订');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const KEY = process.env.COOKIE_GMSXD
-const SEND_KEY = ''//process.env.SEND_KEY
+const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/qhq/Actions/master/Scripts/sxd.js'
@@ -20,6 +20,7 @@ async function downFile () {
 async function changeFiele () {
     let content = await fs.readFileSync('./temp.js', 'utf8')
     content = content.replace(/let SESSION = $.getdata($.SESSION_KEY);/, `let SESSION = '${KEY}';`)
+    console.log(content);
     await fs.writeFileSync( './execute.js', content, 'utf8')
 }
 
@@ -67,7 +68,7 @@ async function start() {
 
     //运行完成后，删除下载的文件
     console.log('运行完成后，删除下载的文件\n')
-    //await deleteFile(path);
+    await deleteFile(path);
 
 }
 
