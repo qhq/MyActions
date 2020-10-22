@@ -19,7 +19,7 @@ async function downFile () {
 
 async function changeFiele () {
     let content = await fs.readFileSync('./temp.js', 'utf8')
-    content = content.replace(/let SESSION = $.getdata($.SESSION_KEY);/, `let SESSION = ${KEY};`)
+    content = content.replace(/let SESSION = $.getdata($.SESSION_KEY);/, `let SESSION = '${KEY}';`)
     await fs.writeFileSync( './execute.js', content, 'utf8')
 }
 
