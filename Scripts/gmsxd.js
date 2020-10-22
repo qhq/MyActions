@@ -9,7 +9,7 @@ const download = require('download')
 const $ = new Env('随心订');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
-const KEY = process.env.TELECOM_MOBILE
+const KEY = process.env.COOKIE_GMSXD
 const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
@@ -18,9 +18,9 @@ async function downFile () {
 }
 
 async function changeFiele () {
-    let content = await fs.readFileSync('./10000.js', 'utf8')
+    let content = await fs.readFileSync('./gmsxd.js', 'utf8')
     content = content.replace(/const phonedat = ''/, `const phonedat = '${KEY}'`)
-    await fs.writeFileSync( './10000.js', content, 'utf8')
+    await fs.writeFileSync( './gmsxd.js', content, 'utf8')
 }
 
 async function deleteFile(path) {
@@ -45,7 +45,7 @@ async function start() {
     await changeFiele();
     console.log('替换变量完毕')
     // 执行
-    await exec("node 10000.js >> result.txt");
+    await exec("node gmsxd.js >> result.txt");
     console.log('执行完毕')
     const path = "./result.txt";
     let content = "";
