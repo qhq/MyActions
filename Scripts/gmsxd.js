@@ -10,7 +10,7 @@ const $ = new Env('随心订');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const KEY = process.env.COOKIE_GMSXD
-const SEND_KEY = process.env.SEND_KEY
+const SEND_KEY = process.env.BARK_PUSH
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/qhq/Actions/master/Scripts/sxd.js'
@@ -21,7 +21,7 @@ async function changeFiele () {
     let content = await fs.readFileSync('./temp.js', 'utf8')
     content = content.replace(/let SESSION = \$\.getdata\(\$\.SESSION_KEY\);/, `let SESSION = '${KEY}';`)
     await fs.writeFileSync( './execute.js', content, 'utf8')
-    console.log(content);
+    //console.log(content);
 }
 
 async function deleteFile(path) {
@@ -56,14 +56,14 @@ async function start() {
 
     if(SEND_KEY) {
         if (content.includes("签到成功")|content.includes("已签")) {
-            console.log("随心订-" + content)
+            console.log(`${$.name}\n` + content)
         }else{
-            await notify.sendNotify("随心订-" + new Date().toLocaleDateString(), content);
-            console.log("随心订-" + content)
+            await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+            console.log(`${$.name}-` + content)
         }
     }else{
-        await notify.sendNotify("随心订-" + new Date().toLocaleDateString(), content);
-        console.log("随心订-" + content)
+        await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+        console.log(`${$.name}\n` + content)
     }
 
     //运行完成后，删除下载的文件
