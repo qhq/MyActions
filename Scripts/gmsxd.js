@@ -6,21 +6,21 @@ const exec = require('child_process').execSync
 const fs = require('fs')
 const download = require('download')
 
-const $ = new Env('光明随心订签到');
+const $ = new Env('随心订');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
-const KEY = process.env.COOKIE_GMSXD
+const KEY = process.env.TELECOM_MOBILE
 const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
-    const url = 'https://raw.githubusercontent.com/qhq/Auto_sign/master/Scripts/sxd.js'
+    const url = 'https://raw.githubusercontent.com/qhq/Auto_sign/master/Scripts/gmsxd.js'
     await download(url, './')
 }
 
 async function changeFiele () {
-    let content = await fs.readFileSync('./SXD.js', 'utf8')
-    //content = content.replace(/JSON.parse($.getdata($.SESSION_KEY)/, `JSON.parse(${KEY}`)
-    await fs.writeFileSync( './SXD.js', content, 'utf8')
+    let content = await fs.readFileSync('./10000.js', 'utf8')
+    content = content.replace(/const phonedat = ''/, `const phonedat = '${KEY}'`)
+    await fs.writeFileSync( './10000.js', content, 'utf8')
 }
 
 async function deleteFile(path) {
@@ -35,7 +35,7 @@ async function deleteFile(path) {
 
 async function start() {
     if (!KEY) {
-        console.log('请填写 key 后在继续')
+        console.log('请填写电信号码后再继续')
         return
     }
     // 下载最新代码
@@ -45,8 +45,7 @@ async function start() {
     await changeFiele();
     console.log('替换变量完毕')
     // 执行
-    console.log(KEY);
-    await exec("node gmsxd.js >> result.txt");
+    await exec("node 10000.js >> result.txt");
     console.log('执行完毕')
     const path = "./result.txt";
     let content = "";
@@ -55,15 +54,15 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        if (content.includes("Cookie")) {
-            await notify.sendNotify("光明随心订签到-" + new Date().toLocaleDateString(), content);
-            console.log("光明随心订签到-" + content)
+        if (content.includes("签到成功")|content.includes("已签")) {
+            console.log("随心订-" + content)
         }else{
-            console.log("光明随心订签到-" + content)
+            await notify.sendNotify("随心订-" + new Date().toLocaleDateString(), content);
+            console.log("随心订-" + content)
         }
     }else{
-        await notify.sendNotify("光明随心订签到-" + new Date().toLocaleDateString(), content);
-        console.log("光明随心订签到-" + content)
+        await notify.sendNotify("随心订-" + new Date().toLocaleDateString(), content);
+        console.log("随心订-" + content)
     }
 
     //运行完成后，删除下载的文件
