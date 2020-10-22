@@ -14,7 +14,7 @@ let CookieNode = [
 ]
 // 判断 github action 里面是否有京东 ck
 if (process.env.COOKIE_GMSXD) {
-  if (process.env.COOKIE_GMSXD.indexOf('&') > -1) {
+  if (process.env.COOKIE_GMSXD.indexOf('@') > -1) {
     console.log(`您的 cookie 选择的是用 & 隔开 \n`)
     CookieNode = process.env.COOKIE_GMSXD.split('&');
   } else if (process.env.COOKIE_GMSXD.indexOf('\n') > -1) {
