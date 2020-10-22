@@ -53,20 +53,17 @@ if ($.isNode()) {
   //console.log = () => {};
 }
 !(async() => {
-console.log(1);
   if (!cookiesArr[0]) {
-console.log(3);
     $.msg($.name, '【提示】请先获取cookie', 'https://bean.m.jd.com/', {"open-url": "https://bean.m.jd.com/"});
     return;
   }
-console.log(2);
   // 下载最新代码
   //await downFile();
   //const content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
   for (let i =0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
     
-console.log("2");
+console.log(cookie);
     if (cookie) {
       //UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
 
