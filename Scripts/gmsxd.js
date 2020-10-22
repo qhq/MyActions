@@ -66,8 +66,8 @@ if ($.isNode()) {
 
       $.index = i + 1;
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
-
-      const opts = JSON.parse(JSON.stringify(cookie));
+console.log(JSON.stringify(cookie,null,4));
+      const opts = JSON.parse(console.log(JSON.stringify(cookie,null,4)););
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
       console.log(opts);
       //uid = decodeURIComponent(cookie.match(/uid:(\d{11})/));
