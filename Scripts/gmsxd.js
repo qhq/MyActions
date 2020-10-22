@@ -15,8 +15,8 @@ let CookieNode = [
 // 判断 github action 里面是否有京东 ck
 if (process.env.COOKIE_GMSXD) {
   if (process.env.COOKIE_GMSXD.indexOf('@') > -1) {
-    console.log(`您的 cookie 选择的是用 & 隔开 \n`)
-    CookieNode = process.env.COOKIE_GMSXD.split('&');
+    console.log(`您的 cookie 选择的是用 @ 隔开 \n`)
+    CookieNode = process.env.COOKIE_GMSXD.split('@');
   } else if (process.env.COOKIE_GMSXD.indexOf('\n') > -1) {
     console.log(`您的 cookie 选择的是用换行隔开 \n`)
     CookieNode = process.env.COOKIE_GMSXD.split('\n');
@@ -44,7 +44,7 @@ const download = require('download');
 const path = "./result.txt";
 //const JD_DailyBonusPath = "./JD_DailyBonus.js";
 let cookiesArr = [], cookie = '';
-
+console.log("1");
 if ($.isNode()) {
   Object.keys(CookieNode).forEach((item) => {
     cookiesArr.push(CookieNode[item])
@@ -62,6 +62,8 @@ if ($.isNode()) {
   //const content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
   for (let i =0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
+    
+console.log("2");
     if (cookie) {
       //UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
 
