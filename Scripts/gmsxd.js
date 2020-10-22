@@ -81,9 +81,9 @@ if ($.isNode()) {
           resolve();
         }
       });
-      if ($.resData['uid'] == ''|$.resData['uid']){
-        $.msg($.name, ' 手机号码为空', ' 请登录后继续操作。');
-        $.logErr('', resp);}
+      //if (!cookie.match(/uid:(\d{11})/)){
+        //$.msg($.name, ' 手机号码为空', ' 请登录后继续操作。');
+        //$.logErr('', resp);}
 
         const { result, msgCode,msgText } = $.resData;
 
