@@ -61,8 +61,6 @@ if ($.isNode()) {
   //const content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
   for (let i =0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
-    
-      console.log(`0\n${cookie}`);
     if (cookie) {
       //UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
 
@@ -70,13 +68,9 @@ if ($.isNode()) {
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
 
       const opts = JSON.parse(JSON.stringify(cookie));
-      console.log(`1\n${opts.url}`);
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
-      console.log(`2\n${opts.url}`);
-      console.log(`3\n${opts.headers}`);
       uid = decodeURIComponent(cookie.match(/uid:(\d{11})/));
-      console.log(uid);
-      opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
+      opts.body = `{"userLoginId":"${uid}"}`;
       $.post(opts, (err, resp, data) => {
         try {
           $.resData = JSON.parse(data);
