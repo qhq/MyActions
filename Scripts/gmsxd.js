@@ -14,9 +14,9 @@ let CookieNode = [
 ]
 // 判断 github action 里面是否有京东 ck
 if (process.env.COOKIE_GMSXD) {
-  if (process.env.COOKIE_GMSXD.indexOf('@') > -1) {
-    console.log(`您的 cookie 选择的是用 @ 隔开 \n`)
-    CookieNode = process.env.COOKIE_GMSXD.split('@');
+  if (process.env.COOKIE_GMSXD.indexOf('&') > -1) {
+    console.log(`您的 cookie 选择的是用 & 隔开 \n`)
+    CookieNode = process.env.COOKIE_GMSXD.split('&');
   } else if (process.env.COOKIE_GMSXD.indexOf('\n') > -1) {
     console.log(`您的 cookie 选择的是用换行隔开 \n`)
     CookieNode = process.env.COOKIE_GMSXD.split('\n');
@@ -49,8 +49,8 @@ if ($.isNode()) {
   Object.keys(CookieNode).forEach((item) => {
     cookiesArr.push(CookieNode[item])
   })
-  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
-  //console.log = () => {};
+  //if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
+  console.log = () => {};
 }
 !(async() => {
   if (!cookiesArr[0]) {
@@ -62,17 +62,16 @@ if ($.isNode()) {
   //const content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
   for (let i =0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
-
     if (cookie) {
       //UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
 
       $.index = i + 1;
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
 
-      const opts = JSON.parse(cookie);
-      console.log(opts);
+      //const opts = JSON.parse(cookie);
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
-      opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
+      uid = decodeURIComponent(cookie.match(/uid:(\d{11})/));
+      opts.body = `{"userLoginId":"${uid}"}`;
       $.post(opts, (err, resp, data) => {
         try {
           $.resData = JSON.parse(data);
