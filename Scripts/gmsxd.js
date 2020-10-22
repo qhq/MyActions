@@ -14,13 +14,13 @@ const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/qhq/Auto_sign/master/Scripts/sxd.js'
-    await download(url, './')
+    await download(url, '../')
 }
 
 async function changeFiele () {
-    let content = await fs.readFileSync('./gmsxd.js', 'utf8')
+    let content = await fs.readFileSync('../gmsxd.js', 'utf8')
     content = content.replace(/JSON.parse($.getdata($.SESSION_KEY)/, `JSON.parse(${KEY}`)
-    await fs.writeFileSync( './gmsxd.js', content, 'utf8')
+    await fs.writeFileSync( '../gmsxd.js', content, 'utf8')
 }
 
 async function deleteFile(path) {
