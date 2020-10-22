@@ -18,9 +18,9 @@ async function downFile () {
 }
 
 async function changeFiele () {
-    let content = await fs.readFileSync('./sxd.js', 'utf8')
+    let content = await fs.readFileSync('./SXD.js', 'utf8')
     content = content.replace(/JSON.parse($.getdata($.SESSION_KEY)/, `JSON.parse(${KEY}`)
-    await fs.writeFileSync( './sxd.js', content, 'utf8')
+    await fs.writeFileSync( './SXD.js', content, 'utf8')
 }
 
 async function deleteFile(path) {
