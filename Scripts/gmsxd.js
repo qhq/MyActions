@@ -75,7 +75,7 @@ if ($.isNode()) {
                 if (error) {
                   throw new Error(error)
                 } else {
-                  const $.resData = JSON.parse(data);
+                  $.resData = JSON.parse(data);
                           const { result, msgCode,msgText } = $.resData;
 
         console.log('====================================');
