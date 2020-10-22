@@ -70,7 +70,7 @@ console.log(cookie);
       $.index = i + 1;
       //console.log(`开始京东账号${$.index} ${UserName}京豆签到\n`);
 
-      const opts = JSON.parse($.getdata(cookie));
+      const opts = JSON.parse(cookie);
       opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
       opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
       $.post(opts, (err, resp, data) => {
