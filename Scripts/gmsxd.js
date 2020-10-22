@@ -49,8 +49,7 @@ if ($.isNode()) {
   Object.keys(CookieNode).forEach((item) => {
     cookiesArr.push(CookieNode[item])
   })
-  //if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
-  console.log = () => {};
+  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 }
 !(async() => {
   if (!cookiesArr[0]) {
