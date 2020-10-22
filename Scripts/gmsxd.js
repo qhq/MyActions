@@ -19,8 +19,7 @@ async function downFile () {
 
 async function changeFiele () {
     let content = await fs.readFileSync('./temp.js', 'utf8')
-    content = content.replace(/let SESSION = $.getdata($.SESSION_KEY);/, `let SESSION = '${KEY}';`)
-    console.log(content);
+    content = content.replace(/let SESSION = \$\.getdata\(\$\.SESSION_KEY\);/, `let SESSION = '${KEY}';`)
     await fs.writeFileSync( './execute.js', content, 'utf8')
 }
 
@@ -45,6 +44,7 @@ async function start() {
     // 替换变量
     await changeFiele();
     console.log('替换变量完毕')
+    console.log(content);
     // 执行
     await exec("node execute.js >> result.txt");
     console.log('执行完毕')
