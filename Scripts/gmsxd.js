@@ -61,6 +61,8 @@ if ($.isNode()) {
   //const content = await fs.readFileSync('./JD_DailyBonus.js', 'utf8')
   for (let i =0; i < cookiesArr.length; i++) {
     cookie = cookiesArr[i];
+    
+      console.log(`0\n${cookie}`);
     if (cookie) {
       //UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
 
