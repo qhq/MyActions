@@ -13,7 +13,7 @@ const KEY = process.env.COOKIE_GMSXD
 const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
-    const url = 'https://raw.githubusercontent.com/qhq/Auto_sign/master/Scripts/sxd.js?token=AAZKMWMYBHS3RJFRJMUMJBC7SFCQ2'
+    const url = 'https://raw.githubusercontent.com/qhq/Auto_sign/master/Scripts/sxd.js'
     await download(url, './')
 }
 
