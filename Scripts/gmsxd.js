@@ -44,7 +44,7 @@ const download = require('download');
 const path = "./result.txt";
 //const JD_DailyBonusPath = "./JD_DailyBonus.js";
 let cookiesArr = [], cookie = '';
-console.log("1");
+console.log(CookieNode);
 if ($.isNode()) {
   Object.keys(CookieNode).forEach((item) => {
     cookiesArr.push(CookieNode[item])
