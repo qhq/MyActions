@@ -13,14 +13,14 @@ const KEY = process.env.COOKIE_GMSXD
 const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
-    const url = 'https://raw.githubusercontent.com/qhq/Auto_sign/master/Scripts/gmsxd.js'
-    await download(url, './')
+    const url = 'https://gitee.com/qhqcz/quan-x/raw/master/Scripts/gmsxd.js'
+    await download(url, './', { filename: "temp.js" })
 }
 
 async function changeFiele () {
-    let content = await fs.readFileSync('./gmsxd.js', 'utf8')
-    content = content.replace(/const phonedat = ''/, `const phonedat = '${KEY}'`)
-    await fs.writeFileSync( './gmsxd.js', content, 'utf8')
+    let content = await fs.readFileSync('./temp.js', 'utf8')
+    content = content.replace(/let SESSION = $.getdata($.SESSION_KEY);/, `let SESSION = ${KEY};`)
+    await fs.writeFileSync( './execute.js', content, 'utf8')
 }
 
 async function deleteFile(path) {
@@ -35,7 +35,7 @@ async function deleteFile(path) {
 
 async function start() {
     if (!KEY) {
-        console.log('请填写电信号码后再继续')
+        console.log('请填写COOKIE_GMSXD后继续')
         return
     }
     // 下载最新代码
@@ -45,7 +45,7 @@ async function start() {
     await changeFiele();
     console.log('替换变量完毕')
     // 执行
-    await exec("node gmsxd.js >> result.txt");
+    await exec("node execute.js >> result.txt");
     console.log('执行完毕')
     const path = "./result.txt";
     let content = "";
