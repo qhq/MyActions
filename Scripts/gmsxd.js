@@ -91,7 +91,7 @@ if ($.isNode()) {
           $.subt = ' 签到失败';
           $.desc = ` ${msgText}`;
           $.msg($.name, $.subt, $.desc);
-          await notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
+           notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
         }
                 }
               } catch (eor) {
