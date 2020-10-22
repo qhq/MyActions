@@ -74,6 +74,7 @@ if ($.isNode()) {
       $.post(opts, (err, resp, data) => {
         try {
           $.resData = JSON.parse(data);
+          console.log($.resData);
         } catch (e) {
           $.logErr(e, resp);
         } finally {
