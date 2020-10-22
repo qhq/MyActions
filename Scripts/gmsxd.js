@@ -68,6 +68,8 @@ if ($.isNode()) {
         return new Promise(resolve => {
           setTimeout(() => {
             const opts = cookie;
+    opts.url = 'https://www.4008117117.com/micapi/cycle/userStore/member/doSign';
+    opts.body = `{"userLoginId":"${opts.headers.uid}"}`;
             $.post(opts, function(error, response, data) {
               try {
                 if (error) {
