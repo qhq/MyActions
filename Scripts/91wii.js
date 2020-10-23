@@ -6,7 +6,7 @@ const exec = require('child_process').execSync
 const fs = require('fs')
 const download = require('download')
 
-const $ = new Env('91WII论坛');
+const $ = new Env('91WII签到');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const KEY = process.env.COOKIE_91WII
@@ -25,7 +25,7 @@ async function changeFiele () {
     content = content.replace(/process\.env\.COOKIE_91WII_FORMHASH/g, `'${FH}'`)
     content = content.replace(/process\.env\.COOKIE_91WII/g, `'${KEY}'`)
     await fs.writeFileSync( './execute.js', content, 'utf8')
-    console.log(content);
+    //console.log(content);
 }
 
 async function deleteFile(path) {
