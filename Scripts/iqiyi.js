@@ -6,21 +6,21 @@ const exec = require('child_process').execSync
 const fs = require('fs')
 const download = require('download')
 
-const $ = new Env('吾爱破解签到');
+const $ = new Env('爱奇艺会员签到');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
-const KEY = process.env.WA_COOKIE
+const KEY = process.env.iQIYI_COOKIE
 const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
-    const url = 'https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js'
+    const url = 'https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js'
     await download(url, './')
 }
 
 async function changeFiele () {
-    let content = await fs.readFileSync('./52pojie.js', 'utf8')
-    content = content.replace(/const CookieWA = ''/, `const CookieWA = '${KEY}'`)
-    await fs.writeFileSync( './52pojie.js', content, 'utf8')
+    let content = await fs.readFileSync('./iQIYI.js', 'utf8')
+    content = content.replace(/var cookie = ''/, `var cookie = '${KEY}'`)
+    await fs.writeFileSync( './iQIYI.js', content, 'utf8')
 }
 
 async function deleteFile(path) {
@@ -45,7 +45,7 @@ async function start() {
     await changeFiele();
     console.log('替换变量完毕')
     // 执行
-    await exec("node 52pojie.js >> result.txt");
+    await exec("node iQIYI.js >> result.txt");
     console.log('执行完毕')
     const path = "./result.txt";
     let content = "";
@@ -54,15 +54,15 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        if (content.includes("签到成功")|content.includes("已签")) {
-            console.log("吾爱破解签到-" + content)
+        if (content.includes("Cookie")) {
+            await notify.sendNotify("爱奇艺签到-" + new Date().toLocaleDateString(), content);
+            console.log("爱奇艺签到-" + content)
         }else{
-            await notify.sendNotify("吾爱破解签到-" + new Date().toLocaleDateString(), content);
-            console.log("吾爱破解签到-" + content)
+            console.log("爱奇艺签到-" + content)
         }
     }else{
-        await notify.sendNotify("吾爱破解签到-" + new Date().toLocaleDateString(), content);
-        console.log("吾爱破解签到-" + content)
+        await notify.sendNotify("爱奇艺签到-" + new Date().toLocaleDateString(), content);
+        console.log("爱奇艺签到-" + content)
     }
 
     //运行完成后，删除下载的文件
