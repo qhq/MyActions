@@ -15,7 +15,7 @@ jobs:
 
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-        env:
+    env:
           JD_PRICE_DETECT_URL: ${{ secrets.JD_PRICE_DETECT_URL }}
           JD_PRICE_DETECT_PRICE: ${{ secrets.JD_PRICE_DETECT_PRICE }}
     steps:
