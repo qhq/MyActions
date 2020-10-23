@@ -5,8 +5,8 @@ const download = require('download')
 const $ = new Env('京东价格监控');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
-const detect_url = process.env.JD_PRICE_DETECT_URL
-const target_price = process.env.JD_PRICE_DETECT_PRICE
+const DETECT_URL = process.env.JD_PRICE_DETECT_URL
+const DETECT_PRICE = process.env.JD_PRICE_DETECT_PRICE
 const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
@@ -16,8 +16,8 @@ async function downFile () {
 
 async function changeFiele () {
     let content = await fs.readFileSync('./52pojie.js', 'utf8')
-    content = content.replace(/url = \[\]/, `url = '${detect_url}'.split(',')`)
-    content = content.replace(/price = \[\]/, `price = '${target_price}'.split(',')`)
+    content = content.replace(/url = \[\]/, `url = '${DETECT_URL}'.split(',')`)
+    content = content.replace(/price = \[\]/, `price = '${DETECT_PRICE}'.split(',')`)
     await fs.writeFileSync( './52pojie.js', content, 'utf8')
 }
 
@@ -32,8 +32,8 @@ async function deleteFile(path) {
 }
 
 async function start() {
-    if (!KEY) {
-        console.log('请填写 key 后在继续')
+    if (!DETECT_URL) {
+        console.log('请填写 DETECT_URL 后在继续')
         return
     }
     // 下载最新代码
