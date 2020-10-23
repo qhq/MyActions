@@ -48,7 +48,8 @@ async function start() {
     const path = "./result.txt";
     let content = "";
     if (fs.existsSync(path)) {
-        content = fs.readFileSync(path, "utf8");
+        content = fs.readFileSync(path, "utf8").replace(/[\r\n]/g,"")//去掉回车换行;
+        
     }
 
     if(SEND_KEY) {
