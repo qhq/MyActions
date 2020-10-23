@@ -55,11 +55,11 @@ async function start() {
         if (content.includes("不弹")|content.includes("已签")) {
             console.log(content)
         }else{
-            await notify.sendNotify("${$.name}-1" + new Date().toLocaleDateString(), content);
+            await notify.sendNotify("${$.name}" + new Date().toLocaleDateString(), content);
             console.log(content)
         }
     }else{
-        await notify.sendNotify(`${$.name}-2` + new Date().toLocaleDateString(), content);
+        await notify.sendNotify(`${$.name}` + new Date().toLocaleDateString(), content);
         console.log(content)
     }
 
