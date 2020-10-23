@@ -54,8 +54,7 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        console.log(content);
-        if (content.includes("签到成功")|content.includes("已签")|content.includes("成功")|content.includes("重复")) {
+        if (content.includes("签到成功")|content.includes("已签")|content.includes("已签过")|content.includes("成功")|content.includes("重复")) {
             console.log("吾爱破解签到-" + content)
         }else{
             await notify.sendNotify("吾爱破解签到-" + new Date().toLocaleDateString(), content);
