@@ -6,7 +6,7 @@ const exec = require('child_process').execSync
 const fs = require('fs')
 const download = require('download')
 
-const $ = new Env('随心订');
+const $ = new Env('光明随心订');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const KEY = process.env.COOKIE_GMSXD
@@ -55,7 +55,7 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        if (content.includes("签到成功")|content.includes("已签")) {
+        if (content.includes("签到成功")|content.includes("已签")|content.includes("重复")) {
             console.log(`${$.name}\n` + content)
         }else{
             await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
