@@ -54,15 +54,16 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        if (content.includes("Cookie")) {
-            await notify.sendNotify("爱奇艺签到-" + new Date().toLocaleDateString(), content);
-            console.log("爱奇艺签到-" + content)
+        if (content.includes("Cookie")|content.includes("签到成功")|content.includes("已签")|content.includes("重复")) {
+            //await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+            console.log(`${$.name}\n` + content)
         }else{
-            console.log("爱奇艺签到-" + content)
+            await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+            console.log(`${$.name}\n` + content)
         }
     }else{
         await notify.sendNotify("爱奇艺签到-" + new Date().toLocaleDateString(), content);
-        console.log("爱奇艺签到-" + content)
+        console.log(`${$.name}\n` + content)
     }
 
     //运行完成后，删除下载的文件
