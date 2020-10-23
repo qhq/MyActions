@@ -54,15 +54,15 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        if (content.includes("签到成功")|content.includes("已签")|content.includes("已签过")|content.includes("成功")|content.includes("重复")) {
-            console.log("吾爱破解签到-" + content)
+        if (content.includes("签到成功")|content.includes("已签")|content.includes("Bad Gateway")|content.includes("成功")|content.includes("重复")) {
+            console.log(`${$.name}-` + content)
         }else{
-            await notify.sendNotify("吾爱破解签到-" + new Date().toLocaleDateString(), content);
-            console.log("吾爱破解签到-" + content)
+            await notify.sendNotify(`${$.name}-` + new Date().toLocaleDateString(), content);
+            console.log(`${$.name}-` + content)
         }
     }else{
-        await notify.sendNotify("吾爱破解签到-" + new Date().toLocaleDateString(), content);
-        console.log("吾爱破解签到-" + content)
+        await notify.sendNotify(`${$.name}-` + new Date().toLocaleDateString(), content);
+        console.log(`${$.name}-` + content)
     }
 
     //运行完成后，删除下载的文件
