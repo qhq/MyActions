@@ -54,15 +54,15 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        if (content.includes("Cookie")|content.includes("签到成功")|content.includes("已签")|content.includes("重复")) {
-            //await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+        if (content.includes("Cookie")|content.includes("成功")|content.includes("已签")|content.includes("重复")) {
+            //await notify.sendNotify(`${$.name}` + new Date().toLocaleDateString(), content);
             console.log(`${$.name}\n` + content)
         }else{
-            await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+            await notify.sendNotify(`${$.name}-` + new Date().toLocaleDateString(), content);
             console.log(`${$.name}\n` + content)
         }
     }else{
-        await notify.sendNotify("爱奇艺签到-" + new Date().toLocaleDateString(), content);
+        await notify.sendNotify(`${$.name}-` + new Date().toLocaleDateString(), content);
         console.log(`${$.name}\n` + content)
     }
 
