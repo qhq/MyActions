@@ -23,7 +23,7 @@ async function changeFiele () {
     content = content.replace(/process\.env\.COOKIE_91WII\.split\(('&'|'\\n'|)\);/, `'${KEY}';`)
     content = content.replace(/process\.env\.COOKIE_91WII_FORMHASH\.split\(('&'|'\\n'|)\);/, `'${FH}';`)
     await fs.writeFileSync( './execute.js', content, 'utf8')
-    //console.log(content);
+    console.log(content);
 }
 
 async function deleteFile(path) {
