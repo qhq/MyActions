@@ -9,7 +9,7 @@ const formhash = process.env.COOKIE_91WII_FORMHASH
 
 var $ = new Env('91WII签到')
 
-const notify = $.isNode() ? require('../sendNotify') : ''
+//const notify = $.isNode() ? require('../sendNotify') : ''
 var date = new Date()
 if (typeof $request != "undefined") {
   //GetCookie()
