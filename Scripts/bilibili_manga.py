@@ -1,6 +1,6 @@
 import requests
 import sys;
-sys.path.append("My-Actions/function/")
+sys.path.append("Actions/Scripts/")
 from bilibili import *
 import time
 import os
