@@ -7,7 +7,7 @@ const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const DETECT_URL = process.env.JD_PRICE_DETECT_URL
 const DETECT_PRICE = process.env.JD_PRICE_DETECT_PRICE
-const SEND_KEY = process.env.SEND_KEY
+const SEND_KEY = process.env.BARK_PUSH
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js'
@@ -49,18 +49,17 @@ async function start() {
     let content = "";
     if (fs.existsSync(path)) {
         content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g,`\r\n`)//去掉回车换行;
-        console.log(content)
     }
 
     if(SEND_KEY) {
         if (content.includes("不弹")|content.includes("已签")) {
             console.log(content)
         }else{
-            await notify.sendNotify("${$.name}-" + new Date().toLocaleDateString(), content);
+            await notify.sendNotify("${$.name}-1" + new Date().toLocaleDateString(), content);
             console.log(content)
         }
     }else{
-        await notify.sendNotify(`${$.name}-` + new Date().toLocaleDateString(), content);
+        await notify.sendNotify(`${$.name}-2` + new Date().toLocaleDateString(), content);
         console.log(content)
     }
 
