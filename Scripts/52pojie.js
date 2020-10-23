@@ -9,7 +9,7 @@ const download = require('download')
 const $ = new Env('吾爱破解签到');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
-const KEY = process.env.WA_COOKIE
+const KEY = process.env.COOKIE_52POJIE
 const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
