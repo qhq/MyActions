@@ -30,21 +30,17 @@ function checkin() {
             "Accept-Language": "zh-cn",
             "Referer": "https://www.91wii.com/home.php?mod=space&do=notice&view=mypost",
             "Accept-Encoding": "gzip, deflate, br"
-        }
+                  }
     },function(error, response, data) {
         if (error) {
             $.log(error);
             $.msg(`${$.name}`, "签到请求失败 ‼️‼️", error)
         } else {
-
             //console.log(data);
             if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8|ǩ���ɹ�~�����������ֵ)/)) {
                 $.msg(`${$.name}`, "", date.getMonth() + 1 + "月" + date.getDate() + "日，签到成功 🎉")
             } else if (data.match(/(ÄúÒÑ|\u5DF2\u7ECF\u7B7E\u8FC7\u5230|�������Ѿ�ǩ����)/)) {
                 $.msg(`${$.name}`, "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
-                if ($.isNode()) {
-                  notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
-                }
             } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�|系统拒绝|���ϵͳ�ܾ�)/)) {
                 $.msg(`${$.name}`, "", "签到失败，Cookie 失效 ‼️‼️");
                 if ($.isNode()) {
