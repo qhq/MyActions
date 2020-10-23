@@ -11,14 +11,14 @@ const SEND_KEY = process.env.SEND_KEY
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js'
-    await download(url, './')
+    await download(url, './', { filename: "temp.js" })
 }
 
 async function changeFiele () {
-    let content = await fs.readFileSync('./52pojie.js', 'utf8')
+    let content = await fs.readFileSync('./temp.js', 'utf8')
     content = content.replace(/url = \[\]/, `url = '${DETECT_URL}'.split(',')`)
     content = content.replace(/price = \[\]/, `price = '${DETECT_PRICE}'.split(',')`)
-    await fs.writeFileSync( './52pojie.js', content, 'utf8')
+    await fs.writeFileSync( './execute.js', content, 'utf8')
 }
 
 async function deleteFile(path) {
@@ -43,7 +43,7 @@ async function start() {
     await changeFiele();
     console.log('替换变量完毕')
     // 执行
-    await exec("node 52pojie.js >> result.txt");
+    await exec("node execute.js >> result.txt");
     console.log('执行完毕')
     const path = "./result.txt";
     let content = "";
