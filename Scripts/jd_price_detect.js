@@ -49,19 +49,19 @@ async function start() {
     let content = "";
     if (fs.existsSync(path)) {
         content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g,`\r\n`)//去掉回车换行;
-        
+        console.log(content)
     }
 
     if(SEND_KEY) {
         if (content.includes("不弹")|content.includes("已签")) {
-            console.log(`${$.name}-` + content)
+            console.log(content)
         }else{
             await notify.sendNotify("${$.name}-" + new Date().toLocaleDateString(), content);
-            console.log(`${$.name}-` + content)
+            console.log(content)
         }
     }else{
         await notify.sendNotify(`${$.name}-` + new Date().toLocaleDateString(), content);
-        console.log(`${$.name}-` + content)
+        console.log(content)
     }
 
     //运行完成后，删除下载的文件
