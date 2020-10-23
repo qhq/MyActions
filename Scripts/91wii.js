@@ -6,10 +6,10 @@ F12开发工具中切到网络，刷新页面，查看Cookie，将值填入Secre
 
 var $ = new Env('91wii');
 
+const notify = $.isNode() ? require('../sendNotify') : '';
 const CookieQ = process.env.COOKIE_91WII;
 const formhash = process.env.COOKIE_91WII_FORMHASH;
 
-const notify = $.isNode() ? require('../sendNotify') : '';
 var date = new Date();
 if (typeof $request != "undefined") {
   GetCookie()
