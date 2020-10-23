@@ -10,7 +10,7 @@ const $ = new Env('吾爱破解签到');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const KEY = process.env.COOKIE_52POJIE
-const SEND_KEY = process.env.SEND_KEY
+const SEND_KEY = process.env.BARK_PUSH
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js'
