@@ -42,9 +42,14 @@ function checkin() {
                 $.msg(`${$.name}`, "", date.getMonth() + 1 + "月" + date.getDate() + "日，签到成功 🎉")
             } else if (data.match(/(ÄúÒÑ|\u5DF2\u7ECF\u7B7E\u8FC7\u5230|�������Ѿ�ǩ����)/)) {
                 $.msg(`${$.name}`, "", date.getMonth() + 1 + "月" + date.getDate() + "日，已签过 ⚠️")
+                if ($.isNode()) {
+                  notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
+                }
             } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�|系统拒绝|���ϵͳ�ܾ�)/)) {
                 $.msg(`${$.name}`, "", "签到失败，Cookie 失效 ‼️‼️");
-                notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
+                if ($.isNode()) {
+                  notify.sendNotify(`${$.name} cookie已失效`, `请重新登录获取cookie`);
+                }
             } else {
                 $.msg("91WII", "", "脚本待更新 ‼️‼️")
             }
