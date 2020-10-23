@@ -6,7 +6,7 @@ name: 京东价格监控
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */1 * * *'
+    - cron: '0 */30 * * *'
   watch:
     types: [started]
 
