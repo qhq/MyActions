@@ -20,8 +20,10 @@ async function downFile () {
 
 async function changeFiele () {
     let content = await fs.readFileSync('./temp.js', 'utf8')
-    content = content.replace(/process\.env\.COOKIE_91WII\.split\(('&'|'\\n'|)\);/, `'${KEY}';`)
-    content = content.replace(/process\.env\.COOKIE_91WII_FORMHASH\.split\(('&'|'\\n'|)\);/, `'${FH}';`)
+    //content = content.replace(/process\.env\.COOKIE_91WII\.split\(('&'|'\\n'|)\);/, `'${KEY}';`)
+    //content = content.replace(/process\.env\.COOKIE_91WII_FORMHASH\.split\(('&'|'\\n'|)\);/, `'${FH}';`)
+    content = content.replace(/process\.env\.COOKIE_91WII/, `'${KEY}'`)
+    content = content.replace(/process\.env\.COOKIE_91WII_FORMHASH/, `'${FH}'`)
     await fs.writeFileSync( './execute.js', content, 'utf8')
     console.log(content);
 }
