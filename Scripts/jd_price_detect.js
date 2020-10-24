@@ -3,17 +3,25 @@ const fs = require('fs')
 const download = require('download')
 
 const $ = new Env('京东价格监控');
-const notify = $.isNode() ? require('../sendNotify') : '';
+//const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
-const DETECT_URL = process.env.JD_PRICE_DETECT_URL
-const DETECT_PRICE = process.env.JD_PRICE_DETECT_PRICE
-const SEND_KEY = process.env.BARK_PUSH
+const Secrets = {
+    DETECT_URL : process.env.JD_PRICE_DETECT_URL, //cokie,多个用\n隔开即可
+    DETECT_PRICE : process.env.JD_PRICE_DETECT_PRICE,
+    PUSH_KEY: process.env.PUSH_KEY, //server酱推送消息
+    BARK_PUSH: process.env.BARK_PUSH, //Bark推送
+    TG_BOT_TOKEN: process.env.TG_BOT_TOKEN, //TGBot推送Token
+    TG_USER_ID: process.env.TG_USER_ID, //TGBot推送成员ID
+};
+let KEYs = [];
 
+//下载脚本
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js'
     await download(url, './', { filename: "temp.js" })
 }
 
+//替换内容
 async function changeFiele () {
     let content = await fs.readFileSync('./temp.js', 'utf8')
     content = content.replace(/url = \[\]/, `url = '${DETECT_URL}'.split(',')`)
@@ -31,11 +39,37 @@ async function deleteFile(path) {
     }
 }
 
-async function start() {
-    if (!DETECT_URL) {
-        console.log('请填写 DETECT_URL 后在继续')
-        return
+//顺序执行
+async function executeOneByOne() {
+    const content = await fs.readFileSync("./temp.js", "utf8");
+    for (var i = 0; i < KEYs.length; i++) {
+        console.log(`正在执行第${i + 1}个`);
+        await changeFiele(content, KEYs[i]);
+        console.log("替换变量完毕");
+        try {
+            await exec("node execute.js", { stdio: "inherit" });
+        } catch (e) {
+            console.log("执行异常:" + e);
+        }
+        console.log("执行完毕");
     }
+}
+
+//启动
+async function start() {
+    console.log(`当前执行时间:${new Date().toString()}`);
+    if (!Secrets.DETECT_URL) {
+        console.log("请填写 Secrets 后在继续");
+        return;
+    }
+    /*
+    if (!Secrets.SyncUrl) {
+        console.log("请填写 SYNCURL 后在继续");
+        return;
+    }
+    */
+    KEYs = Secrets.DETECT_URL.split('\n');
+    console.log(`当前共${KEYs.length}个商品需要监测`);
     // 下载最新代码
     await downFile();
     console.log('下载代码完毕')
@@ -43,7 +77,7 @@ async function start() {
     await changeFiele();
     console.log('替换变量完毕')
     // 执行
-    await exec("node execute.js >> result.txt");
+    await executeOneByOne();
     console.log('执行完毕')
     const path = "./result.txt";
     let content = "";
