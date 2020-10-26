@@ -72,11 +72,11 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
         content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g, `\r\n`)//去掉回车换行;
     }
 
-    if (content.includes("已低于")) {
-        await notify.sendNotify(`${$.name}` + new Date().toLocaleDateString(), content);
+    if (content.includes("已低于")|content.includes("补充完整")) {
+        await notify.sendNotify(`${$.name}` + ${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString(), content);
         console.log(content)
     } else {
-        //await notify.sendNotify(`${$.name}` + new Date().toLocaleDateString(), content);
+        //await notify.sendNotify(`${$.name}` + ${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString(), content);
         console.log(content)
     }
 
