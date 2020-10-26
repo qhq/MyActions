@@ -23,6 +23,7 @@ async function replaceWithSecrets(content, Secrets) {
     return batchReplace(content, replacements);
 }
 function batchReplace(content, replacements) {
+    console.log(content);
     for (var i = 0; i < replacements.length; i++) {
         console.log(replacements[i].key)
         content = content.replace(replacements[i].key, replacements[i].value);
