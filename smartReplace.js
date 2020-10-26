@@ -5,8 +5,9 @@ async function replaceWithSecrets(content, Secrets) {
     if (!Secrets || !Secrets) return content;
     const replacements = [];
     await init_notify(Secrets, content, replacements);
-        if (Secrets.DETECT_URL && content.indexOf("$.timeout") > 0) {
-            replacements.push({ key: "url = \[\]", value: "url = " + JSON.stringify(Secrets.DETECT_URL.split(",")) });
+        if (Secrets.DETECT_URL) {
+            replacements.push({ key: "url = \[\]", value: "url = " + JSON.stringify(Secrets.DETECT_URL.split("\n")) });
+            replacements.push({ key: "price = \[\]", value: "price = " + JSON.stringify(Secrets.DETECT_PRICE.split("\n")) });
         }
         await downloader(content);//检查所需额外js
     /*
@@ -36,7 +37,7 @@ async function init_notify(Secrets, content, replacements) {
                     "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){}}",
             });
         }
-    } else {
+    }/* else {
         await download_notify();
         if (content.indexOf("京东多合一签到") > 0 && content.indexOf("@NobyDa") > 0) {
             console.log("京东多合一签到通知注入成功");
@@ -49,7 +50,7 @@ async function init_notify(Secrets, content, replacements) {
                 value: `console.log("通知开始");lxk0301Notify.sendNotify("京东多合一签到", one + two + three + notify);console.log("通知结束");`,
             });
         }
-    }
+    }*/
 }
 async function downloader(content) {
     if (content.indexOf("jdFruitShareCodes") > 0) {
