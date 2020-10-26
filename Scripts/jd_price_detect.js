@@ -60,7 +60,7 @@ async function start() {
         await changeFiele();
         console.log('替换变量完毕')
         // 执行
-        await exec("node execute.js", { stdio: "inherit" });
+        await exec("node execute.js >> result.txt");
     } catch (e) {
         console.log("执行异常:" + e);
     }
@@ -74,7 +74,7 @@ async function start() {
     if (content.includes("不弹") | content.includes("已签")) {
         console.log(content)
     } else {
-        await notify.sendNotify("${$.name}" + new Date().toLocaleDateString(), content);
+        await notify.sendNotify(`${$.name}` + new Date().toLocaleDateString(), content);
         console.log(content)
     }
 
