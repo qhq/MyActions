@@ -6,9 +6,8 @@ async function replaceWithSecrets(content, Secrets) {
     const replacements = [];
     await init_notify(Secrets, content, replacements);
         if (Secrets.DETECT_URL) {
-            console.log(JSON.stringify(Secrets.DETECT_URL.split("\n")))
             //replacements.push({ key: /url = []/, value: "url = " + JSON.stringify(Secrets.DETECT_URL.split("\n")) });
-            replacements.push({ key: /[]/, value: "qhq"});
+            replacements.push({ key: "[]", value: "qhq"});
             //replacements.push({ key: /price = \[\]/, value: "price = " + JSON.stringify(Secrets.DETECT_PRICE.split("\n")) });
         }
         await downloader(content);//检查所需额外js
