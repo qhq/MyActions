@@ -6,8 +6,9 @@ async function replaceWithSecrets(content, Secrets) {
     const replacements = [];
     await init_notify(Secrets, content, replacements);
         if (Secrets.DETECT_URL) {
-            replacements.push({ key: "url = []", value: "url = " + JSON.stringify(Secrets.DETECT_URL.split("\n")) });
-            replacements.push({ key: "price = []", value: "price = " + JSON.stringify(Secrets.DETECT_PRICE.split("\n")) });
+            console.log(JSON.stringify(Secrets.DETECT_URL.split("\n")))
+            replacements.push({ key: /url = \[\]/, value: "url = " + JSON.stringify(Secrets.DETECT_URL.split("\n")) });
+            replacements.push({ key: /price = \[\]/, value: "price = " + JSON.stringify(Secrets.DETECT_PRICE.split("\n")) });
         }
         await downloader(content);//检查所需额外js
     /*
@@ -23,6 +24,7 @@ async function replaceWithSecrets(content, Secrets) {
 }
 function batchReplace(content, replacements) {
     for (var i = 0; i < replacements.length; i++) {
+        console.log(replacements[i].key)
         content = content.replace(replacements[i].key, replacements[i].value);
     }
     return content;
