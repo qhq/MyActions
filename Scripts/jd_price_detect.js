@@ -24,9 +24,8 @@ async function downFile() {
 //替换内容
 async function changeFiele() {
     const content = await fs.readFileSync("./temp.js", "utf8");
-    let newContent = await smartReplace.replaceWithSecrets(content, Secrets);
-    await fs.writeFileSync('./execute.js', content, 'utf8')
-    console.log(content);
+    let Content = await smartReplace.replaceWithSecrets(content, Secrets);
+    await fs.writeFileSync('./execute.js', Content, 'utf8')
 }
 
 async function deleteFile(path) {
