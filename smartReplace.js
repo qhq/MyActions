@@ -12,6 +12,7 @@ async function replaceWithSecrets(content, Secrets) {
         if (Secrets.COOKIE_DKYD) {
             replacements.push({ key: "$util.getdata(DUOKAN_COOKIE_KEY)", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[0]) });
             replacements.push({ key: "$util.getdata(DUOKAN_DEVICE_ID_KEY)", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[1]) });
+            replacements.push({ key: "let result = JSON.parse(data)", value: "let result = JSON.parse(data);console.log(result);" });
         }
         await downloader(content);//检查所需额外js
     /*
