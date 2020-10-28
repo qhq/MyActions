@@ -25,7 +25,7 @@ async function downFile() {
 async function changeFiele() {
     const content = await fs.readFileSync("./temp.js", "utf8");
     let Content = await smartReplace.replaceWithSecrets(content, Secrets);
-    //console.log(Content);
+    console.log(Content);
     await fs.writeFileSync('./execute.js', Content, 'utf8')
 }
 
@@ -71,6 +71,7 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
     let content = "";
     if (fs.existsSync(path)) {
         content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g, `\r\n`)//去掉回车换行;
+        console.log(content);
     }
 
     if (content.includes("成功")) {
