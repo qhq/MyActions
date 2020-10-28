@@ -17,7 +17,7 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/chavyleung/scripts/master/duokan/duokan.js'
+    const url = 'https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js'
     await download(url, './', { filename: "temp.js" })
     console.log("下载代码完毕");
 }
