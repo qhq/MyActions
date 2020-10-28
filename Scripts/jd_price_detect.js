@@ -17,15 +17,17 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js'
+    const url = 'https://raw.githubusercontent.com/chavyleung/scripts/master/duokan/duokan.js'
     await download(url, './', { filename: "temp.js" })
+    console.log("下载代码完毕");
 }
 
 //替换内容
 async function changeFiele() {
-    const content = await fs.readFileSync("./temp.js", "utf8");
-    let Content = await smartReplace.replaceWithSecrets(content, Secrets);
-    await fs.writeFileSync('./execute.js', Content, 'utf8')
+    let content = await fs.readFileSync("./temp.js", "utf8");
+    content = await smartReplace.replaceWithSecrets(content, Secrets);
+    await fs.writeFileSync("./execute.js", content, "utf8");
+    console.log("替换变量完毕");
 }
 
 async function deleteFile(path) {
@@ -56,10 +58,8 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
     try {
         // 下载最新代码
         await downFile();
-        console.log('下载代码完毕')
         // 替换变量
         await changeFiele();
-        console.log('替换变量完毕')
         // 执行
         await exec("node execute.js >> result.txt");
     } catch (e) {
