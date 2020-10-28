@@ -19,14 +19,15 @@ const Secrets = {
 async function downFile() {
     const url = 'https://raw.githubusercontent.com/chavyleung/scripts/master/duokan/duokan.js'
     await download(url, './', { filename: "temp.js" })
+    console.log("下载代码完毕");
 }
 
 //替换内容
 async function changeFiele() {
-    const content = await fs.readFileSync("./temp.js", "utf8");
-    let Content = await smartReplace.replaceWithSecrets(content, Secrets);
-    console.log(Content);
-    await fs.writeFileSync('./execute.js', Content, 'utf8')
+    let content = await fs.readFileSync("./temp.js", "utf8");
+    content = await smartReplace.replaceWithSecrets(content, Secrets);
+    await fs.writeFileSync("./execute.js", content, "utf8");
+    console.log("替换变量完毕");
 }
 
 async function deleteFile(path) {
@@ -41,6 +42,7 @@ async function deleteFile(path) {
 
 //启动
 async function start() {
+//console.log(` 当前执行时间:${new Date().toString()}`);
 console.log(`国际时间 (UTC)：${new Date().toLocaleString()}`)
 console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
     if (!Secrets.COOKIE_DKYD) {
@@ -58,10 +60,8 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
     try {
         // 下载最新代码
         await downFile();
-        console.log('下载代码完毕')
         // 替换变量
         await changeFiele();
-        console.log('替换变量完毕')
         // 执行
         await exec("node execute.js >> result.txt");
     } catch (e) {
