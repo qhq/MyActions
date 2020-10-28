@@ -71,7 +71,7 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
     let content = "";
     if (fs.existsSync(path)) {
         content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g, `\r\n`)//去掉回车换行;
-        console.log(content);
+        //console.log(content);
     }
 
     if (content.includes("成功")) {
