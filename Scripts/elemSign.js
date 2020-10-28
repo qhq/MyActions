@@ -27,7 +27,7 @@ async function changeFiele() {
     let content = await fs.readFileSync("./temp.js", "utf8");
     content = await smartReplace.replaceWithSecrets(content, Secrets);
     await fs.writeFileSync("./execute.js", content, "utf8");
-    console.log(content);
+    //console.log(content);
     console.log("替换变量完毕");
 }
 
