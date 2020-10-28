@@ -25,7 +25,7 @@ async function downFile() {
 async function changeFiele() {
     const content = await fs.readFileSync("./temp.js", "utf8");
     let Content = await smartReplace.replaceWithSecrets(content, Secrets);
-    //console.log(Content);
+    console.log(Content);
     await fs.writeFileSync('./execute.js', Content, 'utf8')
 }
 
@@ -41,7 +41,7 @@ async function deleteFile(path) {
 
 //启动
 async function start() {
-console.log(`国际时间 (UTC)：${new Date().toLocaleString()}\n`)
+console.log(`国际时间 (UTC)：${new Date().toLocaleString()}`)
 console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
     if (!Secrets.COOKIE_DKYD) {
         console.log("请填写 Secrets 后再继续");
