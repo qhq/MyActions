@@ -28,7 +28,7 @@ jobs:
           npm install
       - name: ' 运行 【多看阅读签到】'
         run: |
-          node Scripts/91wii.js
+          node Scripts/dkyd.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
