@@ -8,7 +8,7 @@ const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 //DUOKAN_COOKIE_KEY，DUOKAN_DEVICE_ID_KEY 两个参数用换行放一个secret
 const Secrets = {
-    Cookie: process.env.COOKIE_DKYD, //cokie,多个用\n隔开即可
+    COOKIE_DKYD: process.env.COOKIE_DKYD, //cokie,多个用\n隔开即可
     PUSH_KEY: process.env.PUSH_KEY, //server酱推送消息
     BARK_PUSH: process.env.BARK_PUSH, //Bark推送
     TG_BOT_TOKEN: process.env.TG_BOT_TOKEN, //TGBot推送Token
@@ -43,7 +43,7 @@ async function deleteFile(path) {
 async function start() {
 console.log(`国际时间 (UTC)：${new Date().toLocaleString()}\n`)
 console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
-    if (!Secrets.Cookie) {
+    if (!Secrets.COOKIE_DKYD) {
         console.log("请填写 Secrets 后在继续");
         return;
     }
