@@ -9,6 +9,10 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: /url = \[\]/, value: "url = " + JSON.stringify(Secrets.DETECT_URL.split("\n")) });
             replacements.push({ key: /price = \[\]/, value: "price = " + JSON.stringify(Secrets.DETECT_PRICE.split("\n")) });
         }
+        if (Secrets.COOKIE_DKYD) {
+            replacements.push({ key: "let cookieVal = $util.getdata(DUOKAN_COOKIE_KEY)", value: "let cookieVal = " + JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[0]) });
+            replacements.push({ key: "let deviceId = $util.getdata(DUOKAN_DEVICE_ID_KEY)", value: "let deviceId = " + JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[1]) });
+        }
         await downloader(content);//检查所需额外js
     /*
         if (Secrets.MarketCoinToBeanCount && !isNaN(Secrets.MarketCoinToBeanCount)) {
