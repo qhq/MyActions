@@ -10,9 +10,8 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: /price = \[\]/, value: "price = " + JSON.stringify(Secrets.DETECT_PRICE.split("\n")) });
         }
         if (Secrets.COOKIE_DKYD) {
-            replacements.push({ key: "'duokan_cookie'", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[0]) });
-            replacements.push({ key: "'duokan_device_id'", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[1]) });
-            replacements.push({ key: "done({})", value: "done()" });
+            replacements.push({ key: "$util.getdata(DUOKAN_COOKIE_KEY)", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[0]) });
+            replacements.push({ key: "$util.getdata(DUOKAN_DEVICE_ID_KEY)", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[1]) });
         }
         await downloader(content);//检查所需额外js
     /*
