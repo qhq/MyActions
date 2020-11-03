@@ -6,6 +6,7 @@ async function replaceWithSecrets(content, Secrets) {
     const replacements = [];
     await init_notify(Secrets, content, replacements);
         if (Secrets.JD_COOKIE && content.indexOf("require('./jdCookie.js')") > 0) {
+            console.log(1)
             replacements.push({ key: "require('./jdCookie.js')", value: JSON.stringify(Secrets.JD_COOKIE.split("&")) });
         }
         if (Secrets.DETECT_URL) {
