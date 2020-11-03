@@ -17,7 +17,7 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/lxk0301/scripts/master/jd_bean_change.js'
+    const url = 'https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_starStore.js'
     await download(url, './', { filename: "temp.js" })
     console.log("下载代码完毕");
 }
