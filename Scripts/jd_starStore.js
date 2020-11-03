@@ -45,7 +45,7 @@ async function start() {
 //console.log(` 当前执行时间:${new Date().toString()}`);
 console.log(`国际时间 (UTC)：${new Date().toLocaleString()}`)
 console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
-    if (!Secrets.COOKIE_DKYD) {
+    if (!Secrets.JD_COOKIE) {
         console.log("请填写 Secrets 后再继续");
         await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, "请填写 Secrets");
         return;
