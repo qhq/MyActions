@@ -1,12 +1,12 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 京东排行榜
+name: 京东抽奖机
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '11 9 * * *'
+    - cron: '11 17 * * *'
   watch:
     types: started
 
@@ -29,7 +29,7 @@ jobs:
           npm install request
           npm install --save got
           npm install tough-cookie
-      - name: ' 运行 【京东排行榜】'
+      - name: ' 运行 【京东抽奖机】'
         run: |
           node Scripts/jd_lotteryMachine.js
         env:
