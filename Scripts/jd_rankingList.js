@@ -75,7 +75,7 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
         //console.log(content);
     }
 
-    if (content.includes("成功")) {
+    if (content.includes("成功")|content.includes("success")) {
         //await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
         console.log(content)
     } else {
