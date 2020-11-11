@@ -15,8 +15,8 @@ jobs:
 
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-    env:
-          APPS: ${{secrets.APPS}}
+    #env:
+          #APPS: ${{secrets.APPS}}
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 10.x
