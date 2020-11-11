@@ -33,7 +33,7 @@ async function downFile() {
 //替换内容
 async function changeFiele() {
     let content = await fs.readFileSync("./temp.js", "utf8");
-    content = content.replace(/let apps = [.*？];/m, `let apps = ${APPS};`)
+    content = content.replace(/\/\/app跟踪id/, `let apps = ${APPS};`)
     console.log(content);
     //content = await smartReplace.replaceWithSecrets(content, Secrets);
     await fs.writeFileSync("./execute.js", content, "utf8");
