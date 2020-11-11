@@ -3,12 +3,10 @@ const fs = require('fs')
 const download = require('download')
 const smartReplace = require("../smartReplace");
 
-const $ = new Env('京东价格监控');
+const $ = new Env('App价格监控');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const Secrets = {
-    DETECT_URL: process.env.JD_PRICE_DETECT_URL, //cokie,多个用\n隔开即可
-    DETECT_PRICE: process.env.JD_PRICE_DETECT_PRICE,
     PUSH_KEY: process.env.PUSH_KEY, //server酱推送消息
     BARK_PUSH: process.env.BARK_PUSH, //Bark推送
     TG_BOT_TOKEN: process.env.TG_BOT_TOKEN, //TGBot推送Token
@@ -17,7 +15,7 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js'
+    const url = 'https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/appstore/AppMonitor.js'
     await download(url, './', { filename: "temp.js" })
     console.log("下载代码完毕");
 }
@@ -44,17 +42,6 @@ async function deleteFile(path) {
 async function start() {
 console.log(`国际时间 (UTC)：${new Date().toLocaleString()}\n`)
 console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
-    if (!Secrets.DETECT_URL) {
-        console.log("请填写 Secrets 后在继续");
-        return;
-    }
-    /*
-    if (!Secrets.SyncUrl) {
-        console.log("请填写 SYNCURL 后在继续");
-        return;
-    }
-    */
-    console.log(`当前共${Secrets.DETECT_URL.split("\n").length}个商品需要监测`);
     try {
         // 下载最新代码
         await downFile();
@@ -72,11 +59,11 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
         content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g, `\r\n`)//去掉回车换行;
     }
 
-    if (content.includes("已低于")|content.includes("补充完整")) {
-        await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
+    if (content.includes("无变化")) {
+        //await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
         console.log(content)
     } else {
-        //await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
+        await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
         console.log(content)
     }
 
