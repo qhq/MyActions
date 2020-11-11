@@ -7,11 +7,21 @@ const $ = new Env('App价格监控');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const Secrets = {
+    APPS: process.env.APPS,
     PUSH_KEY: process.env.PUSH_KEY, //server酱推送消息
     BARK_PUSH: process.env.BARK_PUSH, //Bark推送
     TG_BOT_TOKEN: process.env.TG_BOT_TOKEN, //TGBot推送Token
     TG_USER_ID: process.env.TG_USER_ID, //TGBot推送成员ID
 };
+/*
+app可单独设置区域，未单独设置区域，则采用reg默认区域
+设置区域方式apps=["1443988620:hk","1443988620/us","1443988620-uk","1443988620_jp","1443988620 au"]
+以上方式均可 分隔符支持 空格/:|_-
+*/
+const APPS = [
+  "1468401388",
+  "1534690075",
+]; //app跟踪id
 
 //下载脚本
 async function downFile() {
@@ -23,6 +33,7 @@ async function downFile() {
 //替换内容
 async function changeFiele() {
     let content = await fs.readFileSync("./temp.js", "utf8");
+    content = content.replace(/let apps = [.*?];/, `let apps = ${APPS};`)
     content = await smartReplace.replaceWithSecrets(content, Secrets);
     await fs.writeFileSync("./execute.js", content, "utf8");
     console.log("替换变量完毕");
