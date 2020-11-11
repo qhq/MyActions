@@ -1,92 +1,600 @@
-const exec = require('child_process').execSync
-const fs = require('fs')
-const download = require('download')
-const smartReplace = require("../smartReplace");
-
-const $ = new Env('App价格监控');
-const notify = $.isNode() ? require('../sendNotify') : '';
-// 公共变量
-const Secrets = {
-    APPS: process.env.APPS,
-    PUSH_KEY: process.env.PUSH_KEY, //server酱推送消息
-    BARK_PUSH: process.env.BARK_PUSH, //Bark推送
-    TG_BOT_TOKEN: process.env.TG_BOT_TOKEN, //TGBot推送Token
-    TG_USER_ID: process.env.TG_USER_ID, //TGBot推送成员ID
-};
 /*
+【app版本及价格监控】修改自t.me/QuanXApp群友分享 
+Modified by evilbutcher
+
+【仓库地址】https://github.com/evilbutcher/Quantumult_X/tree/master（欢迎star🌟）
+
+【BoxJs】https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/evilbutcher.boxjs.json
+
+【致谢】
+感谢来自t.me/QuanXApp群友分享脚本！
+感谢Peng-YM的OpenAPI.js！
+
+⚠️【免责声明】
+------------------------------------------
+1、此脚本仅用于学习研究，不保证其合法性、准确性、有效性，请根据情况自行判断，本人对此不承担任何保证责任。
+2、由于此脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除，若违反规定引起任何事件本人对此均不负责。
+3、请勿将此脚本用于任何商业或非法目的，若违反规定请自行对此负责。
+4、此脚本涉及应用与本人无关，本人对因此引起的任何隐私泄漏或其他后果不承担任何责任。
+5、本人对任何脚本引发的问题概不负责，包括但不限于由脚本错误引起的任何损失和损害。
+6、如果任何单位或个人认为此脚本可能涉嫌侵犯其权利，应及时通知并提供身份证明，所有权证明，我们将在收到认证文件确认后删除此脚本。
+7、所有直接或间接使用、查看此脚本的人均应该仔细阅读此声明。本人保留随时更改或补充此声明的权利。一旦您使用或复制了此脚本，即视为您已接受此免责声明。
+
+【Quantumult X】
+————————————————
+30 7-22 * * * https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/appstore/AppMonitor.js, tag=App价格监控
+
+【Surge】
+————————————————
+App价格监控 = type=cron,cronexp="30 7-22 * * *",script-path=https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/appstore/AppMonitor.js,wake-system=true,timeout=600
+
+【Loon】
+————————————————
+cron "30 7-22 * * *" script-path=https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/appstore/AppMonitor.js, timeout=600, tag=App价格监控
+
 app可单独设置区域，未单独设置区域，则采用reg默认区域
 设置区域方式apps=["1443988620:hk","1443988620/us","1443988620-uk","1443988620_jp","1443988620 au"]
 以上方式均可 分隔符支持 空格/:|_-
+
 */
-const APPS = [
+const $ = new API("App价格监控");
+let apps = [
   "1468401388",
   "1534690075",
 ]; //app跟踪id
-
-//下载脚本
-async function downFile() {
-    const url = 'https://raw.githubusercontent.com/evilbutcher/Quantumult_X/master/check_in/appstore/AppMonitor.js'
-    await download(url, './', { filename: "temp.js" })
-    console.log("下载代码完毕");
+if ($.read("apps") != "" && $.read("apps") != undefined) {
+  apps = $.read("apps").split("，");
 }
-
-//替换内容
-async function changeFiele() {
-    let content = await fs.readFileSync("./temp.js", "utf8");
-    content = content.replace(/let apps = [.*?]/m, `let apps = [${APPS}];`)
-    console.log(content);
-    //content = await smartReplace.replaceWithSecrets(content, Secrets);
-    await fs.writeFileSync("./execute.js", content, "utf8");
-    console.log("替换变量完毕");
+let reg = "cn"; //默认区域：美国us 中国cn 香港hk
+if ($.read("reg") != "" && $.read("reg") != undefined) {
+  reg = $.read("reg");
 }
-
-async function deleteFile(path) {
-    // 查看文件result.txt是  否存在,如果存在,先删除
-    const fileExists = await fs.existsSync(path);
-    // console.log('fileExists', fileExists);
-    if (fileExists) {
-        const unlinkRes = await fs.unlinkSync(path);
-        // console.log('unlinkRes', unlinkRes)
-    }
-}
-
-//启动
-async function start() {
-console.log(`国际时间 (UTC)：${new Date().toLocaleString()}\n`)
-console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
-    try {
-        // 下载最新代码
-        await downFile();
-        // 替换变量
-        await changeFiele();
-        // 执行
-        await exec("node execute.js >> result.txt");
-    } catch (e) {
-        console.log("执行异常:" + e);
-    }
-    console.log("执行完毕");
-    const path = "./result.txt";
-    let content = "";
-    if (fs.existsSync(path)) {
-        content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g, `\r\n`)//去掉回车换行;
-    }
-
-    if (content.includes("无变化")) {
-        //await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
-        console.log(content)
+let notifys = [];
+format_apps(apps);
+function format_apps(x) {
+  let apps_f = {};
+  x.forEach((n) => {
+    if (/^[a-zA-Z0-9:/|\-_\s]{1,}$/.test(n)) {
+      n = n.replace(/[/|\-_\s]/g, ":");
+      let n_n = n.split(":");
+      if (n_n.length === 1) {
+        if (apps_f.hasOwnProperty(reg)) {
+          apps_f[reg].push(n_n);
+        } else {
+          apps_f[reg] = [];
+          apps_f[reg].push(n_n[0]);
+        }
+      } else if (n_n.length === 2) {
+        if (apps_f.hasOwnProperty(n_n[1])) {
+          apps_f[n_n[1]].push(n_n[0]);
+        } else {
+          apps_f[n_n[1]] = [];
+          apps_f[n_n[1]].push(n_n[0]);
+        }
+      } else {
+        notifys.push(`ID格式错误:【${n}】`);
+      }
     } else {
-        await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
-        console.log(content)
+      notifys.push(`ID格式错误:【${n}】`);
     }
-
-    //运行完成后，删除下载的文件
-    console.log('运行完成后，删除下载的文件\n')
-    await deleteFile(path);
-
+  });
+  if (Object.keys(apps_f).length > 0) {
+    post_data(apps_f);
+  }
+}
+async function post_data(d) {
+  try {
+    let app_monitor = $.read("app_monitor");
+    if (app_monitor === "" || app_monitor === undefined) {
+      app_monitor = {};
+    } else {
+      app_monitor = JSON.parse(app_monitor);
+      console.log(app_monitor);
+    }
+    let infos = {};
+    await Promise.all(
+      Object.keys(d).map(async (k) => {
+        let config = {
+          url: "https://itunes.apple.com/lookup?id=" + d[k] + "&country=" + k,
+        };
+        await $.http
+          .get(config)
+          .then((response) => {
+            let results = JSON.parse(response.body).results;
+            if (Array.isArray(results) && results.length > 0) {
+              results.forEach((x) => {
+                infos[x.trackId] = {
+                  n: x.trackName,
+                  v: x.version,
+                  p: x.formattedPrice,
+                };
+                if (app_monitor.hasOwnProperty(x.trackId)) {
+                  if (
+                    JSON.stringify(app_monitor[x.trackId]) !==
+                    JSON.stringify(infos[x.trackId])
+                  ) {
+                    /*
+                      if (x.version !== app_monitor[x.trackId].v) {
+                      notifys.push(
+                        `${flag(k)}🧩${x.trackName}:升级【${x.version}】`
+                      );
+                    }
+                    */
+                    if (x.formattedPrice !== app_monitor[x.trackId].p) {
+                      notifys.push(
+                        `${flag(k)}💰${x.trackName}:价格【${x.formattedPrice}】`
+                      );
+                    }
+                  }
+                } else {
+                  notifys.push(
+                    `${flag(k)}🧩${x.trackName}:版本【${x.version}】`
+                  );
+                  notifys.push(
+                    `${flag(k)}💰${x.trackName}:价格【${x.formattedPrice}】`
+                  );
+                }
+              });
+            }
+            return Promise.resolve();
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      })
+    );
+    infos = JSON.stringify(infos);
+    $.write(infos, "app_monitor");
+    if (notifys.length > 0) {
+      notify(notifys);
+    } else {
+      console.log("APP监控：版本及价格无变化");
+      $.done;
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+function notify(notifys) {
+  notifys = notifys.join("\n");
+  console.log(notifys);
+  $.notify("APP监控", "", notifys);
+  $.done;
+}
+function flag(x) {
+  var flags = new Map([
+    ["AC", "🇦🇨"],
+    ["AF", "🇦🇫"],
+    ["AI", "🇦🇮"],
+    ["AL", "🇦🇱"],
+    ["AM", "🇦🇲"],
+    ["AQ", "🇦🇶"],
+    ["AR", "🇦🇷"],
+    ["AS", "🇦🇸"],
+    ["AT", "🇦🇹"],
+    ["AU", "🇦🇺"],
+    ["AW", "🇦🇼"],
+    ["AX", "🇦🇽"],
+    ["AZ", "🇦🇿"],
+    ["BB", "🇧🇧"],
+    ["BD", "🇧🇩"],
+    ["BE", "🇧🇪"],
+    ["BF", "🇧🇫"],
+    ["BG", "🇧🇬"],
+    ["BH", "🇧🇭"],
+    ["BI", "🇧🇮"],
+    ["BJ", "🇧🇯"],
+    ["BM", "🇧🇲"],
+    ["BN", "🇧🇳"],
+    ["BO", "🇧🇴"],
+    ["BR", "🇧🇷"],
+    ["BS", "🇧🇸"],
+    ["BT", "🇧🇹"],
+    ["BV", "🇧🇻"],
+    ["BW", "🇧🇼"],
+    ["BY", "🇧🇾"],
+    ["BZ", "🇧🇿"],
+    ["CA", "🇨🇦"],
+    ["CF", "🇨🇫"],
+    ["CH", "🇨🇭"],
+    ["CK", "🇨🇰"],
+    ["CL", "🇨🇱"],
+    ["CM", "🇨🇲"],
+    ["CN", "🇨🇳"],
+    ["CO", "🇨🇴"],
+    ["CP", "🇨🇵"],
+    ["CR", "🇨🇷"],
+    ["CU", "🇨🇺"],
+    ["CV", "🇨🇻"],
+    ["CW", "🇨🇼"],
+    ["CX", "🇨🇽"],
+    ["CY", "🇨🇾"],
+    ["CZ", "🇨🇿"],
+    ["DE", "🇩🇪"],
+    ["DG", "🇩🇬"],
+    ["DJ", "🇩🇯"],
+    ["DK", "🇩🇰"],
+    ["DM", "🇩🇲"],
+    ["DO", "🇩🇴"],
+    ["DZ", "🇩🇿"],
+    ["EA", "🇪🇦"],
+    ["EC", "🇪🇨"],
+    ["EE", "🇪🇪"],
+    ["EG", "🇪🇬"],
+    ["EH", "🇪🇭"],
+    ["ER", "🇪🇷"],
+    ["ES", "🇪🇸"],
+    ["ET", "🇪🇹"],
+    ["EU", "🇪🇺"],
+    ["FI", "🇫🇮"],
+    ["FJ", "🇫🇯"],
+    ["FK", "🇫🇰"],
+    ["FM", "🇫🇲"],
+    ["FO", "🇫🇴"],
+    ["FR", "🇫🇷"],
+    ["GA", "🇬🇦"],
+    ["GB", "🇬🇧"],
+    ["HK", "🇭🇰"],
+    ["ID", "🇮🇩"],
+    ["IE", "🇮🇪"],
+    ["IL", "🇮🇱"],
+    ["IM", "🇮🇲"],
+    ["IN", "🇮🇳"],
+    ["IS", "🇮🇸"],
+    ["IT", "🇮🇹"],
+    ["JP", "🇯🇵"],
+    ["KR", "🇰🇷"],
+    ["MO", "🇲🇴"],
+    ["MX", "🇲🇽"],
+    ["MY", "🇲🇾"],
+    ["NL", "🇳🇱"],
+    ["PH", "🇵🇭"],
+    ["RO", "🇷🇴"],
+    ["RS", "🇷🇸"],
+    ["RU", "🇷🇺"],
+    ["RW", "🇷🇼"],
+    ["SA", "🇸🇦"],
+    ["SB", "🇸🇧"],
+    ["SC", "🇸🇨"],
+    ["SD", "🇸🇩"],
+    ["SE", "🇸🇪"],
+    ["SG", "🇸🇬"],
+    ["TH", "🇹🇭"],
+    ["TN", "🇹🇳"],
+    ["TO", "🇹🇴"],
+    ["TR", "🇹🇷"],
+    ["TV", "🇹🇻"],
+    ["TW", "🇨🇳"],
+    ["UK", "🇬🇧"],
+    ["UM", "🇺🇲"],
+    ["US", "🇺🇸"],
+    ["UY", "🇺🇾"],
+    ["UZ", "🇺🇿"],
+    ["VA", "🇻🇦"],
+    ["VE", "🇻🇪"],
+    ["VG", "🇻🇬"],
+    ["VI", "🇻🇮"],
+    ["VN", "🇻🇳"],
+  ]);
+  return flags.get(x.toUpperCase());
 }
 
-start()
+//From Peng-YM's OpenAPI.js
+function ENV() {
+  const isQX = typeof $task !== "undefined";
+  const isLoon = typeof $loon !== "undefined";
+  const isSurge = typeof $httpClient !== "undefined" && !isLoon;
+  const isJSBox = typeof require == "function" && typeof $jsbox != "undefined";
+  const isNode = typeof require == "function" && !isJSBox;
+  const isRequest = typeof $request !== "undefined";
+  const isScriptable = typeof importModule !== "undefined";
+  return { isQX, isLoon, isSurge, isNode, isJSBox, isRequest, isScriptable };
+}
 
+function HTTP(baseURL, defaultOptions = {}) {
+  const { isQX, isLoon, isSurge, isScriptable, isNode } = ENV();
+  const methods = ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"];
 
+  function send(method, options) {
+    options = typeof options === "string" ? { url: options } : options;
+    options.url = baseURL ? baseURL + options.url : options.url;
+    options = { ...defaultOptions, ...options };
+    const timeout = options.timeout;
+    const events = {
+      ...{
+        onRequest: () => {},
+        onResponse: (resp) => resp,
+        onTimeout: () => {},
+      },
+      ...options.events,
+    };
 
-function Env(t,e){class s{constructor(t){this.env=t}send(t,e="GET"){t="string"==typeof t?{url:t}:t;let s=this.get;return"POST"===e&&(s=this.post),new Promise((e,i)=>{s.call(this,t,(t,s,o)=>{t?i(t):e(s)})})}get(t){return this.send.call(this.env,t)}post(t){return this.send.call(this.env,t,"POST")}}return new class{constructor(t,e){this.name=t,this.http=new s(this),this.data=null,this.dataFile="box.dat",this.logs=[],this.isMute=!1,this.logSeparator="\n",this.startTime=(new Date).getTime(),Object.assign(this,e),this.log("",`\ud83d\udd14${this.name}, \u5f00\u59cb!`)}isNode(){return"undefined"!=typeof module&&!!module.exports}isQuanX(){return"undefined"!=typeof $task}isSurge(){return"undefined"!=typeof $httpClient&&"undefined"==typeof $loon}isLoon(){return"undefined"!=typeof $loon}toObj(t,e=null){try{return JSON.parse(t)}catch{return e}}toStr(t,e=null){try{return JSON.stringify(t)}catch{return e}}getjson(t,e){let s=e;const i=this.getdata(t);if(i)try{s=JSON.parse(this.getdata(t))}catch{}return s}setjson(t,e){try{return this.setdata(JSON.stringify(t),e)}catch{return!1}}getScript(t){return new Promise(e=>{this.get({url:t},(t,s,i)=>e(i))})}runScript(t,e){return new Promise(s=>{let i=this.getdata("@chavy_boxjs_userCfgs.httpapi");i=i?i.replace(/\n/g,"").trim():i;let o=this.getdata("@chavy_boxjs_userCfgs.httpapi_timeout");o=o?1*o:20,o=e&&e.timeout?e.timeout:o;const[r,h]=i.split("@"),a={url:`http://${h}/v1/scripting/evaluate`,body:{script_text:t,mock_type:"cron",timeout:o},headers:{"X-Key":r,Accept:"*/*"}};this.post(a,(t,e,i)=>s(i))}).catch(t=>this.logErr(t))}loaddata(){if(!this.isNode())return{};{this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e);if(!s&&!i)return{};{const i=s?t:e;try{return JSON.parse(this.fs.readFileSync(i))}catch(t){return{}}}}}writedata(){if(this.isNode()){this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),i=!s&&this.fs.existsSync(e),o=JSON.stringify(this.data);s?this.fs.writeFileSync(t,o):i?this.fs.writeFileSync(e,o):this.fs.writeFileSync(t,o)}}lodash_get(t,e,s){const i=e.replace(/\[(\d+)\]/g,".$1").split(".");let o=t;for(const t of i)if(o=Object(o)[t],void 0===o)return s;return o}lodash_set(t,e,s){return Object(t)!==t?t:(Array.isArray(e)||(e=e.toString().match(/[^.[\]]+/g)||[]),e.slice(0,-1).reduce((t,s,i)=>Object(t[s])===t[s]?t[s]:t[s]=Math.abs(e[i+1])>>0==+e[i+1]?[]:{},t)[e[e.length-1]]=s,t)}getdata(t){let e=this.getval(t);if(/^@/.test(t)){const[,s,i]=/^@(.*?)\.(.*?)$/.exec(t),o=s?this.getval(s):"";if(o)try{const t=JSON.parse(o);e=t?this.lodash_get(t,i,""):e}catch(t){e=""}}return e}setdata(t,e){let s=!1;if(/^@/.test(e)){const[,i,o]=/^@(.*?)\.(.*?)$/.exec(e),r=this.getval(i),h=i?"null"===r?null:r||"{}":"{}";try{const e=JSON.parse(h);this.lodash_set(e,o,t),s=this.setval(JSON.stringify(e),i)}catch(e){const r={};this.lodash_set(r,o,t),s=this.setval(JSON.stringify(r),i)}}else s=this.setval(t,e);return s}getval(t){return this.isSurge()||this.isLoon()?$persistentStore.read(t):this.isQuanX()?$prefs.valueForKey(t):this.isNode()?(this.data=this.loaddata(),this.data[t]):this.data&&this.data[t]||null}setval(t,e){return this.isSurge()||this.isLoon()?$persistentStore.write(t,e):this.isQuanX()?$prefs.setValueForKey(t,e):this.isNode()?(this.data=this.loaddata(),this.data[e]=t,this.writedata(),!0):this.data&&this.data[e]||null}initGotEnv(t){this.got=this.got?this.got:require("got"),this.cktough=this.cktough?this.cktough:require("tough-cookie"),this.ckjar=this.ckjar?this.ckjar:new this.cktough.CookieJar,t&&(t.headers=t.headers?t.headers:{},void 0===t.headers.Cookie&&void 0===t.cookieJar&&(t.cookieJar=this.ckjar))}get(t,e=(()=>{})){t.headers&&(delete t.headers["Content-Type"],delete t.headers["Content-Length"]),this.isSurge()||this.isLoon()?$httpClient.get(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)}):this.isQuanX()?$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:o,body:r}=t;e(null,{status:s,statusCode:i,headers:o,body:r},r)},t=>e(t)):this.isNode()&&(this.initGotEnv(t),this.got(t).on("redirect",(t,e)=>{try{const s=t.headers["set-cookie"].map(this.cktough.Cookie.parse).toString();this.ckjar.setCookieSync(s,null),e.cookieJar=this.ckjar}catch(t){this.logErr(t)}}).then(t=>{const{statusCode:s,statusCode:i,headers:o,body:r}=t;e(null,{status:s,statusCode:i,headers:o,body:r},r)},t=>e(t)))}post(t,e=(()=>{})){if(t.body&&t.headers&&!t.headers["Content-Type"]&&(t.headers["Content-Type"]="application/x-www-form-urlencoded"),t.headers&&delete t.headers["Content-Length"],this.isSurge()||this.isLoon())$httpClient.post(t,(t,s,i)=>{!t&&s&&(s.body=i,s.statusCode=s.status),e(t,s,i)});else if(this.isQuanX())t.method="POST",$task.fetch(t).then(t=>{const{statusCode:s,statusCode:i,headers:o,body:r}=t;e(null,{status:s,statusCode:i,headers:o,body:r},r)},t=>e(t));else if(this.isNode()){this.initGotEnv(t);const{url:s,...i}=t;this.got.post(s,i).then(t=>{const{statusCode:s,statusCode:i,headers:o,body:r}=t;e(null,{status:s,statusCode:i,headers:o,body:r},r)},t=>e(t))}}time(t){let e={"M+":(new Date).getMonth()+1,"d+":(new Date).getDate(),"H+":(new Date).getHours(),"m+":(new Date).getMinutes(),"s+":(new Date).getSeconds(),"q+":Math.floor(((new Date).getMonth()+3)/3),S:(new Date).getMilliseconds()};/(y+)/.test(t)&&(t=t.replace(RegExp.$1,((new Date).getFullYear()+"").substr(4-RegExp.$1.length)));for(let s in e)new RegExp("("+s+")").test(t)&&(t=t.replace(RegExp.$1,1==RegExp.$1.length?e[s]:("00"+e[s]).substr((""+e[s]).length)));return t}msg(e=t,s="",i="",o){const r=t=>{if(!t||!this.isLoon()&&this.isSurge())return t;if("string"==typeof t)return this.isLoon()?t:this.isQuanX()?{"open-url":t}:void 0;if("object"==typeof t){if(this.isLoon()){let e=t.openUrl||t["open-url"],s=t.mediaUrl||t["media-url"];return{openUrl:e,mediaUrl:s}}if(this.isQuanX()){let e=t["open-url"]||t.openUrl,s=t["media-url"]||t.mediaUrl;return{"open-url":e,"media-url":s}}}};this.isMute||(this.isSurge()||this.isLoon()?$notification.post(e,s,i,r(o)):this.isQuanX()&&$notify(e,s,i,r(o)));let h=["","==============\ud83d\udce3\u7cfb\u7edf\u901a\u77e5\ud83d\udce3=============="];h.push(e),s&&h.push(s),i&&h.push(i),console.log(h.join("\n")),this.logs=this.logs.concat(h)}log(...t){t.length>0&&(this.logs=[...this.logs,...t]),console.log(t.join(this.logSeparator))}logErr(t,e){const s=!this.isSurge()&&!this.isQuanX()&&!this.isLoon();s?this.log("",`\u2757\ufe0f${this.name}, \u9519\u8bef!`,t.stack):this.log("",`\u2757\ufe0f${this.name}, \u9519\u8bef!`,t)}wait(t){return new Promise(e=>setTimeout(e,t))}done(t={}){const e=(new Date).getTime(),s=(e-this.startTime)/1e3;this.log("",`\ud83d\udd14${this.name}, \u7ed3\u675f! \ud83d\udd5b ${s} \u79d2`),this.log(),(this.isSurge()||this.isQuanX()||this.isLoon())&&$done(t)}}(t,e)}
+    events.onRequest(method, options);
+
+    let worker;
+    if (isQX) {
+      worker = $task.fetch({ method, ...options });
+    } else if (isLoon || isSurge || isNode) {
+      worker = new Promise((resolve, reject) => {
+        const request = isNode ? require("request") : $httpClient;
+        request[method.toLowerCase()](options, (err, response, body) => {
+          if (err) reject(err);
+          else
+            resolve({
+              statusCode: response.status || response.statusCode,
+              headers: response.headers,
+              body,
+            });
+        });
+      });
+    } else if (isScriptable) {
+      const request = new Request(options.url);
+      request.method = method;
+      request.headers = options.headers;
+      request.body = options.body;
+      worker = new Promise((resolve, reject) => {
+        request
+          .loadString()
+          .then((body) => {
+            resolve({
+              statusCode: request.response.statusCode,
+              headers: request.response.headers,
+              body,
+            });
+          })
+          .catch((err) => reject(err));
+      });
+    }
+
+    let timeoutid;
+    const timer = timeout
+      ? new Promise((_, reject) => {
+          timeoutid = setTimeout(() => {
+            events.onTimeout();
+            return reject(
+              `${method} URL: ${options.url} exceeds the timeout ${timeout} ms`
+            );
+          }, timeout);
+        })
+      : null;
+
+    return (timer
+      ? Promise.race([timer, worker]).then((res) => {
+          clearTimeout(timeoutid);
+          return res;
+        })
+      : worker
+    ).then((resp) => events.onResponse(resp));
+  }
+
+  const http = {};
+  methods.forEach(
+    (method) =>
+      (http[method.toLowerCase()] = (options) => send(method, options))
+  );
+  return http;
+}
+
+function API(name = "untitled", debug = false) {
+  const { isQX, isLoon, isSurge, isNode, isJSBox, isScriptable } = ENV();
+  return new (class {
+    constructor(name, debug) {
+      this.name = name;
+      this.debug = debug;
+
+      this.http = HTTP();
+      this.env = ENV();
+
+      this.node = (() => {
+        if (isNode) {
+          const fs = require("fs");
+
+          return {
+            fs,
+          };
+        } else {
+          return null;
+        }
+      })();
+      this.initCache();
+
+      const delay = (t, v) =>
+        new Promise(function (resolve) {
+          setTimeout(resolve.bind(null, v), t);
+        });
+
+      Promise.prototype.delay = function (t) {
+        return this.then(function (v) {
+          return delay(t, v);
+        });
+      };
+    }
+    // persistance
+
+    // initialize cache
+    initCache() {
+      if (isQX) this.cache = JSON.parse($prefs.valueForKey(this.name) || "{}");
+      if (isLoon || isSurge)
+        this.cache = JSON.parse($persistentStore.read(this.name) || "{}");
+
+      if (isNode) {
+        // create a json for root cache
+        let fpath = "root.json";
+        if (!this.node.fs.existsSync(fpath)) {
+          this.node.fs.writeFileSync(
+            fpath,
+            JSON.stringify({}),
+            { flag: "wx" },
+            (err) => console.log(err)
+          );
+        }
+        this.root = {};
+
+        // create a json file with the given name if not exists
+        fpath = `${this.name}.json`;
+        if (!this.node.fs.existsSync(fpath)) {
+          this.node.fs.writeFileSync(
+            fpath,
+            JSON.stringify({}),
+            { flag: "wx" },
+            (err) => console.log(err)
+          );
+          this.cache = {};
+        } else {
+          this.cache = JSON.parse(
+            this.node.fs.readFileSync(`${this.name}.json`)
+          );
+        }
+      }
+    }
+
+    // store cache
+    persistCache() {
+      const data = JSON.stringify(this.cache);
+      if (isQX) $prefs.setValueForKey(data, this.name);
+      if (isLoon || isSurge) $persistentStore.write(data, this.name);
+      if (isNode) {
+        this.node.fs.writeFileSync(
+          `${this.name}.json`,
+          data,
+          { flag: "w" },
+          (err) => console.log(err)
+        );
+        this.node.fs.writeFileSync(
+          "root.json",
+          JSON.stringify(this.root),
+          { flag: "w" },
+          (err) => console.log(err)
+        );
+      }
+    }
+
+    write(data, key) {
+      this.log(`SET ${key}`);
+      if (key.indexOf("#") !== -1) {
+        key = key.substr(1);
+        if (isSurge & isLoon) {
+          $persistentStore.write(data, key);
+        }
+        if (isQX) {
+          $prefs.setValueForKey(data, key);
+        }
+        if (isNode) {
+          this.root[key] = data;
+        }
+      } else {
+        this.cache[key] = data;
+      }
+      this.persistCache();
+    }
+
+    read(key) {
+      this.log(`READ ${key}`);
+      if (key.indexOf("#") !== -1) {
+        key = key.substr(1);
+        if (isSurge & isLoon) {
+          return $persistentStore.read(key);
+        }
+        if (isQX) {
+          return $prefs.valueForKey(key);
+        }
+        if (isNode) {
+          return this.root[key];
+        }
+      } else {
+        return this.cache[key];
+      }
+    }
+
+    delete(key) {
+      this.log(`DELETE ${key}`);
+      if (key.indexOf("#") !== -1) {
+        key = key.substr(1);
+        if (isSurge & isLoon) {
+          $persistentStore.write(null, key);
+        }
+        if (isQX) {
+          $prefs.removeValueForKey(key);
+        }
+        if (isNode) {
+          delete this.root[key];
+        }
+      } else {
+        delete this.cache[key];
+      }
+      this.persistCache();
+    }
+
+    // notification
+    notify(title, subtitle = "", content = "", options = {}) {
+      const openURL = options["open-url"];
+      const mediaURL = options["media-url"];
+
+      if (isQX) $notify(title, subtitle, content, options);
+      if (isSurge) {
+        $notification.post(
+          title,
+          subtitle,
+          content + `${mediaURL ? "\n多媒体:" + mediaURL : ""}`,
+          {
+            url: openURL,
+          }
+        );
+      }
+      if (isLoon) {
+        let opts = {};
+        if (openURL) opts["openUrl"] = openURL;
+        if (mediaURL) opts["mediaUrl"] = mediaURL;
+        if (JSON.stringify(opts) == "{}") {
+          $notification.post(title, subtitle, content);
+        } else {
+          $notification.post(title, subtitle, content, opts);
+        }
+      }
+      if (isNode || isScriptable) {
+        const content_ =
+          content +
+          (openURL ? `\n点击跳转: ${openURL}` : "") +
+          (mediaURL ? `\n多媒体: ${mediaURL}` : "");
+        if (isJSBox) {
+          const push = require("push");
+          push.schedule({
+            title: title,
+            body: (subtitle ? subtitle + "\n" : "") + content_,
+          });
+        } else {
+          console.log(`${title}\n${subtitle}\n${content_}\n\n`);
+        }
+      }
+    }
+
+    // other helper functions
+    log(msg) {
+      if (this.debug) console.log(msg);
+    }
+
+    info(msg) {
+      console.log(msg);
+    }
+
+    error(msg) {
+      console.log("ERROR: " + msg);
+    }
+
+    wait(millisec) {
+      return new Promise((resolve) => setTimeout(resolve, millisec));
+    }
+
+    done(value = {}) {
+      if (isQX || isLoon || isSurge) {
+        $done(value);
+      } else if (isNode && !isJSBox) {
+        if (typeof $context !== "undefined") {
+          $context.headers = value.headers;
+          $context.statusCode = value.statusCode;
+          $context.body = value.body;
+        }
+      }
+    }
+  })(name, debug);
+}
