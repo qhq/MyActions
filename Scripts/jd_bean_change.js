@@ -31,6 +31,7 @@ let cookiesArr = [
   'pt_key=AAJfoKqyADBmV5J17bfD6mvifIiK1JKIb7PL0QhA50BGPm_O56nMhttNLUfdRdvWZgFlh7nk_SI; pt_pin=czfd;',
   'pt_key=AAJfoLGjADDIfEAcQYWnfgq63i5Y_C11ZCxO9Wggk5C7yzMK4ihNOk5qe0yRW79ZqkvadUoS_co; pt_pin=%E7%8E%8B%E8%80%81%E8%99%8E%E6%8A%A2%E4%BA%B2;',
 ], cookie = '';
+let sDetail = '';
 
 !(async () => {
     if (!cookiesArr[0]) {
@@ -40,7 +41,7 @@ let cookiesArr = [
     for (let i = 0; i < cookiesArr.length; i++) {
         if (cookiesArr[i]) {
             cookie = cookiesArr[i];
-            let sDetail = '';
+            sDetail = '';
             $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
             $.index = i + 1;
             $.beanCount = 0;
