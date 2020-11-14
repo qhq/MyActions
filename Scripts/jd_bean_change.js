@@ -116,16 +116,14 @@ async function bean() {
   } while (t === 0);
   const resultDetail = new Array;
   for (let item of yesterdayArr) {
+      console.log(item.eventMassage+":"+Number(item.amount));
     if (Number(item.amount) > 0) {
       if (resultDetail[item.eventMassage] != undefined) {
-        console.log(item.eventMassage+":"+resultDetail[item.eventMassage]);
-        console.log(Number(item.amount));
-resultDetail[item.eventMassage] += Number(item.amount);
-        console.log(resultDetail[item.eventMassage]);
+        resultDetail[item.eventMassage] += Number(item.amount);
       } else {
         resultDetail[item.eventMassage] = Number(item.amount);
       }
-
+      console.log(item.eventMassage+":"+resultDetail[item.eventMassage]);
       $.incomeBean += Number(item.amount);
     } else if (Number(item.amount) < 0) {
       $.expenseBean += Number(item.amount);
