@@ -20,17 +20,24 @@ cron "2 9 * * *" script-path=https://raw.githubusercontent.com/lxk0301/scripts/m
 Surge
 京豆变动通知 = type=cron,cronexp=2 9 * * *,wake-system=1,timeout=440,script-path=https://raw.githubusercontent.com/lxk0301/scripts/master/jd_bean_change.js
  */
+
 const $ = new Env('京豆变动通知');
-const notify = $.isNode() ? require('../sendNotify') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-//const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [
-  'pt_key=AAJfrrdfADAgC0kkpyCFafVphEwztSRVBNlJ9LNiayjuGDGlCUZYPw9zStQBz5bAxsDxo6eWc3g; pt_pin=qhqcz;',
-  'pt_key=AAJfoKqyADBmV5J17bfD6mvifIiK1JKIb7PL0QhA50BGPm_O56nMhttNLUfdRdvWZgFlh7nk_SI; pt_pin=czfd;',
-  'pt_key=AAJfoLGjADDIfEAcQYWnfgq63i5Y_C11ZCxO9Wggk5C7yzMK4ihNOk5qe0yRW79ZqkvadUoS_co; pt_pin=%E7%8E%8B%E8%80%81%E8%99%8E%E6%8A%A2%E4%BA%B2;',
-], cookie = '';
+let cookiesArr = [], cookie = '';
+if ($.isNode()) {
+  Object.keys(jdCookieNode).forEach((item) => {
+    cookiesArr.push(jdCookieNode[item])
+  })
+  if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
+} else {
+  cookiesArr.push($.getdata('CookieJD'));
+  cookiesArr.push($.getdata('CookieJD2'));
+}
+
 let sDetail = '';
 
 !(async () => {
