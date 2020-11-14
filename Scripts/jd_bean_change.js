@@ -118,10 +118,10 @@ async function bean() {
   for (let item of yesterdayArr) {
     if (Number(item.amount) > 0) {
       if (resultDetail[item.eventMassage] != undefined) {
-        console.log(item.eventMassage+":"+resultDetail[item.eventMassage].value);
+        console.log(item.eventMassage+":"+resultDetail[item.eventMassage]);
         console.log(Number(item.amount));
-resultDetail[item.eventMassage].value += Number(item.amount);
-        console.log(resultDetail[item.eventMassage].value);
+resultDetail[item.eventMassage] += Number(item.amount);
+        console.log(resultDetail[item.eventMassage]);
       } else {
         resultDetail[item.eventMassage] = Number(item.amount);
       }
