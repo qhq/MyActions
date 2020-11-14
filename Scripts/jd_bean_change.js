@@ -95,10 +95,10 @@ async function bean() {
     if (response && response.code === "0") {
       page++;
       let detailList = response.detailList;
-      detailList = detailList.replace(/\(.*?\)/g, "");
+      //detailList = detailList.replace(/\(.*?\)/g, "");
       if (detailList && detailList.length > 0) {
         for (let item of detailList) {
-          const date = item.date.replace(/-/g, '/') + "+08:00";
+          const date = item.date.replace(/\(.*?\)/g, "").replace(/-/g, '/') + "+08:00";
           if (tm <= new Date(date).getTime() && new Date(date).getTime() < tm1) {
             //昨日的
             yesterdayArr.push(item);
