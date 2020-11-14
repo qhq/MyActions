@@ -200,7 +200,7 @@ function getJingBeanBalanceDetail(page) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            data = JSON.parse(data.replace(/\(.*?\d{4,20}.*?\)[\s]/g, ''));
+            data = JSON.parse(data.replace(/\(.*?\d{4,20}.*?\)[\s|]/g, ''));
             // console.log(data)
           } else {
             console.log(`京东服务器返回空数据`)
