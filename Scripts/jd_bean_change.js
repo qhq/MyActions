@@ -99,7 +99,7 @@ async function bean() {
       if (detailList && detailList.length > 0) {
         for (let item of detailList) {
           //const date = item.date.replace(/\(.*?\d{4,20}.*?\)/g, "").replace(/-/g, '/') + "+08:00";
-          const date = item.date.replace(/订单号/g, '').replace(/-/g, '/') + "+08:00";
+          const date = item.date.replace(/-/g, '/') + "+08:00";
           if (tm <= new Date(date).getTime() && new Date(date).getTime() < tm1) {
             //昨日的
             yesterdayArr.push(item);
@@ -201,7 +201,7 @@ function getJingBeanBalanceDetail(page) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            data = JSON.parse(data);
+            data = JSON.parse(data).replace(/\(.*?\d{4,20}.*?\)/g, '');
             // console.log(data)
           } else {
             console.log(`京东服务器返回空数据`)
