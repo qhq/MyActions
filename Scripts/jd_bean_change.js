@@ -88,7 +88,7 @@ async function bean() {
   const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 - (24 * 60 * 60 * 1000);
   // 今天0:0:0时间戳
   const tm1 = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000;
-  let page = 7, t = 0, yesterdayArr = [];
+  let page = 1, t = 0, yesterdayArr = [];
   do {
     let response = await getJingBeanBalanceDetail(page);
     console.log(`第${page}页: ${JSON.stringify(response)}`);
@@ -116,21 +116,21 @@ async function bean() {
   } while (t === 0);
   const resultDetail = new Array;
   for (let item of yesterdayArr) {
-      console.log(item.eventMassage+":"+Number(item.amount));
+      //console.log(item.eventMassage+":"+Number(item.amount));
     if (Number(item.amount) > 0) {
       if (resultDetail[item.eventMassage] != undefined) {
         resultDetail[item.eventMassage] += Number(item.amount);
       } else {
         resultDetail[item.eventMassage] = Number(item.amount);
       }
-      console.log(item.eventMassage+":"+resultDetail[item.eventMassage]);
+      //console.log(item.eventMassage+":"+resultDetail[item.eventMassage]);
       $.incomeBean += Number(item.amount);
     } else if (Number(item.amount) < 0) {
       $.expenseBean += Number(item.amount);
     }
 
    }
-console.log(resultDetail);
+//console.log(resultDetail);
 for (var key in resultDetail) {
   sDetail = sDetail + key+"："+resultDetail[key]+"\n";
 }
