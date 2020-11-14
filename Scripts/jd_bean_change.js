@@ -91,6 +91,7 @@ async function bean() {
   let page = 1, t = 0, yesterdayArr = [];
   do {
     let response = await getJingBeanBalanceDetail(page);
+    response = response.replace(/\(.*?\)/g, "");
     console.log(`第${page}页: ${JSON.stringify(response)}`);
     if (response && response.code === "0") {
       page++;
@@ -115,7 +116,6 @@ async function bean() {
     }
   } while (t === 0);
   const resultDetail = new Array;
-  yesterdayArr.replace(/\(.*?\)/g, "");
   for (let item of yesterdayArr) {
     if (Number(item.amount) > 0) {
       if (resultDetail[item.eventMassage] != undefined) {
