@@ -91,11 +91,11 @@ async function bean() {
   let page = 1, t = 0, yesterdayArr = [];
   do {
     let response = await getJingBeanBalanceDetail(page);
-    response = response.replace(/\(.*?\)/g, "");
     console.log(`第${page}页: ${JSON.stringify(response)}`);
     if (response && response.code === "0") {
       page++;
       let detailList = response.detailList;
+      detailList = detailList.replace(/\(.*?\)/g, "");
       if (detailList && detailList.length > 0) {
         for (let item of detailList) {
           const date = item.date.replace(/-/g, '/') + "+08:00";
