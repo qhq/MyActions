@@ -88,17 +88,15 @@ async function bean() {
   const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 - (24 * 60 * 60 * 1000);
   // 今天0:0:0时间戳
   const tm1 = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000;
-  let page = 7, t = 0, yesterdayArr = [];
+  let page = 1, t = 0, yesterdayArr = [];
   do {
     let response = await getJingBeanBalanceDetail(page);
     console.log(`第${page}页: ${JSON.stringify(response)}`);
     if (response && response.code === "0") {
       page++;
       let detailList = response.detailList;
-      //detailList = detailList.replace(/\(.*?\)/g, "");
       if (detailList && detailList.length > 0) {
         for (let item of detailList) {
-          //const date = item.date.replace(/\(.*?\d{4,20}.*?\)/g, "").replace(/-/g, '/') + "+08:00";
           const date = item.date.replace(/-/g, '/') + "+08:00";
           if (tm <= new Date(date).getTime() && new Date(date).getTime() < tm1) {
             //昨日的
@@ -201,7 +199,7 @@ function getJingBeanBalanceDetail(page) {
           console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
           if (data) {
-            data = JSON.parse(data.replace(/\(.*?\d{4,20}.*?\)/g, ''));
+            data = JSON.parse(data.replace(/\(.*?\d{4,20}.*?\)[\s|]/g, ''));
             // console.log(data)
           } else {
             console.log(`京东服务器返回空数据`)
