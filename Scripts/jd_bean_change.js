@@ -88,7 +88,7 @@ async function bean() {
   const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000 - (24 * 60 * 60 * 1000);
   // 今天0:0:0时间戳
   const tm1 = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000;
-  let page = 1, t = 0, yesterdayArr = [];
+  let page = 7, t = 0, yesterdayArr = [];
   do {
     let response = await getJingBeanBalanceDetail(page);
     console.log(`第${page}页: ${JSON.stringify(response)}`);
