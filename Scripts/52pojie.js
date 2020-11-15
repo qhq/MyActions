@@ -54,7 +54,7 @@ async function start() {
     }
 
     if(SEND_KEY) {
-        if (content.includes("签到成功")|content.includes("已签")|content.includes("Bad Gateway")|content.includes("成功")|content.includes("重复")) {
+        if (content.includes("暂停签到")|content.includes("已签")|content.includes("Bad Gateway")|content.includes("成功")|content.includes("重复")) {
             console.log(`${$.name}-` + content)
         }else{
             await notify.sendNotify(`${$.name}-` + new Date().toLocaleDateString(), content);
