@@ -43,8 +43,8 @@ async function deleteFile(path) {
 //启动
 async function start() {
 //console.log(` 当前执行时间:${new Date().toString()}`);
-console.log(`国际时间 (UTC)：${new Date().toLocaleString()}`)
-console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
+console.log(`国际时间 (UTC+00)：${new Date().toLocaleString()}`)
+console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
     if (!Secrets.JD_COOKIE) {
         console.log("请填写 Secrets 后再继续");
         await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, "请填写 Secrets");
@@ -75,7 +75,7 @@ console.log(`北京时间 (UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 6
         //console.log(content);
     }
 
-    if (content.includes("成功")) {
+    if (content.includes("成功")|content.includes("success")) {
         //await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
         console.log(content)
     } else {
