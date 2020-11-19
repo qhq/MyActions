@@ -6,7 +6,7 @@ name: 京东泡泡大战
 on:
   workflow_dispatch:
   schedule:
-    - cron: '2 0 * * *'
+    - cron: '11 16/4 * * * '
   watch:
     types: [started]
 
@@ -27,9 +27,9 @@ jobs:
         run: |
           npm install
           # npm install got tough-cookie
-      - name: ' 运行 【京东泡泡大战】'
+      - name: ' 运行 【东东小窝】'
         run: |
-          node Scripts/jd_paopao.js
+          node Scripts/jd_woHome.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
