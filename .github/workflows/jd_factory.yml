@@ -6,7 +6,7 @@ name: 东东工厂
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0 */2 * * *'
   watch:
     types: [started]
 
