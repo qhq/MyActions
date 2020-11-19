@@ -11,7 +11,7 @@ const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const KEY = process.env.COOKIE_91WII
 const FH = process.env.COOKIE_91WII_FORMHASH
-const SEND_KEY = process.env.BARK_PUSH
+const SEND_KEY = process.env.TG_BOT_TOKEN
 
 async function downFile () {
     const url = 'https://raw.githubusercontent.com/qhq/QuanX/master/Scripts/91wii.js'
