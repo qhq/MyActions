@@ -91,7 +91,7 @@ function format_apps(x) {
 }
 async function post_data(d) {
   try {
-    let app_monitor = $.read("app_monitor");
+    //let app_monitor = $.read("app_monitor");
     const path = "./app_monitor.txt";
     //let app_monitor = {};
     console.log(fs.existsSync(path));
@@ -161,7 +161,7 @@ async function post_data(d) {
     infos = JSON.stringify(infos);
     $.write(infos, "app_monitor");
     fs.writeFileSync( './app_monitor.txt', infos, 'utf8')
-    console.log(fs.readFileSync(path, "utf8"));
+    //console.log(fs.readFileSync(path, "utf8"));
     if (notifys.length > 0) {
       notify(notifys);
     } else {
