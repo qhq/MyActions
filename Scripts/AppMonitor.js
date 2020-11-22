@@ -91,11 +91,13 @@ function format_apps(x) {
 async function post_data(d) {
   try {
     let app_monitor = $.read("app_monitor");
+    console.log(app_monitor);
     if (app_monitor === "" || app_monitor === undefined) {
+    console.log(9999);
       app_monitor = {};
     } else {
       app_monitor = JSON.parse(app_monitor);
-      //console.log(app_monitor);
+      console.log(app_monitor);
     }
     let infos = {};
     await Promise.all(
