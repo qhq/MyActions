@@ -92,7 +92,7 @@ function format_apps(x) {
 async function post_data(d) {
   try {
     //let app_monitor = $.read("app_monitor");
-    const path = "./app_monitor.txt";
+    const path = "app_monitor.txt";
     //let app_monitor = {};
     console.log(fs.existsSync(path));
     if (fs.existsSync(path)) {
