@@ -92,7 +92,11 @@ function format_apps(x) {
 async function post_data(d) {
   try {
     //let app_monitor = $.read("app_monitor");
-    let app_monitor = fs.readFileSync('./app_monitor.txt', 'utf8')
+    const path = "./app_monitor.txt";
+    let app_monitor = "";
+    if (fs.existsSync(path)) {
+        app_monitor = fs.readFileSync(path, "utf8");
+    }
     console.log(app_monitor);
     if (app_monitor === "" || app_monitor === undefined) {
       app_monitor = {};
