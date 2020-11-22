@@ -29,7 +29,6 @@ jobs:
         run: |
           node Scripts/AppMonitor.js
         env:
-          COOKIE_52POJIE: ${{ secrets.COOKIE_52POJIE }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
