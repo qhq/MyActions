@@ -38,6 +38,7 @@ app可单独设置区域，未单独设置区域，则采用reg默认区域
 
 */
 const $ = new API("App价格监控");
+const fs = require('fs')
 let apps = [
   "1443988620|hk",
   "1312014438 cn",
@@ -90,10 +91,10 @@ function format_apps(x) {
 }
 async function post_data(d) {
   try {
-    let app_monitor = $.read("app_monitor");
+    //let app_monitor = $.read("app_monitor");
+    let app_monitor = fs.readFileSync('./app_monitor.txt', 'utf8')
     console.log(app_monitor);
     if (app_monitor === "" || app_monitor === undefined) {
-    console.log(9999);
       app_monitor = {};
     } else {
       app_monitor = JSON.parse(app_monitor);
@@ -151,6 +152,7 @@ async function post_data(d) {
     );
     infos = JSON.stringify(infos);
     $.write(infos, "app_monitor");
+    fs.writeFileSync( './app_monitor.txt', infos, 'utf8')
     if (notifys.length > 0) {
       notify(notifys);
     } else {
