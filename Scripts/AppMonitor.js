@@ -95,7 +95,7 @@ async function post_data(d) {
       app_monitor = {};
     } else {
       app_monitor = JSON.parse(app_monitor);
-      console.log(app_monitor);
+      //console.log(app_monitor);
     }
     let infos = {};
     await Promise.all(
