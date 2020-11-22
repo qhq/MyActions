@@ -97,6 +97,7 @@ async function post_data(d) {
     if (fs.existsSync(path)) {
         app_monitor = fs.readFileSync(path, "utf8");
     }
+    console.log(9999);
     console.log(app_monitor);
     if (app_monitor === "" || app_monitor === undefined) {
       app_monitor = {};
