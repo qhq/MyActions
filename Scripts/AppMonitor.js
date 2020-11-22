@@ -93,14 +93,16 @@ async function post_data(d) {
   try {
     //let app_monitor = $.read("app_monitor");
     const path = "./app_monitor.txt";
-    let app_monitor = "";
+    let app_monitor = {};
     if (fs.existsSync(path)) {
+    console.log(7777);
         app_monitor = fs.readFileSync(path, "utf8");
     }
     console.log(8888);
     console.log(app_monitor);
     console.log(9999);
     if (app_monitor === "" || app_monitor === undefined) {
+    console.log(0000);
       app_monitor = {};
     } else {
       app_monitor = JSON.parse(app_monitor);
