@@ -19,6 +19,10 @@ async function replaceWithSecrets(content, Secrets) {
         if (Secrets.COOKIE_ELM) {
             replacements.push({ key: "sy.getdata(cookieKey)", value: JSON.stringify(Secrets.COOKIE_ELM) });
         }
+        if (Secrets.JD_COOKIE && content.indexOf("京东赚赚") > 0) {
+            replacements.push({ key: ', $.getdata("jdzz_token2") || "";', value: "" });
+            replacements.push({ key: '$.getdata("jdzz_token1")', value: JSON.stringify(Secrets.JD_TOKEN) });
+        }
         await downloader(content);//检查所需额外js
     /*
         if (Secrets.MarketCoinToBeanCount && !isNaN(Secrets.MarketCoinToBeanCount)) {
