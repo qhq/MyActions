@@ -9,7 +9,7 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: "require('./jdCookie.js')", value: JSON.stringify(Secrets.JD_COOKIE.split("&")) });
         }
         if (Secrets.JD_COOKIE && content.indexOf('require("./jdCookie.js")') > 0) {
-            replacements.push({ key: "require('./jdCookie.js')", value: JSON.stringify(Secrets.JD_COOKIE.split("&")) });
+            replacements.push({ key: 'require("./jdCookie.js")', value: JSON.stringify(Secrets.JD_COOKIE.split("&")) });
         }
         if (Secrets.DETECT_URL) {
             replacements.push({ key: /url = \[\]/, value: "url = " + JSON.stringify(Secrets.DETECT_URL.split("\n")) });
