@@ -5,8 +5,8 @@ name: 【测试】
 
 on:
     workflow_dispatch:
-    schedule:
-        - cron: "19 16 * * *"
+    # schedule:
+        # - cron: "19 16 * * *"
     watch:
         types: [started]
     repository_dispatch:
