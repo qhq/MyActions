@@ -17,8 +17,8 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_woHome.js'
-    //const url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/ddxw.js'
+    //const url = 'https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_woHome.js'
+    const url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/ddxw.js'
     await download(url, './', { filename: "temp.js" })
     console.log("下载代码完毕");
 }
