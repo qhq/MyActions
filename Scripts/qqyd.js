@@ -17,7 +17,7 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/xingliuchao/jd/main/QQread.js'
+    const url = 'https://raw.githubusercontent.com/ziye12/JavaScript/master/qqread.js'
     await download(url, './', { filename: "temp.js" })
     console.log("下载代码完毕");
 }
