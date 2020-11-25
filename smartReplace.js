@@ -32,6 +32,7 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: "$.getdata(qqreadbodyKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[2]) });
             replacements.push({ key: "$.getdata(qqreadtimeurlKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[3]) });
             replacements.push({ key: "$.getdata(qqreadtimeheaderKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[4]) });
+            replacements.push({ key: "大概5分钟", value: /大概5分钟\nconst task = \{\};/ });
         }
         await downloader(content);//检查所需额外js
     /*
