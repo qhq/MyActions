@@ -17,7 +17,9 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_factory.js'
+    const url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/dd_factory.js'
+    
+    //const url = 'https://raw.githubusercontent.com/799953468/Quantumult-X/master/Scripts/JD/jd_factory.js'
     await download(url, './', { filename: "temp.js" })
     console.log("下载代码完毕");
 }
