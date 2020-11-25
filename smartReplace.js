@@ -33,7 +33,7 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: "$.getdata(qqreadtimeurlKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[3]) });
             replacements.push({ key: "$.getdata(qqreadtimeheaderKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[4]) });
             replacements.push({ key: "&&task.data.treasureBox.doneFlag==0", value: `` });
-            //replacements.push({ key: "setTimeout(function() {", value: `setTimeout(function() {\nvar task;` });
+            replacements.push({ key: "setTimeout(function() {", value: `setTimeout(function() {\nvar task='';` });
             replacements.push({ key: "task =JSON.parse(data)", value: `task = JSON.parse(data)\nconsole.log(task);` });
             //replacements.push({ key: "i<13", value: `i<3` });
         }
