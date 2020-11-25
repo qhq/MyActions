@@ -19,6 +19,31 @@ cookies = b.get_cookies()
 for cookie in cookies:
     cookie_str += cookie + "=" + cookies[cookie] + "; "
 
+from bilibili import *
+from sendNotify import *
+import time
+import os
+
+msg = ""
+day = ""
+
+sendNotify = sendNotify()
+SEND_KEY = os.environ['SEND_KEY']
+# 尝试登陆
+b = Bilibili()
+login = b.login(username=os.environ['BILI_USER'], password=os.environ['BILI_PASS'])
+print(login)
+if login == False:
+    if SEND_KEY != '':
+        sendNotify.send(title = u"哔哩哔哩漫画签到", msg = "登录失败 账号或密码错误")
+        exit(0)
+# 获取 Cookie
+cookie_str = ""
+cookies = b.get_cookies()
+
+for cookie in cookies:
+    cookie_str += cookie + "=" + cookies[cookie] + "; "
+
 headers_with_cookie={
     'User-Agent': "Mozilla/5.0 BiliDroid/6.4.0 (bbcallen@gmail.com) os/android model/M1903F11I mobi_app/android build/6040500 channel/bili innerVer/6040500 osVer/9.0.0 network/2",
     'Cookie': cookie_str
@@ -58,15 +83,5 @@ print("哔哩哔哩银瓜子兑换硬币 start>>>")
 print(b.silver_to_coin())
 
 # print(msg)
-
-# Server酱
-if serverJ != "":
-    api = "https://sc.ftqq.com/"+ serverJ + ".send"
-    title = u"哔哩哔哩漫画签到"
-    content = msg
-    data = {
-        "text":title,
-        "desp":content
-    }
-    req = requests.post(api,data = data)
-    
+if SEND_KEY == '':
+    sendNotify.send(title = u"哔哩哔哩漫画签到",msg = msg)
