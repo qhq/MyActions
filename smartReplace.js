@@ -26,6 +26,11 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: ', $.getdata("jdzz_token2") || "";', value: "" });
             replacements.push({ key: '$.getdata("jdzz_token1")', value: JSON.stringify(Secrets.JD_TOKEN) });
         }
+        if (Secrets.COOKIE_QQYD) {
+            replacements.push({ key: "$.getdata(qqreadurlKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[0]) });
+            replacements.push({ key: "$.getdata(qqreadheaderKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[1]) });
+            replacements.push({ key: "$.getdata(qqreadbodyKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[2]) });
+        }
         await downloader(content);//检查所需额外js
     /*
         if (Secrets.MarketCoinToBeanCount && !isNaN(Secrets.MarketCoinToBeanCount)) {
