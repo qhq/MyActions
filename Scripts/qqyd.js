@@ -51,6 +51,7 @@ console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 
         await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, "请填写 Secrets");
         return;
     }
+        console.log("111");
     /*
     if (!Secrets.SyncUrl) {
         console.log("请填写 SYNCURL 后在继续");
