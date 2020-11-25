@@ -28,7 +28,6 @@ async function replaceWithSecrets(content, Secrets) {
         }
         if (Secrets.COOKIE_QQYD) {
             replacements.push({ key: "$.getdata(qqreadurlKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[0]) });
-            console.log(JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[0]));
             replacements.push({ key: "$.getdata(qqreadheaderKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[1]) });
             replacements.push({ key: "$.getdata(qqreadbodyKey)", value: JSON.stringify(Secrets.COOKIE_QQYD.split("\n")[2]) });
         }
