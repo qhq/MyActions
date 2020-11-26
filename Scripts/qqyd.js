@@ -64,7 +64,7 @@ console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 
         // 替换变量
         await changeFiele();
         // 执行
-        //await exec("node execute.js >> result.txt");
+        await exec("node execute.js >> result.txt");
     } catch (e) {
         console.log("执行异常:" + e);
     }
@@ -77,7 +77,7 @@ console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 
     }
     var d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
     console.log(d.getHours() +'  '+ d.getMinutes());
-    if (content.includes("今日阅读") && d.getHours()==23 && d.getMinutes()<30 ) {
+    if (content.includes("今日阅读") && d.getHours()==23 && d.getMinutes()<=50 ) {
         await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
         console.log(content)
     } else {
