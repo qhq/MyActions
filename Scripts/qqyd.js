@@ -3,7 +3,7 @@ const fs = require('fs')
 const download = require('download')
 const smartReplace = require("../smartReplace");
 
-const $ = new Env('QQ阅读');
+const $ = new Env('企鹅阅读');
 const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 
@@ -75,12 +75,13 @@ console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 
         content = fs.readFileSync(path, "utf8").replace(/[\r\n]+/g, `\r\n`)//去掉回车换行;
         //console.log(content);
     }
-
-    if (content.includes("成功")|content.includes("success")) {
-        //await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
+    var d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString();
+    console.log(d.getHours() +'  '+ d.getMinutes());
+    if (content.includes("今日阅读") && d.getHours()==23 && d.getMinutes()<30 ) {
+        await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
         console.log(content)
     } else {
-        await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
+        //await notify.sendNotify(`${$.name}` + `${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}`, content);
         console.log(content)
     }
 
