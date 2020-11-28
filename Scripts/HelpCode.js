@@ -85,6 +85,7 @@ var msgDetail = '';
         }
     }
     console.log(msgDetail);
+    $.msg($.name, `${msgDetail}`);
 })()
 
 function upCode(url_HOST) {
