@@ -8,25 +8,6 @@ import os
 msg = ""
 day = ""
 
-serverJ = os.environ['push_key']
-# 尝试登陆
-b = Bilibili()
-b.login(username=os.environ['BILI_USER'], password=os.environ['BILI_PASS'])
-
-# 获取 Cookie
-cookie_str = ""
-cookies = b.get_cookies()
-for cookie in cookies:
-    cookie_str += cookie + "=" + cookies[cookie] + "; "
-
-from bilibili import *
-from sendNotify import *
-import time
-import os
-
-msg = ""
-day = ""
-
 sendNotify = sendNotify()
 SEND_KEY = os.environ['SEND_KEY']
 # 尝试登陆
