@@ -2,7 +2,7 @@ import requests
 import sys;
 sys.path.append("Actions/Scripts/")
 from bilibili import *
-from sendNotify import *
+from bilibili_sendNotify import *
 import time
 import os
 
