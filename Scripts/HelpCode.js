@@ -90,7 +90,7 @@ var msgDetail = '';
     console.log(msgDetail);
     $.msg($.name, `${msgDetail}`); 
 if ($.isNode()) {
-          await notify.sendNotify($.name, `${msgDetail}`);
+          await notify.sendNotify($.name, `${msgDetail}`);}
 })()
 
 function upCode(url_HOST) {
