@@ -69,6 +69,8 @@ const ddfactory = [
 //京喜工厂
 const jxfactory = [
     'aQ1lKXp1-Y68dsouERMI6A==',
+    'yU8FNMmhr9YbwYeb9eHIZg==',
+    'G6oPayj9gxX12TtQEgGctA==',
 ];
 
 
@@ -78,6 +80,7 @@ var msgDetail = '';
 !(async () => {
     for (let i = 0; i < codeName.length; i++) {
         $.codeName = codeName[i];
+        msgDetail = msgDetail + `======${$.codeName]}======\n`;
         for (let index = 0; index < eval($.codeName).length; index++) {
             $.code = eval($.codeName)[index];
             url_HOST = `http://api.turinglabs.net/api/v1/jd/${$.codeName}/create/${$.code}`;
@@ -85,8 +88,9 @@ var msgDetail = '';
         }
     }
     console.log(msgDetail);
-    $.msg($.name, `${msgDetail}`);
-    notify.sendNotify($.name, `${msgDetail}`);
+    $.msg($.name, `${msgDetail}`); 
+if ($.isNode()) {
+          await notify.sendNotify($.name, `${msgDetail}`);
 })()
 
 function upCode(url_HOST) {
