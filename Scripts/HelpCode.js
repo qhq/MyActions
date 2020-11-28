@@ -80,7 +80,7 @@ var msgDetail = '';
 !(async () => {
     for (let i = 0; i < codeName.length; i++) {
         $.codeName = codeName[i];
-        msgDetail = msgDetail + `======${$.codeName]}======\n`;
+        msgDetail = msgDetail + `======${$.codeName}======\n`;
         for (let index = 0; index < eval($.codeName).length; index++) {
             $.code = eval($.codeName)[index];
             url_HOST = `http://api.turinglabs.net/api/v1/jd/${$.codeName}/create/${$.code}`;
