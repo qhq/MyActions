@@ -2,14 +2,14 @@ import requests
 import sys;
 sys.path.append("Actions/Scripts/")
 from bilibili import *
-from sendNotify import *
+from bilibili_sendNotify import *
 import time
 import os
 
 msg = ""
 day = ""
 
-sendNotify = sendNotify()
+sendNotify = bilibili_sendNotify()
 SEND_KEY = os.environ['SEND_KEY']
 # 尝试登陆
 b = Bilibili()
