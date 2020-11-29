@@ -59,6 +59,9 @@ async function executeOneByOne() {
             console.log(result);
             //msg(result);
         }
+        //运行完成后，删除下载的文件
+        console.log('运行完成后，删除下载的文件\n')
+        await deleteFile(path);
     }
 }
 /*
@@ -87,9 +90,6 @@ async function start() {
     console.log("下载代码完毕");
     await executeOneByOne();
     console.log("全部执行完毕");
-    //运行完成后，删除下载的文件
-    console.log('运行完成后，删除下载的文件\n')
-    await deleteFile(path);
 }
 
 start();
