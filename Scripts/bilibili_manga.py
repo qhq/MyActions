@@ -1,8 +1,8 @@
 import requests
 import sys;
-sys.path.append("Actions/Scripts/")
+sys.path.append("Self/Scripts/")
 from bilibili import *
-from sendNotify import *
+from bilibili_sendNotify import *
 import time
 import os
 
