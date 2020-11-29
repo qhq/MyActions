@@ -2,7 +2,7 @@ const exec = require("child_process").execSync;
 const fs = require("fs");
 const axios = require("axios");
 
-const $ = new Env('');
+const $ = new Env();
 const notify = $.isNode() ? require('../sendNotify') : '';
 
 // 公共变量
