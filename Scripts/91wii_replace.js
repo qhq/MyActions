@@ -68,17 +68,20 @@ async function executeOneByOne() {
 }
 
 async function msg(content) {
-        if (content.includes("成功")|content.includes("已签")|content.includes("重复")) {
-            await notify.sendNotify(new Date().toLocaleDateString(),content);
-            console.log(`${$.name}\n` + content)
-        }else{
-            await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
-            console.log(`${$.name}-` + content)
-        }
+    let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+    if (content.includes("成功")|content.includes("已签")|content.includes("重复")) {
+        await notify.sendNotify(new Date().toLocaleDateString(),content);
+        console.log(`${$.name}\n` + content)
+    }else{
+        await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+        console.log(`${$.name}-` + content)
+    }
 }
 
 async function start() {
-    console.log(`当前执行时间:${new Date().toString()}`);
+    //console.log(`当前执行时间:${new Date().toString()}`);
+    console.log(`国际时间 (UTC+00)：${new Date().toLocaleString()}`)
+    console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
     if (!Secrets.COOKIE_91WII) {
         console.log("请填写 COOKIE_91WII 后在继续");
         return;
