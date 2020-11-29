@@ -48,7 +48,7 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            await exec("node execute.js"), { stdio: "inherit" });
+            await exec("node execute.js", { stdio: "inherit" });
             //await exec("node execute.js >> result.txt")
         } catch (e) {
             console.log("执行异常:" + e);
