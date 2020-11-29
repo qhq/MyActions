@@ -68,7 +68,7 @@ async function executeOneByOne() {
 
 async function msg(content) {
         if (content.includes("成功")|content.includes("已签")|content.includes("重复")) {
-            await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+            await notify.sendNotify(content);
             console.log(`${$.name}\n` + content)
         }else{
             await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
