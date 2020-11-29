@@ -10,7 +10,7 @@ msg = ""
 day = ""
 
 sendNotify = sendNotify()
-SEND_KEY = os.environ['SEND_KEY']
+SEND_KEY = os.environ['TG_BOT_TOKEN']
 # 尝试登陆
 b = Bilibili()
 login = b.login(username=os.environ['BILI_USER'], password=os.environ['BILI_PASS'])
