@@ -1,7 +1,7 @@
 //http://api.turinglabs.net/api/v1/jd/cleantimeinfo/
 
 const $ = new Env('助力码提交');
-const notify = $.isNode() ? require('../sendNotify') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 
 const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory',];
 
