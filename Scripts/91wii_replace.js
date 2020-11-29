@@ -35,12 +35,17 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            await exec("node execute.js", { stdio: "inherit" });
+            await exec("node execute.js >> result.txt", { stdio: "inherit" });
         } catch (e) {
             console.log("执行异常:" + e);
         }
         console.log("执行完毕");
         const path = "./result.txt";
+        let content = "";
+        if (fs.existsSync(path)) {
+            content = fs.readFileSync(path, "utf8");
+            msg(content);
+        }
     }
 }
 async function deleteFile(path) {
@@ -51,6 +56,14 @@ async function deleteFile(path) {
         const unlinkRes = await fs.unlinkSync(path);
         // console.log('unlinkRes', unlinkRes)
     }
+}
+async function msg(content) {
+        if (content.includes("成功")|content.includes("已签")|content.includes("重复")) {
+            console.log(`${$.name}\n` + content)
+        }else{
+            await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
+            console.log(`${$.name}-` + content)
+        }
 }
 async function start() {
     console.log(`当前执行时间:${new Date().toString()}`);
