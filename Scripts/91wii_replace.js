@@ -41,10 +41,10 @@ async function executeOneByOne() {
         }
         console.log("执行完毕");
         const path = "./result.txt";
-        let content = "";
+        let result = "";
         if (fs.existsSync(path)) {
-            content = fs.readFileSync(path, "utf8");
-            msg(content);
+            result = fs.readFileSync(path, "utf8");
+            msg(result);
         }
     }
 }
