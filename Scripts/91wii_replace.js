@@ -1,7 +1,8 @@
 const exec = require("child_process").execSync;
 const fs = require("fs");
 const axios = require("axios");
-const notify = $.isNode() ? require('./sendNotify') : '';
+
+//const notify = $.isNode() ? require('./sendNotify') : '';
 
 // 公共变量
 const Secrets = {
@@ -45,7 +46,8 @@ async function executeOneByOne() {
         let result = "";
         if (fs.existsSync(path)) {
             result = fs.readFileSync(path, "utf8");
-            msg(result);
+            console.log(result);
+            //msg(result);
         }
     }
 }
@@ -58,6 +60,7 @@ async function deleteFile(path) {
         // console.log('unlinkRes', unlinkRes)
     }
 }
+/*
 async function msg(content) {
         if (content.includes("成功")|content.includes("已签")|content.includes("重复")) {
             console.log(`${$.name}\n` + content)
@@ -65,7 +68,7 @@ async function msg(content) {
             await notify.sendNotify(`${$.name}\n` + new Date().toLocaleDateString(), content);
             console.log(`${$.name}-` + content)
         }
-}
+}*/
 async function start() {
     console.log(`当前执行时间:${new Date().toString()}`);
     if (!Secrets.COOKIE_91WII) {
