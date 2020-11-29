@@ -18,6 +18,7 @@ jobs:
     env:
           COOKIE_91WII: ${{ secrets.COOKIE_91WII }}
           COOKIE_91WII_FORMHASH: ${{ secrets.COOKIE_91WII_FORMHASH }}
+          SYNCURL: https://raw.githubusercontent.com/qhq/QuanX/master/Scripts/91wii.js
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 10.x
@@ -30,7 +31,7 @@ jobs:
           # npm install got tough-cookie
       - name: ' 运行 【91wii签到】'
         run: |
-          node Scripts/91wii.js
+          node Scripts/91wii_replace.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
