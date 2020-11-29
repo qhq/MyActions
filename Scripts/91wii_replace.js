@@ -30,6 +30,16 @@ async function changeFiele(content, cookie) {
     await fs.writeFileSync( './execute.js', content, 'utf8')
 }
 
+async function deleteFile(path) {
+    // 查看文件result.txt是  否存在,如果存在,先删除
+    const fileExists = await fs.existsSync(path);
+    // console.log('fileExists', fileExists);
+    if (fileExists) {
+        const unlinkRes = await fs.unlinkSync(path);
+        // console.log('unlinkRes', unlinkRes)
+    }
+}
+
 async function executeOneByOne() {
     const content = await fs.readFileSync("./temp.js", "utf8");
     for (var i = 0; i < Cookies.length; i++) {
@@ -49,15 +59,6 @@ async function executeOneByOne() {
             console.log(result);
             //msg(result);
         }
-    }
-}
-async function deleteFile(path) {
-    // 查看文件result.txt是  否存在,如果存在,先删除
-    const fileExists = await fs.existsSync(path);
-    // console.log('fileExists', fileExists);
-    if (fileExists) {
-        const unlinkRes = await fs.unlinkSync(path);
-        // console.log('unlinkRes', unlinkRes)
     }
 }
 /*
