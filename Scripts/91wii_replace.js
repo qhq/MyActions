@@ -3,7 +3,7 @@ const fs = require("fs");
 const axios = require("axios");
 
 const $ = new Env('qhq');
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 
 // 公共变量
 const Secrets = {
