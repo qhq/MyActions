@@ -15,13 +15,6 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: /url = \[\]/, value: "url = " + JSON.stringify(Secrets.DETECT_URL.split("\n")) });
             replacements.push({ key: /price = \[\]/, value: "price = " + JSON.stringify(Secrets.DETECT_PRICE.split("\n")) });
         }
-        if (Secrets.COOKIE_DKYD) {
-            replacements.push({ key: "$util.getdata(DUOKAN_COOKIE_KEY)", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[0]) });
-            replacements.push({ key: "$util.getdata(DUOKAN_DEVICE_ID_KEY)", value: JSON.stringify(Secrets.COOKIE_DKYD.split("\n")[1]) });
-        }
-        if (Secrets.COOKIE_ELM) {
-            replacements.push({ key: "sy.getdata(cookieKey)", value: JSON.stringify(Secrets.COOKIE_ELM) });
-        }
         if (Secrets.JD_COOKIE && content.indexOf("京东赚赚") > 0) {
             replacements.push({ key: ', $.getdata("jdzz_token2") || "";', value: "" });
             replacements.push({ key: '$.getdata("jdzz_token1")', value: JSON.stringify(Secrets.JD_TOKEN) });
