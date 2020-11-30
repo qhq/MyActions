@@ -75,9 +75,13 @@ async function executeOneByOne() {
 }
 
 async function msg(content) {
+    var gold = content.match(/【任务列表】:余额\d{1,7}金币/g);
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
     if (d.getHours()==22 && d.getMinutes()<=20 ) {
         await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
+        console.log(content)
+    } elseif (gold >= 10000) {
+        //await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
         console.log(content)
     } else {
         //await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
