@@ -80,7 +80,7 @@ async function msg(content) {
     if (d.getHours()==22 && d.getMinutes()<=20 ) {
         await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
         console.log(content)
-    } elseif (gold >= 10000) {
+    } else if (gold >= 10000) {
         //await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
         console.log(content)
     } else {
