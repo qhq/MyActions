@@ -7,7 +7,6 @@ const fs = require("fs");
 const axios = require("axios");
 
 const $ = new Env('企鹅阅读');
-const notify = $.isNode() ? require('./sendNotify') : '';
 
 // 公共变量
 const Secrets = {
@@ -89,6 +88,7 @@ async function download_notify() {
 
 async function msg(content) {
     await download_notify();
+    const notify = $.isNode() ? require('./sendNotify') : '';
     content = content.replace(/\n\n/, "\n")
     var reg =/【任务列表】:余额(\d{1,7})金币/g;
     var gold = parseInt(reg.exec(content)[1].trim());
