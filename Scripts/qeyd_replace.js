@@ -29,7 +29,7 @@ async function downFile() {
 async function changeFiele(content, cookie) {
     //替换各种信息.
     content = content.replace("const notifyInterval=2", `const notifyInterval=2\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    content = content.replace("$.msg(jsname,''", "notify.sendNotify(jsname")
+    content = content.replace(/$\.msg\(jsname,''/g, "notify.sendNotify(jsname")
     content = content.replace("$.getdata(qqreadurlKey)", "\"https://mqqapi.reader.qq.com/mqq/user/init\"")
     content = content.replace("$.getdata(qqreadheaderKey)", JSON.stringify(cookie.split("@")[0]))
     content = content.replace("$.getdata(qqreadtimeurlKey)", JSON.stringify(cookie.split("@")[1]))
