@@ -35,6 +35,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("$.getdata(qqreadtimeurlKey)", JSON.stringify(cookie.split("@")[1]))
     content = content.replace("$.getdata(qqreadtimeheaderKey)", JSON.stringify(cookie.split("@")[2]))
     //content = content.replace("i<18", "i<3")
+
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){}}")
     //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
@@ -68,7 +69,7 @@ async function executeOneByOne() {
         if (fs.existsSync(path)) {
             result = fs.readFileSync(path, "utf8");
             //console.log(result);
-            msg(result);
+            await msg(result);
         }
         //运行完成后，删除下载的文件
         console.log('运行完成后，删除下载的文件\n')
