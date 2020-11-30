@@ -4,7 +4,7 @@ const download = require('download')
 const smartReplace = require("../smartReplace");
 
 const $ = new Env('京东赚赚');
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 
 const Secrets = {
