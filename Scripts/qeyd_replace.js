@@ -55,8 +55,8 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            //await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
-            await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
+            await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
+            //await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
         }
@@ -79,10 +79,10 @@ async function msg(content) {
     var gold = parseInt(reg.exec(content)[1].trim());
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
     if (d.getHours()==22 && d.getMinutes()<=20 ) {
-        await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
+        await notify.sendNotify(`${d.toLocaleString()}`, content);
         //console.log(content)
     } else if (gold >= 10000) {
-        await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
+        await notify.sendNotify(`${d.toLocaleString()}`, content);
         //console.log(content)
     } else {
         //await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
