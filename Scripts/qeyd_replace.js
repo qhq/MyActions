@@ -87,7 +87,7 @@ async function download_notify() {
 }
 */
 async function msg(content) {
-    content = content.replace(/(^\n*)|(\n*$)/g, "")
+    content = content.replace(/(^\n*)|(\n*$)|\n{2，4}/g, "")
     var reg =/【任务列表】:余额(\d{1,7})金币/g;
     var gold = parseInt(reg.exec(content)[1].trim());
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
