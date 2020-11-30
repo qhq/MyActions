@@ -84,7 +84,7 @@ async function msg(content) {
     if (d.getHours()==22 && d.getMinutes()<=20 ) {
         await notify.sendNotify(`${d.toLocaleString()}`, content);
         //console.log(content)
-    } else if (gold >= 5000 && d.getHours()>=9 && d.getHours()<=22 ) {
+    } else if (gold >= 500000 && d.getHours()>=9 && d.getHours()<=22 ) {
         await notify.sendNotify(`${d.toLocaleString()}`, content);
         //console.log(content)
     } else {
