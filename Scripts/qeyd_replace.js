@@ -82,22 +82,22 @@ async function msg(content) {
     var reg =/【任务列表】:余额(\d{1,7})金币/g;
     var gold = parseInt(reg.exec(content)[1].trim());
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
-    if (d.getHours()<22 ) {
-        await notify.sendNotify(`${d.toLocaleString()}`, content);
+    if (d.getHours()==22 && d.getMinutes()<=20) {
+        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
         //console.log(content)
     } else if (gold >= 500000 && d.getHours()>=9 && d.getHours()<=22 ) {
-        await notify.sendNotify(`${d.toLocaleString()}`, content);
+        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
         //console.log(content)
     } else {
-        //await notify.sendNotify(`${$.name}` + `${d.toLocaleString()}`, content);
+        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
         console.log(content)
     }
 }
 
 async function start() {
     //console.log(`当前执行时间:${new Date().toString()}`);
-    console.log(`国际时间 (UTC+00)：${new Date().toLocaleString()}`)
-    console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}\n`)
+    console.log(`国际时间 (UTC+00)：${new Date().toLocaleString('chinese',{hour12:false})}`)
+    console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString('chinese',{hour12:false})}\n`)
     if (!Secrets.COOKIE_QEYD) {
         console.log("请填写 COOKIE_QEYD 后在继续");
         return;
