@@ -7,7 +7,7 @@ const fs = require("fs");
 const axios = require("axios");
 
 const $ = new Env('企鹅阅读');
-const notify = $.isNode() ? require('../sendNotify') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 
 // 公共变量
 const Secrets = {
@@ -79,7 +79,16 @@ async function executeOneByOne() {
     }
 }
 
+async function download_notify() {
+    let response = await axios.get("https://github.com/lxk0301/jd_scripts/raw/master/sendNotify.js");
+    response = response.replace("${text}\n\n${desp}", "${text}\n${desp}")
+    let fcontent = response.data;
+    await fs.writeFileSync("./sendNotify.js", fcontent, "utf8");
+    console.log("下载通知代码完毕");
+}
+
 async function msg(content) {
+    await download_notify();
     content = content.replace(/\n\n/, "\n")
     var reg =/【任务列表】:余额(\d{1,7})金币/g;
     var gold = parseInt(reg.exec(content)[1].trim());
@@ -94,7 +103,7 @@ async function msg(content) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
         console.log(content)
     } else {
-        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
         console.log(content)
     }
 }
