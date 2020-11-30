@@ -93,7 +93,7 @@ async function msg(content) {
         await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
         //console.log(content)
     } else {
-        //await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
+        await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
         console.log(content)
     }
 }
