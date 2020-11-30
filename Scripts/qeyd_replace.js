@@ -93,18 +93,15 @@ async function msg(content) {
     var reg =/【任务列表】:余额(\d{1,7})金币/g;
     var gold = parseInt(reg.exec(content)[1].trim());
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
+    console.log(content);
     if (d.getHours()==8 && d.getMinutes()<=21) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
-        console.log(content)
     } else if (gold >= 1000000 && d.getHours()>=9 && d.getHours()<=22) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
-        console.log(content)
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
-        console.log(content)
     } else {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
-        console.log(content)
     }
 }
 
