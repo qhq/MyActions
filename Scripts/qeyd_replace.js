@@ -85,15 +85,15 @@ async function msg(content) {
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
     if (d.getHours()==22 && d.getMinutes()<=21) {
         await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
-        //console.log(content)
+        console.log(content)
     } else if (gold >= 1000000 && d.getHours()>=9 && d.getHours()<=22) {
         await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
-        //console.log(content)
+        console.log(content)
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
-        //console.log(content)
+        console.log(content)
     } else {
-        await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
+        //await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
         console.log(content)
     }
 }
