@@ -6,7 +6,7 @@ const exec = require("child_process").execSync;
 const fs = require("fs");
 const axios = require("axios");
 
-const $ = new Env();
+const $ = new Env('企鹅阅读');
 const notify = $.isNode() ? require('../sendNotify') : '';
 
 // 公共变量
@@ -43,7 +43,7 @@ async function changeFiele(content, cookie) {
 }
 
 async function deleteFile(path) {
-    // 查看文件result.txt是  否存在,如果存在,先删除
+    // 查看文件result.txt是否存在,如果存在,先删除
     const fileExists = await fs.existsSync(path);
     // console.log('fileExists', fileExists);
     if (fileExists) {
@@ -79,13 +79,14 @@ async function executeOneByOne() {
 }
 
 async function msg(content) {
+    content = content.replace(/\n\n/, "\n")
     var reg =/【任务列表】:余额(\d{1,7})金币/g;
     var gold = parseInt(reg.exec(content)[1].trim());
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
-    if (d.getHours()==22 && d.getMinutes()<=20) {
+    if (d.getHours()==22 && d.getMinutes()<=21) {
         await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
         //console.log(content)
-    } else if (gold >= 500000 && d.getHours()>=9 && d.getHours()<=22) {
+    } else if (gold >= 1000000 && d.getHours()>=9 && d.getHours()<=22) {
         await notify.sendNotify(`${d.toLocaleString('zh',{hour12:false})}`, content);
         //console.log(content)
     } else if (content.indexOf("Error") > 0) {
