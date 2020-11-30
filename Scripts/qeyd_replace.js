@@ -68,7 +68,6 @@ async function executeOneByOne() {
         if (fs.existsSync(path)) {
             result = fs.readFileSync(path, "utf8");
             //console.log(result);
-console.log(666);
             msg(result);
         }
         //运行完成后，删除下载的文件
