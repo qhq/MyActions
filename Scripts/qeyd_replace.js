@@ -98,7 +98,7 @@ async function msg(content) {
     var gold = parseInt(reg.exec(content)[1].trim());
     if (d.getHours()==8 && d.getMinutes()<=22) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
-    } else if (gold >= 1000000 && d.getHours()>=9 && d.getHours()<=22) {
+    } else if (gold >= 10 && d.getHours()>=9 && d.getHours()<=22) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
