@@ -87,7 +87,7 @@ async function download_notify() {
 }
 */
 async function msg(content) {
-    content = content.replace(/(^\n*)|(\n*$)/g, "")
+    content = content.replace(/(^\n*)|(\n*$)/g, "")//去返回内容头尾空行
     content = content.replace(/\n{3,}/g, "\n\n")
     let d = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
     console.log('--------------------');
