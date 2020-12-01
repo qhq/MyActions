@@ -102,7 +102,7 @@ async function msg(content) {
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
-        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
 }
 
