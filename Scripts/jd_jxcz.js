@@ -18,7 +18,7 @@ const Secrets = {
 
 //下载脚本
 async function downFile() {
-    const url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/jdzz.js'
+    const url = 'https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_story.js'
     await download(url, './', { filename: "temp.js" })
     console.log("下载代码完毕");
 }
