@@ -95,14 +95,14 @@ async function msg(content) {
     console.log('--------------------');
     console.log(content);
     console.log('--------------------');
-    if (d.getHours()==8 && d.getMinutes()<=21) {
+    if (d.getHours()==8 && d.getMinutes()<=22) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else if (gold >= 1000000 && d.getHours()>=9 && d.getHours()<=22) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
-        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
 }
 
