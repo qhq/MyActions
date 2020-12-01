@@ -9,7 +9,7 @@ on:
     - cron: '10 * * * * '
   watch:
     types: [started]
-
+    
 jobs:
   build:
 
@@ -17,7 +17,7 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
-          JD_TOKEN: ${{ secrets.JD_TOKEN }}
+          SYNCURL: https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_story.js
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 10.x
