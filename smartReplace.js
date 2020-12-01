@@ -19,6 +19,12 @@ async function replaceWithSecrets(content, Secrets) {
             replacements.push({ key: ', $.getdata("jdzz_token2") || "";', value: "" });
             replacements.push({ key: '$.getdata("jdzz_token1")', value: JSON.stringify(Secrets.JD_TOKEN) });
         }
+
+if (Secrets.JD_COOKIE && content.indexOf("京喜厂长") > 0) {
+            replacements.push({ key: '// const jdCookieNode', value: "const jdCookieNode" });
+          
+        }
+
         await downloader(content);//检查所需额外js
     /*
         if (Secrets.MarketCoinToBeanCount && !isNaN(Secrets.MarketCoinToBeanCount)) {
