@@ -64,6 +64,7 @@ async function executeOneByOne() {
             await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
+            await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, "执行异常:" + e);
         }
         console.log("执行完毕");
         const path = "./result.txt";
