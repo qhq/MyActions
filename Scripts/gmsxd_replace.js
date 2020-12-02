@@ -27,7 +27,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace(/let SESSION = \$\.getdata\(\$\.SESSION_KEY\);/, `let SESSION = '${cookie}';`)
+    content = content.replace(/let SESSION = \$\.getdata\(\$\.SESSION_KEY\);/, `let SESSION = '${cookie}';\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
   
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
