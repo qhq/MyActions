@@ -19,7 +19,7 @@ jobs:
         steps:
             - uses: actions/checkout@v1
             - name: Use Node.js 10.x
-              uses: actions/setup-node@1
+              uses: actions/setup-node@v1
               with:
                   node-version: 10.x
             - name: npm install
@@ -27,7 +27,7 @@ jobs:
                   npm install
             - name: "运行 【爱奇艺会员签到】"
               run: |
-                  node Scripts/iqiyi.js
+                  node Scripts/iqiyi_replace.js
               env:
                   PUSH_KEY: ${{ secrets.PUSH_KEY }}
                   BARK_PUSH: ${{ secrets.BARK_PUSH }}
