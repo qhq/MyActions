@@ -27,7 +27,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace("require('./jdCookie.js')", JSON.stringify(Secrets.JD_COOKIE.split("&")))
+    content = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
     
     //替换源脚本中推送函数阻止推送
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
@@ -107,7 +107,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.JD_COOKIE//.split("&");//脚本自带多账号，无需拆分
+    Cookies = Secrets.JD_COOKIE.split("&");//脚本自带多账号，无需拆分
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
