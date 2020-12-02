@@ -30,7 +30,7 @@ async function changeFiele(content, cookie) {
     content = content.replace(/let SESSION = \$\.getdata\(\$\.SESSION_KEY\);/, `let SESSION = '${cookie}';`)
   
     //替换源脚本中推送函数阻止推送
-    content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
+    //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
     //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
@@ -52,8 +52,8 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            //await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
-            await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
+            await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
+            //await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
             await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, "执行异常:" + e);
@@ -87,7 +87,7 @@ async function msg(content) {
     console.log(content);
     console.log('--------------------');
     if (content.includes("签到成功")|content.includes("已签")|content.includes("重复")) {
-        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
