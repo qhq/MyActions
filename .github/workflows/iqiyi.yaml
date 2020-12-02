@@ -27,7 +27,7 @@ jobs:
                   npm install
             - name: "运行 【爱奇艺会员签到】"
               run: |
-                  node Scripts/iqiyi.js
+                  node Scripts/iqiyi_replace.js
               env:
                   PUSH_KEY: ${{ secrets.PUSH_KEY }}
                   BARK_PUSH: ${{ secrets.BARK_PUSH }}
