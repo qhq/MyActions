@@ -5,7 +5,7 @@ const exec = require("child_process").execSync;
 const fs = require("fs");
 const axios = require("axios");
 
-const $ = new Env('京喜厂长');
+const $ = new Env('京喜金牌厂长');
 const notify = $.isNode() ? require('../sendNotify') : '';
 
 // 公共变量
