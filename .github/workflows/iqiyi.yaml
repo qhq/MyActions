@@ -17,8 +17,7 @@ jobs:
             COOKIE_IQIYI: ${{ secrets.COOKIE_IQIYI }}
             SYNCURL: https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
         steps:
-            #- uses: actions/checkout@v1
-            - uses: actions/checkout@dev
+            - uses: actions/checkout@v1
             - name: Use Node.js 10.x
               uses: actions/setup-node@1
               with:
