@@ -107,7 +107,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.JD_COOKIE//.split("\n");
+    Cookies = Secrets.JD_COOKIE.split("&");
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
