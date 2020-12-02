@@ -31,7 +31,7 @@ async function changeFiele(content, cookie) {
     content  = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
     content  = content.replace("$.result.push(", "$.result.push(`用户：${userName}`,")
     content = content.replace(/\$\.msg\(\$\.name, '', `\\n/g, "notify.sendNotify($.name,`")
-    content = content.replace("$.getdata('jxcz_notifyTime');", "'15'")
+    content = content.replace("$.getdata('jxcz_notifyTime');", "'0'")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
@@ -111,7 +111,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.JD_COOKIE.split("&")[0];//脚本自带多账号，无需拆分
+    Cookies = Secrets.JD_COOKIE.split("&");
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
