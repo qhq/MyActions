@@ -4,18 +4,23 @@
 name: 【测试】
 
 on:
+    push:
+        branches: dev
     workflow_dispatch:
     # schedule:
         # - cron: "19 16 * * *"
     watch:
         types: [started]
-    repository_dispatch:
-        types: jd_woHome
+    # repository_dispatch:
+    #    types: jd_woHome
 
 jobs:
     build:
         runs-on: ubuntu-latest
         if: github.event.repository.owner.id == github.event.sender.id
+        env:
+            COOKIE_IQIYI: ${{ secrets.COOKIE_IQIYI }}
+            SYNCURL: https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
         steps:
             - uses: actions/checkout@v1
             - name: Use Node.js 10.x
@@ -25,12 +30,10 @@ jobs:
             - name: npm install
               run: |
                   npm install
-            - name: "运行 【测试】"
+            - name: "运行 【爱奇艺会员签到】"
               run: |
-                  node onlyOneExecute.js
+                  node Scripts/iqiyi_replace.js
               env:
-                  JD_COOKIE: ${{ secrets.JD_COOKIE }}
-                  JD_DEBUG: ${{ secrets.JD_DEBUG }}
                   PUSH_KEY: ${{ secrets.PUSH_KEY }}
                   BARK_PUSH: ${{ secrets.BARK_PUSH }}
                   BARK_SOUND: ${{ secrets.BARK_SOUND }}
@@ -38,4 +41,3 @@ jobs:
                   TG_USER_ID: ${{ secrets.TG_USER_ID }}
                   DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
                   DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
-                  SYNCURL: https://github.com/yangtingxiao/QuantumultX/raw/master/scripts/jd/jd_woHome.js
