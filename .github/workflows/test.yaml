@@ -4,11 +4,7 @@
 name: Run Tests
 
 on:
-    check_run:
-        branches: dev
     workflow_dispatch:
-    # schedule:
-        # - cron: "19 16 * * *"
     watch:
         types: [started]
     # repository_dispatch:
