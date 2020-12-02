@@ -27,7 +27,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace("require('./jdCookie.js')", JSON.stringify(Secrets.JD_COOKIE.split("&")))
+    content = content.replace("require('./jdCookie.js')", JSON.stringify(cookie))
     
     //替换源脚本中推送函数阻止推送
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
