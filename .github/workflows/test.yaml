@@ -9,3 +9,13 @@ on:
         types: [started]
     # repository_dispatch:
     #    types: jd_woHome
+jobs:
+  my-job:
+    name: My Job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print a greeting
+      env:
+        MY_VAR: Hi there! My name is
+      run: |
+        echo $MY_VAR
