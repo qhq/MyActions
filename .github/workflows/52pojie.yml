@@ -5,10 +5,8 @@ name: 吾爱破解签到
 
 on:
   workflow_run:
-    workflows: ["Run Tests"]
-    branches: [dev]
-    types: 
-      - completed
+    workflows: RunTests
+    branches: dev
   workflow_dispatch:
   schedule:
     - cron: '0 0,4 * * *'
