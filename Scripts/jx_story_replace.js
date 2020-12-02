@@ -1,5 +1,5 @@
 /*
-感谢sazs34大佬的替换思路和脚本https://github.com/sazs34
+https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_story.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
@@ -27,11 +27,14 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
+    content = content.replace("Env('京喜金牌厂长');", `Env('京喜金牌厂长');\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content  = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
+    content = content.replace(/$\.msg\($\.name, ''/g, "notify.sendNotify('京喜金牌厂长'")
+    content = content.replace("$.getdata('jx_notifyTime');", "'14:21'")
     
     //替换源脚本中推送函数阻止推送
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
