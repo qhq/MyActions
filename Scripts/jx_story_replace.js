@@ -29,12 +29,13 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     content = content.replace("Env('京喜金牌厂长');", `Env('京喜金牌厂长');\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content  = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
+    content  = content.replace("await showMsg();", "await showMsg(userName);")
     content = content.replace(/\$\.msg\(\$\.name, '', `\\n/g, "notify.sendNotify(`$.name：${userName}`,`")
     content = content.replace("$.getdata('jxcz_notifyTime');", "'15'")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -110,7 +111,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.JD_COOKIE.split("&")[0];//脚本自带多账号，无需拆分
+    Cookies = Secrets.JD_COOKIE.split("&");//脚本自带多账号，无需拆分
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
