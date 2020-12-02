@@ -27,7 +27,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace("const CookieWA = ''", `const CookieWA = '${cookie}'`)
+    content = content.replace("const CookieWA = ''", `const CookieWA = 'a+${cookie}'`)
   
     //替换源脚本中推送函数阻止推送
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
@@ -87,7 +87,7 @@ async function msg(content) {
     console.log(content);
     console.log('--------------------');
     if (content.includes("暂停签到")|content.includes("已签")|content.includes("Bad Gateway")|content.includes("成功")|content.includes("重复")) {
-        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
