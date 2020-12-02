@@ -4,9 +4,6 @@
 name: 爱奇艺会员签到
 
 on:
-    push:
-        branches: 
-            - dev
     workflow_dispatch:
     schedule:
         - cron: "5 16 * * *"
