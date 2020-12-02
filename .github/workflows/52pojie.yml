@@ -4,9 +4,6 @@
 name: 吾爱破解签到
 
 on:
-  workflow_run:
-    workflows: RunTests
-    branches: dev
   workflow_dispatch:
   schedule:
     - cron: '0 0,4 * * *'
