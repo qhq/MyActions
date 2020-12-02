@@ -1,5 +1,5 @@
 /*
-感谢sazs34大佬的替换思路和脚本https://github.com/sazs34
+https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_factory_component.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
@@ -27,8 +27,8 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content  = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
-    
+    content = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
+
     //替换源脚本中推送函数阻止推送
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
     //console.log(content);
@@ -86,7 +86,7 @@ async function msg(content) {
     console.log('--------------------');
     console.log(content);
     console.log('--------------------');
-    if (d.getHours()==8 && d.getMinutes()<=22) {
+    if (d.getHours()==8 && d.getMinutes()<=30) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
