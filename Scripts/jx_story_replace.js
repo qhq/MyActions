@@ -29,7 +29,7 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     content = content.replace("Env('京喜金牌厂长');", `Env('京喜金牌厂长');\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content  = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
-    content = content.replace(/\$\.msg\(\$\.name, ''/g, "notify.sendNotify('京喜金牌厂长'")
+    content = content.replace(/\$\.msg\(\$\.name, '', `/g, "notify.sendNotify($.name,`${userName}")
     content = content.replace("$.getdata('jxcz_notifyTime');", "'14'")
     
     //替换源脚本中推送函数阻止推送
