@@ -27,12 +27,11 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
-    //content = content.replace(`$.getdata('CookieJD') || '', $.getdata('CookieJD2') || ''`, `'${cookie}',`)
+    content  = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
     
     //替换源脚本中推送函数阻止推送
-    content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -53,8 +52,8 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            //await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
-            await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
+            await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
+            //await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
             await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, "执行异常:" + e);
