@@ -28,7 +28,7 @@ jobs:
         run: |
           npm install
           # npm install got tough-cookie
-      - name: ' 运行 【京喜厂长】'
+      - name: ' 运行 【京喜工厂】'
         run: |
           node Scripts/jx_factory_replace.js
         env:
