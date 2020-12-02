@@ -18,8 +18,9 @@ jobs:
             SYNCURL: https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
         steps:
             - uses: actions/checkout@v1
+            - uses: actions/checkout@dev
             - name: Use Node.js 10.x
-              uses: actions/setup-node@dev
+              uses: actions/setup-node@1
               with:
                   node-version: 10.x
             - name: npm install
