@@ -6,7 +6,7 @@ name: 企鹅阅读
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0,10,20,30,40,49 * * * *"
+    - cron: '0,10,20,30,40,49 * * * *'
   watch:
     types: [started]
   repository_dispatch:
@@ -45,5 +45,6 @@ jobs:
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
-          COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
+          IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
           SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/master/qqread.js
+          COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
