@@ -69,6 +69,8 @@ const ddfactory = [
 //京喜工厂
 const jxfactory = [
     'aQ1lKXp1-Y68dsouERMI6A==',
+    'IkI_Dbn9ZH-NZz68IYiyUA==',
+    'rQ9y3IICZJp0aimFsMnUQg==',
     'yU8FNMmhr9YbwYeb9eHIZg==',
     'G6oPayj9gxX12TtQEgGctA==',
 ];
