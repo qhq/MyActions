@@ -9,26 +9,32 @@ on:
     - cron: '0 0-15/1 * * *'
   watch:
     types: [started]
-
+  repository_dispatch:
+    types: jd_price_detect
 jobs:
   build:
-
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
-    env:
-          JD_PRICE_DETECT_URL: ${{ secrets.JD_PRICE_DETECT_URL }}
-          JD_PRICE_DETECT_PRICE: ${{ secrets.JD_PRICE_DETECT_PRICE }}
-          SYNCURL: https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js 10.x
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: qhq/Self
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: ${{ matrix.node-version }}
+      - name: Cache node_modules
+        uses: actions/cache@v2 # 使用 GitHub 官方的缓存 Action。
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }} # 使用 package-lock.json 的 Hash 作为缓存的 key。也可以使用 package.json 代替
       - name: npm install
         run: |
           npm install
-      - name: ' 运行 【京东价格监控】'
+      - name: "运行 【京东价格监控】"
         run: |
           node Scripts/jd_price_detect.js
         env:
@@ -39,3 +45,8 @@ jobs:
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+          IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
+          # 自定义参数
+          SYNCURL: https://raw.githubusercontent.com/toulanboy/scripts/master/jd_price_detect/jd_price_detect.js
+          JD_PRICE_DETECT_URL: ${{ secrets.JD_PRICE_DETECT_URL }}
+          JD_PRICE_DETECT_PRICE: ${{ secrets.JD_PRICE_DETECT_PRICE }}
