@@ -32,7 +32,7 @@ async function changeFiele(content, cookie) {
     content  = content.replace("$.result.push(", "$.result.push(`用户：${userName}`,")
     content = content.replace(/\$\.msg\(\$\.name, '', `\\n/g, "notify.sendNotify($.name,`")
     content = content.replace("$.getdata('jx_notifyTime');", "'3'")
-    content = content.replace("resovle", "resolve")
+    content = content.replace(/resovle/g, "resolve")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
