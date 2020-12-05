@@ -30,7 +30,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("Env(jsname)", `Env(jsname);\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content  = content.replace("$.getdata(flwhburlKey)", JSON.stringify(cookie.split("\n")[0]))
     content  = content.replace("$.getdata(flwhbheaderKey)", JSON.stringify(cookie.split("\n")[1]))
-    content  = content.replace("typeof $request !== 'undefined'", "false")
+    content  = content.replace(/let isGetCookie = .*?/, "let isGetCookie = false")
     content = content.replace("$.msg(jsname,''", "notify.sendNotify(jsname")
     
     //替换源脚本中推送函数阻止推送
