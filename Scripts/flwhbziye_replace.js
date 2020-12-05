@@ -1,5 +1,5 @@
 /*
-https://raw.githubusercontent.com/MoPoQAQ/Script/main/Me/jx_cfd.js
+https://raw.githubusercontent.com/ziye12/JavaScript/master/flwhbziye.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
@@ -55,7 +55,7 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
+            //await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
             //await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
@@ -110,12 +110,12 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.COOKIE_FLW//.split("&");
+    Cookies = Secrets.COOKIE_FLW.split("\n\n");
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
-    await downFile();
+    //await downFile();
     console.log("下载代码完毕");
-    await executeOneByOne();
+    //await executeOneByOne();
     console.log("全部执行完毕");
 }
 
