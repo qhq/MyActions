@@ -113,9 +113,9 @@ async function start() {
     Cookies = Secrets.COOKIE_FLW.split("\n\n");
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
-    //await downFile();
+    await downFile();
     console.log("下载代码完毕");
-    //await executeOneByOne();
+    await executeOneByOne();
     console.log("全部执行完毕");
 }
 
