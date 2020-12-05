@@ -27,7 +27,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace("Env(jsname)", `Env(jsname);\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
+    //content = content.replace("Env(jsname)", `Env(jsname);\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content  = content.replace("$.getdata(flwhburlKey)", "\"https:\/\/huodong\.fanli\.com\/h5\/Fanlishare20201212\/ajaxInit\"")
     content  = content.replace("$.getdata(flwhbheaderKey)", `'${cookie}'`)
     //content  = content.replace("var tz=''", "var tz=''\nall()")
@@ -35,7 +35,7 @@ async function changeFiele(content, cookie) {
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
