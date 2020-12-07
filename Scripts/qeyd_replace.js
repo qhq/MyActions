@@ -32,9 +32,11 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
     //content = content.replace("$.getdata(qqreadurlKey)", "\"https://mqqapi.reader.qq.com/mqq/user/init\"")
-    content = content.replace("qqreadbdArr[K]", JSON.stringify(cookie.split("@")[0]))
-    content = content.replace("qqreadtimeurlArr[K]", JSON.stringify(cookie.split("@")[1]))
-    content = content.replace("qqreadtimehdArr[K]", JSON.stringify(cookie.split("@")[2]))
+    content = content.replace("const qqreadbdArr = [];", `const qqreadbdArr = [${JSON.stringify(cookie.split("@")[0])}];`)
+    content = content.replace("const qqreadtimeurlArr = [];", `const qqreadtimeurlArr = [${JSON.stringify(cookie.split("@")[1])}];`)
+    content = content.replace("const qqreadtimehdArr = [];", `const qqreadtimehdArr = [${JSON.stringify(cookie.split("@")[2])}];`)
+    //content = content.replace("qqreadtimeurlArr[K]", JSON.stringify(cookie.split("@")[1]))
+    //content = content.replace("qqreadtimehdArr[K]", JSON.stringify(cookie.split("@")[2]))
     //content = content.replace("i<18", "i<3")
     
     //替换源脚本中推送函数阻止推送
