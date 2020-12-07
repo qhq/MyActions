@@ -31,18 +31,22 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/console\.log/g, "")
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     //content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
-    content = content.replace(/if \(\$\.isNode\(\)\)/g, "if (!$.isNode())")
+    //content = content.replace(/if \(\$\.isNode\(\)\)/g, "if (!$.isNode())")
     //content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     //content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     //content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
-    content = content.replace('$.getdata("qqreadbd")', JSON.stringify(cookie.split("@")[0]))
-    content = content.replace('$.getdata("qqreadtimeurl")', JSON.stringify(cookie.split("@")[1]))
-    content = content.replace('$.getdata("qqreadtimehd")', JSON.stringify(cookie.split("@")[2]))
+    //content = content.replace('$.getdata("qqreadbd")', JSON.stringify(cookie.split("@")[0]))
+    //content = content.replace('$.getdata("qqreadtimeurl")', JSON.stringify(cookie.split("@")[1]))
+    //content = content.replace('$.getdata("qqreadtimehd")', JSON.stringify(cookie.split("@")[2]))
+    content = content.replace(/if \(\$\.isNode\(\)\)[\s\S]*?isGetCookie/, "if ((isGetCookie")
+    content = content.replace('qqreadbdArr[K]', JSON.stringify(cookie.split("@")[0]))
+    content = content.replace('qqreadtimeurlArr[K]', JSON.stringify(cookie.split("@")[1]))
+    content = content.replace('qqreadtimehdArr[K]', JSON.stringify(cookie.split("@")[2]))
     content = content.replace("!= 1", "== 1")
     
     //替换源脚本中推送函数阻止推送
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
