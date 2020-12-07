@@ -37,11 +37,11 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
-    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
     content = content.replace(/console\.log\(\n[\s\S]*?\);/g, "")
+    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
     
     //替换源脚本中推送函数阻止推送
-    content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
+    //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
     //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
@@ -106,7 +106,7 @@ async function msg(content) {
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
-        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
 }
 
