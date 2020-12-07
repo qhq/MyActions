@@ -30,15 +30,12 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     //content = content.replace(/console\.log/g, "")
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
+    content = content.replace(/const notifyInterval=\d/, `const notifyInterval=0`)
     //content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
-    //content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
-    //content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
-    //content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
-    //content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
-    content = content.replace(/if \(\$\.isNode\(\)\)[\s\S]*?let K = 0;/, "\nlet K = 0;")
-    content = content.replace('qqreadbdArr[K]', JSON.stringify(cookie.split("@")[0]))
-    content = content.replace('qqreadtimeurlArr[K]', JSON.stringify(cookie.split("@")[1]))
-    content = content.replace('qqreadtimehdArr[K]', JSON.stringify(cookie.split("@")[2]))
+    content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
+    content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
+    content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
+    content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     
     
     //替换源脚本中推送函数阻止推送
