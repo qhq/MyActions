@@ -30,18 +30,19 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     //content = content.replace(/console\.log/g, "")
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
+    //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
     //content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
-    content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
-    
+    //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
+    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
+    content = content.replace(/console\.log\(\n[\s\S]*?\);/g, "")
     
     //替换源脚本中推送函数阻止推送
-    //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -62,8 +63,8 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
-            //await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
+            //await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
+            await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
             await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, "执行异常:" + e);
@@ -105,7 +106,7 @@ async function msg(content) {
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
-        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
 }
 
