@@ -6,11 +6,11 @@ name: 快手视频
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/11 * * * *'
+    - cron: '*/13 * * * *'
   watch:
     types: [started]
   repository_dispatch:
-    types: jx_cfd
+    types: Auto_Kuaishou
 jobs:
   build:
     runs-on: ubuntu-latest
