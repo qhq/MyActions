@@ -39,9 +39,9 @@ async function changeFiele(content, cookie) {
     //content = content.replace('$.getdata("qqreadtimeurl")', JSON.stringify(cookie.split("@")[1]))
     //content = content.replace('$.getdata("qqreadtimehd")', JSON.stringify(cookie.split("@")[2]))
     content = content.replace(/if \(\$\.isNode\(\)\)[\s\S]*?let K = 0;/, "\nlet K = 0;")
-    content = content.replace('qqreadbdArr[K]', JSON.stringify(cookie.split("@")[0]))
-    content = content.replace('qqreadtimeurlArr[K]', JSON.stringify(cookie.split("@")[1]))
-    content = content.replace('qqreadtimehdArr[K]', JSON.stringify(cookie.split("@")[2]))
+    content = content.replace('qqreadbdArr[K]', `'cookie.split("@")[0]'`)
+    content = content.replace('qqreadtimeurlArr[K]', `'cookie.split("@")[1]'`)
+    content = content.replace('qqreadtimehdArr[K]', `'cookie.split("@")[2]'`)
     content = content.replace("!= 1", "== 1")
     
     //替换源脚本中推送函数阻止推送
