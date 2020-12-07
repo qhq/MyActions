@@ -30,13 +30,13 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     //content = content.replace(/console\.log/g, "")
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 0`)
+    content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
     //content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
-    content = content.replace(/function showmsg[\s\S]*?宝箱每15次通知一次/, `function showmsg() {notify.sendNotify(jsname, tz);`)
+    content = content.replace(/function showmsg[\s\S]*?宝箱每15次通知一次/g, `function showmsg() {notify.sendNotify(jsname, tz)`)
     
     
     //替换源脚本中推送函数阻止推送
