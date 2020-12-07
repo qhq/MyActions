@@ -28,18 +28,18 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace(/console\.log\(.*?脚本执行时间.*?=========\\n`\)/, "")
-    content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    content = content.replace(/\$\.msg\(jsname,''/g, "notify.sendNotify('企鹅阅读'")
-    content = content.replace("$.getdata(qqreadurlKey)", "\"https://mqqapi.reader.qq.com/mqq/user/init\"")
-    content = content.replace("$.getdata(qqreadheaderKey)", JSON.stringify(cookie.split("@")[0]))
-    content = content.replace("$.getdata(qqreadtimeurlKey)", JSON.stringify(cookie.split("@")[1]))
-    content = content.replace("$.getdata(qqreadtimeheaderKey)", JSON.stringify(cookie.split("@")[2]))
+    //content = content.replace(/console\.log\(.*?脚本执行时间.*?=========\\n`\)/, "")
+    //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
+    content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
+    //content = content.replace("$.getdata(qqreadurlKey)", "\"https://mqqapi.reader.qq.com/mqq/user/init\"")
+    content = content.replace("qqreadbdArr[K]", JSON.stringify(cookie.split("@")[0]))
+    content = content.replace("qqreadtimeurlArr[K]", JSON.stringify(cookie.split("@")[1]))
+    content = content.replace("qqreadtimehdArr[K]", JSON.stringify(cookie.split("@")[2]))
     //content = content.replace("i<18", "i<3")
     
     //替换源脚本中推送函数阻止推送
     content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -103,7 +103,7 @@ async function msg(content) {
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
-        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
 }
 
