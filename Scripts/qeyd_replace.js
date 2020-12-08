@@ -29,7 +29,6 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    //content = content.replace(/console\.log/g, "")
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
     //content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
@@ -39,6 +38,9 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     content = content.replace(/\(resolve, reject/g,"async (resolve, reject")
     content = content.replace(/\(error, response, /g,"async (error, response, ")
+    content = content.replace("function () {","async function () {")
+    content = content.replace(/(qqread[a-z0-9]*?\(\);)/g,"await $1")
+    content = content.replace("showmsg();","await showmsg();")
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
     content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
     content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
