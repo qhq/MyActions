@@ -1,6 +1,7 @@
 /*
 感谢sazs34大佬的替换思路和脚本https://github.com/sazs34
 感谢ZIYE制作的企鹅阅读脚本https://github.com/18u
+https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
@@ -36,13 +37,15 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
+    content = content.replace(/(resolve, reject/g,"async (resolve, reject")
+    content = content.replace(/(error, response, /g,"async (error, response, ")
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
-    content = content.replace(/console\.log\(\n[\s\S]*?\);/g, " ")
+    content = content.replace(/console\.log\(\n[\s\S]*?\);/g, "//console\.log")
     content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
