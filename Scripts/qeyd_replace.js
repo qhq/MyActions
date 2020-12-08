@@ -47,7 +47,7 @@ async function changeFiele(content, cookie) {
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -111,7 +111,7 @@ async function msg(content) {
     } else if (content.indexOf("Error") > 0) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else {
-        await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
+        //await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     }
 }
 
