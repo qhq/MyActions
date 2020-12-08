@@ -134,7 +134,7 @@ async function bean() {
 for (var key in resultDetail) {
   sDetail = sDetail + key+"："+resultDetail[key]+"\n";
 }
-sDetail = "======收入明细======\n" + sDetail + "======收入明细======"
+sDetail = "-------收入明细-------\n" + sDetail + "-------收入明细-------"
   // console.log(`昨日收入：${$.incomeBean}个京豆 🐶`);
   // console.log(`昨日支出：${$.expenseBean}个京豆 🐶`)
 }
