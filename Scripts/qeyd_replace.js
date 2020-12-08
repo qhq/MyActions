@@ -40,7 +40,7 @@ async function changeFiele(content, cookie) {
     content = content.replace(/\(resolve, reject/g,"async (resolve, reject")
     content = content.replace(/\(error, response, /g,"async (error, response, ")
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
-    content = content.replace(/  console\.log\(/g, "//console.log(")
+    content = content.replace(/ console\.log\(\n[\s\S]*?\);/g, "//")
     content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
     
     //替换源脚本中推送函数阻止推送
