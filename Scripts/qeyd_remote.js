@@ -31,23 +31,24 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
-    //content = content.replace(/\$\.msg\(jsname, ""/g, "notify.sendNotify('企鹅阅读'")
+    content = content.replace('let config = "";', "let config = "";\nlet day = 0;")
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     content = content.replace(/\(resolve, reject/g,"async (resolve, reject")
     content = content.replace(/\(error, response, /g,"async (error, response, ")
-    content = content.replace("function () {","async function () {")
+    content = content.replace(/function (/g,"async function (")
+    content = content.replace("function all","async function all")
     content = content.replace(/(qqread[a-z0-9]*?\(\);)/g,"await $1")
-    content = content.replace("showmsg();","await showmsg();")
+    content = content.replace("showmsg();",`await qqreadtrans();\ntz += "【今日收益】:获得" + day + '\\n';\nawait showmsg();`)
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
     content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
-    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
+    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction qqreadtrans() {return new Promise(async (resolve) => {for (var y = 1; y < 11; y++) {const daytime = new Date(new Date().toLocaleDateString()).getTime()const toqqreadtransurl = {url: "https://mqqapi.reader.qq.com/mqq/red_packet/user/trans/list?pn=" + y,headers: JSON.parse(qqreadtimeheaderVal),timeout: 60000,};$.get(toqqreadtransurl, async (error, response, data) => {if (logs) $.log(`${jsname}, 今日收益: ${data}`);trans = JSON.parse(data);for (var i = 0; i < 20; i++) {if (trans.data.list[i].createTime >= daytime)day += trans.data.list[i].amount;}resolve();});}});}\nfunction GG`)
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
