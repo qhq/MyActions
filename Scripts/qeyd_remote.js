@@ -38,7 +38,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     content = content.replace(/\(resolve, reject/g,"async (resolve, reject")
     content = content.replace(/\(error, response, /g,"async (error, response, ")
-    content = content.replace(/function (/g,"async function (")
+    content = content.replace(/function \(/g,"async function (")
     content = content.replace("function all","async function all")
     content = content.replace(/(qqread[a-z0-9]*?\(\);)/g,"await $1")
     content = content.replace("showmsg();",`await qqreadtrans();\ntz += "【今日收益】:获得" + day + '\\n';\nawait showmsg();`)
