@@ -31,7 +31,7 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
-    content = content.replace('let config = "";', "let config = "";\nlet day = 0;")
+    content = content.replace('let config = "";', `let config = "";\nlet day = 0;`)
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
