@@ -36,7 +36,7 @@ jobs:
           npm install
       - name: "运行 【光明随心订签到】"
         run: |
-          node Scripts/gmsxd_replace.js
+          node Scripts/gmsxd_remote.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
