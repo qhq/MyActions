@@ -36,7 +36,7 @@ jobs:
           npm install
       - name: "运行 【京喜工厂】"
         run: |
-          node Scripts/jx_factory_replace.js
+          node Scripts/jx_factory_remote.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
