@@ -36,7 +36,7 @@ jobs:
           npm install
       - name: "运行 【京喜财富岛】"
         run: |
-          node Scripts/jx_cfd_replace.js
+          node Scripts/jx_cfd_remote.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
