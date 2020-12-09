@@ -36,7 +36,7 @@ jobs:
           npm install
       - name: "运行 【吾爱破解签到】"
         run: |
-          node Scripts/52pojie_replace.js
+          node Scripts/52pojie_remote.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
