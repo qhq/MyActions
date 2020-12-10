@@ -27,7 +27,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {	
     //替换各种信息.	
-    content = content.replace("ali2","js2")	
+    //content = content.replace("ali2","js2")	
     content = content.replace("//console.log","console.log")	
 
     //替换源脚本中推送函数阻止推送	
