@@ -28,11 +28,11 @@ async function downFile() {
 async function changeFiele(content, cookie) {	
     //替换各种信息.	
     content = content.replace("`ali2.a.yximgs.com`","`js2.a.yximgs.com`")	
-    content = content.replace("//console.log","console.log")	
+    //content = content.replace("//console.log","console.log")	
 
     //替换源脚本中推送函数阻止推送	
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")	
-    console.log(content);	
+    //console.log(content);	
     await fs.writeFileSync('./execute.js', content, 'utf8')	
 }	
 
