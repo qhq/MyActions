@@ -72,7 +72,6 @@ async function executeOneByOne() {
             await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
-            await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, "执行异常:" + e);
         }
         console.log("执行完毕");
         const path = "./result.txt";
@@ -82,10 +81,10 @@ async function executeOneByOne() {
             //console.log(result);
             await msg(result);
         }
+        //运行完成后，删除下载的文件
+        console.log('运行完成后，删除下载的文件\n')
+        await deleteFile(path);
     }
-     //运行完成后，删除下载的文件
-     console.log('运行完成后，删除下载的文件\n')
-     await deleteFile(path);
 }
 /*
 async function download_notify() {
@@ -103,6 +102,7 @@ async function msg(content) {
     console.log(content);
     console.log('--------------------');
     var reg =/【现金余额】:([1-9]\d*\.?\d*|0\.\d*[1-9])元/g;
+    console.log(reg.exec(content)[0].trim());
     var gold = parseInt(reg.exec(content)[1].trim());
     if (d.getHours()==8 && d.getMinutes()<=22) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
