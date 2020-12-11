@@ -82,10 +82,10 @@ async function executeOneByOne() {
             //console.log(result);
             await msg(result);
         }
-        //运行完成后，删除下载的文件
-        console.log('运行完成后，删除下载的文件\n')
-        await deleteFile(path);
     }
+     //运行完成后，删除下载的文件
+     console.log('运行完成后，删除下载的文件\n')
+     await deleteFile(path);
 }
 /*
 async function download_notify() {
