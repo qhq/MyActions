@@ -102,8 +102,7 @@ async function msg(content) {
     console.log(content);
     console.log('--------------------');
     var reg =/【现金余额】:([1-9]\d*\.?\d*|0\.\d*[1-9])元/g;
-    console.log(reg.exec(content)[0].trim());
-    var gold = parseInt(reg.exec(content)[1].trim());
+    var gold = 0//parseInt(reg.exec(content)[1].trim());
     if (d.getHours()==8 && d.getMinutes()<=22) {
         await notify.sendNotify(`${d.toLocaleString('chinese',{hour12:false})}`, content);
     } else if (gold >= 10 && d.getHours()>=9 && d.getHours()<=22) {
