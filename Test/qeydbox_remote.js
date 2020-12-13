@@ -39,7 +39,7 @@ async function changeFiele(content, cookie) {
     //content = content.replace("function all","async function all")
     //content = content.replace(/(qqread[a-z0-9]*?\(\);)/g,"await $1")
     //content = content.replace("showmsg();","await showmsg();")
-    content = content.replace("`【${task.data.fans.title}】:${task.data.fans.fansCount}个好友,${task.data.fans.todayAmount}金币\n`;","`【${task.data.fans.title}】:${task.data.fans.fansCount}个好友,${task.data.fans.todayAmount}金币\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.tipText}\n`);")
+    content = content.replace("todayAmount}金币\n`;","todayAmount}金币\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.tipText}\n`);")
     //content = content.replace("tz += `【宝箱奖励${box.data.count}】:获得${box.data.amount}金币\n`;","console.log(`【宝箱奖励${box.data.count}】:获得${box.data.amount}金币\n`)")
     //content = content.replace("tz += `【宝箱翻倍】:获得${box2.data.amount}金币\n`;","console.log(`【宝箱翻倍】:获得${box2.data.amount}金币\n`)")
     content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
