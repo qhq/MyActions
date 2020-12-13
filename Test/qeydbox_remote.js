@@ -34,13 +34,14 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
-    content = content.replace(/for \(let i = 0; i < 13[\s\S]*?\n.*?\}\)\(i\);/, "for (let i = 0; i < 5; i++) {\n(function (i) {\nsetTimeout(\nfunction () {\nif (i == 1) {\nqqreadtask();// 任务列表\n}\nelse if (i == 2) {\nif (task.data && task.data.treasureBox.doneFlag == 0)\nqqreadbox();// 宝箱\n}\nelse if (i == 3) {\nif (task.data && task.data.treasureBox.videoDoneFlag == 0)\nqqreadbox2();// 宝箱翻倍\n}\nelse if (i == 4) {\nif (K < qqreadbdArr.length - 1) {\nK += 1;\nall();\n}\n}\n},\n(i + 1) * dd * 1000\n);\n})(i);")
+    content = content.replace(/for \(let i = 0; i < 13[\s\S]*?\n.*?\}\)\(i\);/, "for (let i = 0; i < 5; i++) {\n(function (i) {\nsetTimeout(\nfunction () {\nif (i == 1) {\nqqreadtask();// 任务列表\n}\nelse if (i == 2) {\nif (task.data && task.data.treasureBox.doneFlag == 0)\nqqreadbox();// 宝箱\n}\nelse if (i == 3) {\nif (task.data && task.data.treasureBox.videoDoneFlag == 0)\nqqreadbox2();// 宝箱翻倍\n}\nelse if (i == 4) {\nif (K < qqreadbdArr.length - 1) {\nK += 1;\nall();\n}\n}\nelse if (K == qqreadbdArr.length - 1) {\nsleep(110000); \n$.done();\n}\n},\n(i + 1) * dd * 1000\n);\n})(i);")
     content = content.replace("todayAmount}金币\\n`;","todayAmount}金币\\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.tipText}\\n`)")
     content = content.replace(/tz \+= (`【宝箱.*?金币\\n`);/g, "console.log($1);")
+    content = content.replace(/function showmsg/, `async function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
