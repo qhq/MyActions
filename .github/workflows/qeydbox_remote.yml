@@ -46,6 +46,6 @@ jobs:
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
-          #SYNCURL: https://raw.githubusercontent.com/Choicc/JavaScript/master/Task/qqreadsbox.js
+          # SYNCURL: https://raw.githubusercontent.com/Choicc/JavaScript/master/Task/qqreadsbox.js
 SYNCURL: https://raw.githubusercontent.com/feiyu12321/qqread/main/Task/qqreads.js
           COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
