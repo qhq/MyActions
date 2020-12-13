@@ -29,8 +29,6 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
@@ -42,12 +40,12 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/(qqread[a-z0-9]*?\(\);)/g,"await $1")
     //content = content.replace("showmsg();","await showmsg();")
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
-    //content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
-    //content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
+    content = content.replace(/for \(let i = 0; i < 13[\s\S]*?\n.*?\}\)\(i\);/, "for (let i = 0; i < 5; i++) {\n(function (i) {\nsetTimeout(\nfunction () {\nif (i == 1) {\nqqreadtask();// 任务列表\n}\nelse if (i == 2) {\nif (task.data && task.data.treasureBox.doneFlag == 0)\nqqreadbox();// 宝箱\n}\nelse if (i == 3) {\nif (task.data && task.data.treasureBox.videoDoneFlag == 0)\nqqreadbox2();// 宝箱翻倍\n}\nelse if (i == 4) {\nif (K < qqreadbdArr.length - 1) {\nK += 1;\nall();\n}\n}\n},\n(i + 1) * dd * 1000\n);\n})(i);")
+    content = content.replace(/tz \+= (`【宝箱.*?金币\\n`);/g, "console.log($1);")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    //console.log(content);
+    console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -128,7 +126,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.COOKIE_QEYD.split("\n");
+    Cookies = Secrets.COOKIE_QEYD.split("\n")[0];
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
