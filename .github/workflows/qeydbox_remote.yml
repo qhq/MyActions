@@ -42,7 +42,7 @@ jobs:
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
           SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js #https://raw.githubusercontent.com/Choicc/JavaScript/master/Task/qqreadsbox.js
           COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
-      - name: "运行 【企鹅阅读】"
+      - name: "运行 【企鹅阅读开宝箱】"
         run: |
           node Test/qeydbox_remote.js
         env:
