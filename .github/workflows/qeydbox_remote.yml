@@ -38,6 +38,14 @@ jobs:
         run: |
           node Test/qeydbox_remote.js
         env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_USER_ID: ${{ secrets.TG_USER_ID }}
+          SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js #https://raw.githubusercontent.com/Choicc/JavaScript/master/Task/qqreadsbox.js
+          COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
+      - name: "运行 【企鹅阅读】"
+        run: |
+          node Scripts/qeydbox_remote.js
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
           BARK_SOUND: ${{ secrets.BARK_SOUND }}
