@@ -44,7 +44,7 @@ jobs:
           COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
       - name: "运行 【企鹅阅读】"
         run: |
-          node Scripts/qeydbox_remote.js
+          node Test/qeydbox_remote.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
