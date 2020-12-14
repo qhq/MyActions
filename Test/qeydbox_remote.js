@@ -34,8 +34,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
-    content = content.replace(/for \(let i = 0; i < 13[\s\S]*?\n.*?\}\)\(i\);/, "for (let i = 0; i < 13; i++) {\n(async function (i) {\nsetTimeout(\n async function () {\nif (i == 1) {\nqqreadtask();// 任务列表\n}\nif (i == 6) {\nconsole.log(`暂停时间：${task.data.treasureBox.timeInterval + 5000}`);\nawait sleep(`${task.data.treasureBox.timeInterval}` == null ? 0 : `${task.data.treasureBox.timeInterval + 5000}`);}\nelse if (i == 7) {\nawait sleep(2000);\nconsole.log(task.data.treasureBox)\nif (task.data && task.data.treasureBox.doneFlag == 0)\nqqreadbox();// 宝箱\n}\nelse if (i == 11) {\n//sleep(1000);\n//console.log(task.data.treasureBox.videoDoneFlag)\nif (task.data && task.data.treasureBox.videoDoneFlag == 0)\nqqreadbox2();// 宝箱翻倍\n}\nelse if (i == 4) {\nif (K < qqreadbdArr.length - 1) {\nK += 1;\nall();\n}\n}\n},\n(i + 1) * dd * 1000\n);\n})(i);")
-    //content = content.replace("todayAmount}金币\\n`;","todayAmount}金币\\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.tipText}\\n`)\nsleep(`${task.data.treasureBox.timeInterval}` == null ? 0 : `${task.data.treasureBox.timeInterval + 1000}`);")
+    content = content.replace(/for \(let i = 0; i < 13[\s\S]*?\n.*?\}\)\(i\);/, "for (let i = 0; i < 13; i++) {\n(function (i) {\nsetTimeout(\nfunction () {\nif (i == 1) {\nqqreadtask();// 任务列表\nconsole.log(`距离时间：${task.data.treasureBox.timeInterval}`)\n}\nelse if (i == 7) {\n//sleep(1000);\nconsole.log(task.data.treasureBox)\nif (task.data && task.data.treasureBox.doneFlag == 0)\nqqreadbox();// 宝箱\n}\nelse if (i == 11) {\n//sleep(1000);\n//console.log(task.data.treasureBox.videoDoneFlag)\nif (task.data && task.data.treasureBox.videoDoneFlag == 0)\nqqreadbox2();// 宝箱翻倍\n}\nelse if (i == 4) {\nif (K < qqreadbdArr.length - 1) {\nK += 1;\nall();\n}\n}\n},\n(i + 1) * dd * 1000\n);\n})(i);")    //content = content.replace("todayAmount}金币\\n`;","todayAmount}金币\\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.tipText}\\n`)\nsleep(`${task.data.treasureBox.timeInterval}` == null ? 0 : `${task.data.treasureBox.timeInterval + 1000}`);")
     content = content.replace("todayAmount}金币\\n`;","todayAmount}金币\\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.timeInterval}\\n`)")
     content = content.replace(/tz \+= (`【宝箱.*?金币\\n`);/g, "console.log($1);")
     content = content.replace(/function showmsg/, `async function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
@@ -123,7 +122,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.COOKIE_QEYD.split("\n");
+    Cookies = Secrets.COOKIE_QEYD.split("\n")[0].split("\n");
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
