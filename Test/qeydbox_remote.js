@@ -43,7 +43,8 @@ async function changeFiele(content, cookie) {
     content = content.replace(/tz \+= (`【宝箱.*?金币\\n`);/g, "console.log($1);")
     content = content.replace(/\(error, response, /g,"async (error, response, ")
     content = content.replace(/function /g,"async function ")
-    content = content.replace(/function showmsg/, `async function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
+    //content = content.replace(/function showmsg/, `async function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
+    content = content.replace(/function showmsg/, `function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
