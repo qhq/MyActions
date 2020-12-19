@@ -41,14 +41,14 @@ async function changeFiele(content, cookie) {
     content = content.replace("todayAmount}金币\\n`;","todayAmount}金币\\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.tipText}\\n`);\nconsole.log(`【距离开箱】：${task.data.treasureBox.timeInterval} ms\\n`);\nsleep(`${task.data.treasureBox.timeInterval}` == null ? 0 : `${task.data.treasureBox.timeInterval + 5000}`);")
     //content = content.replace("todayAmount}金币\\n`;","todayAmount}金币\\n`;\nconsole.log(`【宝箱任务${task.data.treasureBox.count + 1}】:${task.data.treasureBox.tipText}\\n`);\nconsole.log(`【距离开箱】：${task.data.treasureBox.timeInterval} ms\\n`);\nawait $.wait(`${task.data.treasureBox.timeInterval}` == null ? 0 : `${task.data.treasureBox.timeInterval + 100}`);")
     content = content.replace(/tz \+= (`【宝箱.*?金币\\n`);/g, "console.log($1);")
-    content = content.replace(/\(error, response, /g,"async (error, response, ")
-    content = content.replace(/function qqreadtask\(\)/,"async function qqreadtask()")
+    //content = content.replace(/\(error, response, /g,"async (error, response, ")
+    //content = content.replace(/function qqreadtask\(\)/,"async function qqreadtask()")
     content = content.replace(/function showmsg/, `async function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
     //content = content.replace(/function showmsg/, `function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
