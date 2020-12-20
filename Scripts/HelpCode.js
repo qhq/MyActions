@@ -3,9 +3,7 @@
 const $ = new Env('助力码提交');
 const notify = $.isNode() ? require('../sendNotify') : '';
 
-const codeName = ['jdzz',];
-
-//const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory', 'jdzz',];
+const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory', 'jdzz',];
 
 //种豆
 const bean = [
@@ -92,7 +90,7 @@ const jdzz = [
     'ACjBUnq2XyTUKDmQ',
 ];
 
-
+//http://api.turinglabs.net/api/v1/jd/
 let url_HOST = '';
 var msgDetail = '';
 
