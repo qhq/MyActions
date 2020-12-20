@@ -3,7 +3,9 @@
 const $ = new Env('助力码提交');
 const notify = $.isNode() ? require('../sendNotify') : '';
 
-const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory',];
+const codeName = ['jdzz',];
+
+//const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory', 'jdzz',];
 
 //种豆
 const bean = [
@@ -73,6 +75,21 @@ const jxfactory = [
     'rQ9y3IICZJp0aimFsMnUQg==',
     'yU8FNMmhr9YbwYeb9eHIZg==',
     'G6oPayj9gxX12TtQEgGctA==',
+];
+//赚赚
+const jdzz = [
+    'ASm0XzOc',
+    'AWH8Ayw',
+    'A3IvtRx0hFZy23tpqCfbI',
+    'AfUQq49junGtfXTz5335C',
+    'AUWE5m_uTyWBdWjP5iH5DwQ',
+    'AUWE5_83huGhWezGfpSQ0',
+    'AUWE5m_yQymcADWD8j3tLkg',
+    'AUWE5-u3Us3NMUgOOpRgq',
+    'AUWE5mqTCyDxdDjbw2XxPwA',
+    'ACjZfnqyQzTQPD2SXnQ',
+    'AUWE5mKqUmDMOW2T7iX1IkA',
+    'ACjBUnq2XyTUKDmQ',
 ];
 
 
