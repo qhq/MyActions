@@ -102,7 +102,7 @@ var msgDetail = '';
         msgDetail = msgDetail + `======${$.codeName}======\n`;
         for (let index = 0; index < eval($.codeName).length; index++) {
             $.code = eval($.codeName)[index];
-            url_HOST = `http://api.turinglabs.net/api/v1/jd/${$.codeName}/create/${$.code}`;
+            url_HOST = `https://code.chiang.fun/api/v1/jd/${$.codeName}/create/${$.code}`;
             await upCode(url_HOST);
         }
     }
