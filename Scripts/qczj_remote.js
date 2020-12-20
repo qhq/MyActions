@@ -1,7 +1,5 @@
 /*
-感谢sazs34大佬的替换思路和脚本https://github.com/sazs34
-感谢ZIYE制作的企鹅阅读脚本https://github.com/18u
-https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js
+https://raw.githubusercontent.com/ziye12/QCZJSPEED/main/Task/qczjspeed.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
@@ -31,17 +29,17 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace(/middleaccountManageEADER/g, "middleaccountManageHEADER")
-    content = content.replace(`let GetUserInfourlVal = "";`, `let GetUserInfourlVal = [${JSON.stringify(cookie.split("@")[0])}];`)
-    content = content.replace(`let GetUserInfoheaderVal = "";`, `let GetUserInfoheaderVal = [${JSON.stringify(cookie.split("@")[1])}];`)
-    content = content.replace(`let coinbodyVal = "";`, `let coinbodyVal = [${JSON.stringify(cookie.split("@")[2])}];`)
-    content = content.replace(`let accountManageheaderVal = "";`, `let accountManageheaderVal = [${JSON.stringify(cookie.split("@")[3])}];`)
-    content = content.replace(`let taskbodyVal = "";`, `let taskbodyVal = [${JSON.stringify(cookie.split("@")[4])}];`)
-    content = content.replace(`let activitybodyVal = "";`, `let activitybodyVal = [${JSON.stringify(cookie.split("@")[5])}];`)
-    content = content.replace(`let addCoinbodyVal = "";`, `let addCoinbodyVal = [${JSON.stringify(cookie.split("@")[6])}];`)
-    content = content.replace(`let addCoin2bodyVal = "";`, `let addCoin2bodyVal = [${JSON.stringify(cookie.split("@")[7])}];`)
-    content = content.replace(`let reportAssbodyVal = "";`, `let reportAssbodyVal = [${JSON.stringify(cookie.split("@")[8])}];`)
-    content = content.replace(`let reportAssheaderVal = "";`, `let reportAssheaderVal = [${JSON.stringify(cookie.split("@")[9])}];`)
-    content = content.replace(`let cointowalletbodyVal = "";`, `let cointowalletbodyVal = [${JSON.stringify(cookie.split("@")[10])}];`)
+    content = content.replace(`let middleGetUserInfoURL = [];`, `let middleGetUserInfoURL = [${JSON.stringify(cookie.split("@")[0])}];`)
+    content = content.replace(`let middleGetUserInfoHEADER = [];`, `let middleGetUserInfoHEADER = [${JSON.stringify(cookie.split("@")[1])}];`)
+    content = content.replace(`let middlecoinBODY = [];`, `let middlecoinBODY = [${JSON.stringify(cookie.split("@")[2])}];`)
+    content = content.replace(`let middleaccountManageHEADER = [];`, `let middleaccountManageHEADER = [${JSON.stringify(cookie.split("@")[3])}];`)
+    content = content.replace(`let middletaskBODY = [];`, `let middletaskBODY = [${JSON.stringify(cookie.split("@")[4])}];`)
+    content = content.replace(`let middleactivityBODY = [];`, `let middleactivityBODY = [${JSON.stringify(cookie.split("@")[5])}];`)
+    content = content.replace(`let middleaddCoinBODY = [];`, `let middleaddCoinBODY = [${JSON.stringify(cookie.split("@")[6])}];`)
+    content = content.replace(`let middleaddCoin2BODY = [];`, `let middleaddCoin2BODY = [${JSON.stringify(cookie.split("@")[7])}];`)
+    content = content.replace(`let middlereportAssBODY = [];`, `let middlereportAssBODY = [${JSON.stringify(cookie.split("@")[8])}];`)
+    content = content.replace(`let middlereportAssHEADER = [];`, `let middlereportAssHEADER = [${JSON.stringify(cookie.split("@")[9])}];`)
+    content = content.replace(`let middlecointowalletBODY = [];`, `let middlecointowalletBODY = [${JSON.stringify(cookie.split("@")[10])}];`)
     //content = content.replace(/\(resolve, reject/g,"async (resolve, reject")
     //content = content.replace(/\(error, response, /g,"async (error, response, ")
     //content = content.replace(/function \(/g,"async function (")
