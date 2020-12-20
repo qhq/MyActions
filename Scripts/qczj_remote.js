@@ -1,5 +1,7 @@
 /*
 https://raw.githubusercontent.com/ziye12/QCZJSPEED/main/Task/qczjspeed.js
+Secret填写：
+GetUserInfourlVal@GetUserInfoheaderVal@coinbodyVal@accountManageheaderVal@taskbodyVal@activitybodyVal@addCoinbodyVal@addCoin2bodyVal@reportAssbodyVal@reportAssheaderVal@cointowalletbodyVal
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
