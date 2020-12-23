@@ -27,7 +27,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace(/let SESSION = \$\.getdata\(\$\.SESSION_KEY\);/, `let SESSION = '${cookie}';\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
+    content = content.replace("const cookieVal = $.getdata(cookieKey)", `const cookieVal = '${cookie}';\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content = content.replace(/\$\.msg\(\$\.name, \$\.subt/g, "notify.sendNotify('光明随心订'")
   
     //替换源脚本中推送函数阻止推送
