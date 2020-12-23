@@ -1,5 +1,6 @@
 /*
 感谢sazs34大佬的替换思路和脚本https://github.com/sazs34
+https://raw.githubusercontent.com/qhq/QuanX/master/Scripts/gmsxd.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
