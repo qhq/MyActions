@@ -28,7 +28,6 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    console.log(Secrets.COOKIE_GMSXD)
     content = content.replace("const cookieVal = $.getdata(cookieKey)", `const cookieVal = '${cookie}';\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     content = content.replace(/\$\.msg\(\$\.name, \$\.subt/g, "notify.sendNotify('光明随心订'")
   
