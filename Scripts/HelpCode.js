@@ -3,7 +3,7 @@
 const $ = new Env('助力码提交');
 const notify = $.isNode() ? require('../sendNotify') : '';
 
-const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory', 'jdzz',];
+const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory', 'jdzz','jdcrazyjoy',];
 
 //种豆
 const bean = [
@@ -88,6 +88,15 @@ const jdzz = [
     'ACjZfnqyQzTQPD2SXnQ',
     'AUWE5mKqUmDMOW2T7iX1IkA',
     'ACjBUnq2XyTUKDmQ',
+];
+//合成joy
+const jdcrazyjoy = [
+    '3VqkyIMFATo=',
+    '-7QOeL8rfjI=',
+    'e1O0FMwde9XsAz_9lffE6w==',
+    'EBO23Fi9flbZPS6NbTnbkQ==',
+    'ddS4sfcLgkRE496sBdaey6t9zd5YaBeE',
+    'iguq7xHI7m74DZAG8baHtA==',
 ];
 
 //http://api.turinglabs.net/api/v1/jd/
