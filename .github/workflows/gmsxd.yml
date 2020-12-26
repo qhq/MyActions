@@ -47,5 +47,5 @@ jobs:
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
           # 自定义参数
-          SYNCURL: https://raw.githubusercontent.com/qhq/QuanX/master/Scripts/gmsxd.js
+          SYNCURL: https://gitee.com/qhqcz/quan-x/raw/master/Scripts/gmsxd.js # https://raw.githubusercontent.com/qhq/QuanX/master/Scripts/gmsxd.js
           COOKIE_GMSXD: ${{ secrets.COOKIE_GMSXD }}
