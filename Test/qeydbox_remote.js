@@ -45,7 +45,9 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/\(error, response, /g,"async (error, response, ")
     //content = content.replace(/function qqreadtask\(\)/,"async function qqreadtask()")
     content = content.replace(/function showmsg/, `async function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
-    //content = content.replace(/function showmsg/, `function sleep(interval) {\nreturn new Promise(resolve => {\nsetTimeout(resolve, interval);\n})\n}\nfunction showmsg`)
+    content = content.replace("else if (i == 9){", `else if (i == 9){\nqqreadtrans();//今日收益累计\n`)
+    content = content.replace(/for\(var[\s\S]*?\n.*?let day=0;/, `let day = 0;\nfor (var y = 1; y < 9; y++) {`)
+    content = content.replace(/tz\+="【今日收益】[\s\S]*?\n.*?\n.*?\n.*?\n/, `resolve();\n});\n}\ntz += "【今日收益】:获得" + day + '\n'`)
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
