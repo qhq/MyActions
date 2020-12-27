@@ -28,7 +28,7 @@ async function downFile() {
 async function changeFiele(content, cookie) {
     //替换各种信息.
     content = content.replace("Env('财富岛');", `Env('财富岛');\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    content  = content.replace("require('./jdCookie.js')", `{CookieJD:'${cookie}'}`)
+    content  = content.replace(`require("./jdCookie.js")`, `{CookieJD:'${cookie}'}`)
     content  = content.replace("$.result.push(", "$.result.push(`用户：${userName}`,")
     content = content.replace(/\$\.msg\(\$\.name, '', `\\n/g, "notify.sendNotify($.name,`")
     content = content.replace("$.getdata('jx_notifyTime');", "'15'")
@@ -103,7 +103,8 @@ async function msg(content) {
 async function start() {
     //console.log(`当前执行时间:${new Date().toString()}`);
     console.log(`国际时间 (UTC+00)：${new Date().toLocaleString('chinese',{hour12:false})}`)
-    console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString('chinese',{hour12:false})}\n`)
+    console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString('chinese',{hour12:false})}`)
+    console.log(`引用脚本：${SyncUrl.SyncUrl}\n`)
     if (!Secrets.JD_COOKIE) {
         console.log("请填写 JD_COOKIE 后在继续");
         return;
