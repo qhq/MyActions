@@ -104,7 +104,7 @@ async function start() {
     //console.log(`当前执行时间:${new Date().toString()}`);
     console.log(`国际时间 (UTC+00)：${new Date().toLocaleString('chinese',{hour12:false})}`)
     console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString('chinese',{hour12:false})}`)
-    console.log(`引用脚本：${SyncUrl.SyncUrl}\n`)
+    console.log(`引用脚本：${Secrets.SyncUrl}\n`)
     if (!Secrets.JD_COOKIE) {
         console.log("请填写 JD_COOKIE 后在继续");
         return;
