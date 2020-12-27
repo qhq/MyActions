@@ -47,6 +47,6 @@ jobs:
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
           # 自定义参数
-          SYNCURL: https://raw.githubusercontent.com/qhq/QuanX/master/Scripts/91wii.js
+          SYNCURL: https://gitee.com/qhqcz/quan-x/raw/master/Scripts/91wii.js
           COOKIE_91WII: ${{ secrets.COOKIE_91WII }}
           COOKIE_91WII_FORMHASH: ${{ secrets.COOKIE_91WII_FORMHASH }}
