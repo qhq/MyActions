@@ -46,8 +46,8 @@ async function changeFiele(content, cookie) {
     content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
     
     content = content.replace("else if (i == 9){", `else if (i == 9){\nqqreadtrans();//今日收益累计\n`)
-    //content = content.replace("let K = 0;", `let K = 0;\nvar day=988;\n`)
-    //content = content.replace(/for\(var[\s\S]*?\n.*?let day=0;/, `for (var y = 1; y < 9; y++) {`)
+    content = content.replace("let K = 0;", `let K = 0;\nvar day=988;\n`)
+    content = content.replace(/for\(var[\s\S]*?\n.*?let day=0;/, `for (var y = 1; y < 9; y++) {`)
     //content = content.replace(/for\(var[\s\S]*?\n.*?let day=0;/, `var day = 999;\nfor (var y = 1; y < 9; y++) {`)
     content = content.replace(/tz\+="【今日收益】[\s\S]*?\/\/ 更新/g, `if(y == 8)tz += "【今日收益】:获得" + day + '\\n';\nresolve();\n});\n}\n});\n}\n\n// 更新`)
     //content = content.replace(/tz\+="【今日收益】[\s\S]*?\/\/ 更新/g, `resolve();\n});\n}\ntz += "【今日收益】:获得" + day + '\\n'\n});\n}\n\n// 更新`)
