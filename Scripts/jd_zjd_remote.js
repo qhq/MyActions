@@ -1,5 +1,5 @@
 /*
-https://raw.githubusercontent.com/whyour/hundun/master/quanx/jd_zjd_tuan.js
+https://raw.githubusercontent.com/whyour/hundun/master/quanx/jd_zjd.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
