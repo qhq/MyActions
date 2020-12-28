@@ -49,7 +49,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("let K = 0;", `let K = 0;\nvar day=988;\n`)
     content = content.replace(/for\(var[\s\S]*?\n.*?let day=0;/, `for (var y = 1; y < 9; y++) {`)
     //content = content.replace(/for\(var[\s\S]*?\n.*?let day=0;/, `var day = 999;\nfor (var y = 1; y < 9; y++) {`)
-    content = content.replace(/tz\+="【今日收益】[\s\S]*?\/\/ 更新/g, `resolve(day);\ntz += "【" + day + "】"\n});\ntz += "【" + day + "】"\n}\ntz += "【今日收益】:获得" + day + '\\n'\n});\n}\n\n// 更新`)
+    content = content.replace(/tz\+="【今日收益】[\s\S]*?\/\/ 更新/g, `resolve(day);\n});\ntz += "【" + day + "】"\n}\ntz += "【今日收益】:获得" + day + '\\n'\n});\n}\n\n// 更新`)
     //content = content.replace("day+=trans.data.list[i].amount;", `day+=trans.data.list[i].amount;\ntz += "获得" + day\n`)
     
     //替换源脚本中推送函数阻止推送
