@@ -30,7 +30,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("Env('京东赚京豆开团');", `Env('京东赚京豆开团');\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     //content = content.replace(`require("./jdCookie.js")`, `{CookieJD:'${cookie}'}`)
     content = content.replace(/require\(['|"].\/jdCookie\.js['|"]\)/, `{CookieJD:'${cookie}'}`)
-    content = content.replace(/\$\.msg\(\$\.name,/g, "notify.sendNotify($.name,`")
+    content = content.replace(/\$\.msg\(\$\.name,/g, "notify.sendNotify($.name,")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
