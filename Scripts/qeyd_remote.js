@@ -31,7 +31,6 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
-    content = content.replace("let K = 0;","let K = 0;\nlet CASH = 0;")
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace("$.getval('qeCASH');","0;")
     content = content.replace(/\$\{CASH\}/g, "0")
