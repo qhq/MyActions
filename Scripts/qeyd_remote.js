@@ -33,7 +33,7 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace("$.getval('qeCASH');","10;")
-    content = content.replace(/^console\.log\([\s\S]*?\);/g, "")
+    content = content.replace(/(?:^|\n)console\.log\([\s\S]*?\);/g, "")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
@@ -50,7 +50,7 @@ async function changeFiele(content, cookie) {
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
