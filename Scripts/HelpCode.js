@@ -121,6 +121,7 @@ var msgDetail = '';
             $.url = eval($.codeName)[0];
             $.code = eval($.codeName)[index];
             url_HOST = `${$.url}/${$.codeName}/create/${$.code}`;
+            console.log(url_HOST);
             await upCode(url_HOST);
         }
     }
