@@ -1,4 +1,5 @@
 //http://api.turinglabs.net/api/v1/jd/cleantimeinfo/
+//https://code.chiang.fun/api/v1/jd/cleantimeinfo/
 
 const $ = new Env('助力码提交');
 const notify = $.isNode() ? require('../sendNotify') : '';
@@ -7,6 +8,7 @@ const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory', 'jdzz','jdcra
 
 //种豆
 const bean = [
+    'http://api.turinglabs.net/api/v1/jd',
     'tzyicd7vcjefooqbns6eertieu',
     'vznl6lnj45ygubawzy4sypmk3wp7qavhgsxarra',
     'tz5ip676tqe53carnornx565fa3h7wlwy7o5jii',
@@ -22,9 +24,11 @@ const bean = [
     'e7lhibzb3zek25mn4ga4ngdl63z7sdzgwjx5uoq',
     'e7lhibzb3zek3a45h7xvd2d5yojljvem4wkofuq',
     'wrqpt6mmzjh2zaetyf5qe6sp6n4nisowve5p75q',
+    '4npkonnsy7xi2uf7vpunmn6viubd7axcznqkczy',
 ];
 //农场
 const farm = [
+    'http://api.turinglabs.net/api/v1/jd',
     '79e494c92d1343ba8d7fbb9029a43f0b',
     '49b53d7fbc024c74bc7d2874cfe45c8c',
     'e275b3382f994bbc95a83b11b1693b29',
@@ -40,9 +44,11 @@ const farm = [
     'dd8b8158db764898a33361a0979ac382',
     'cf7513fe232e4fccbf4379ebaf7aab11',
     'fe64225268674b2da19e763feddf30ce',
+    'e5995d6d96664eaaa7b5cad85d238563',
 ];
 //萌宠
 const pet = [
+    'http://api.turinglabs.net/api/v1/jd',
     'MTEzMzI0OTE0NTAwMDAwMDAzNjQ0Njg0MQ==',
     'MTE1NDAxNzcwMDAwMDAwMzU4ODkwNTU=',
     'MTE1NDQ5OTIwMDAwMDAwMzkzODEyNDE=',
@@ -55,9 +61,11 @@ const pet = [
     'MTE1NDAxNzgwMDAwMDAwMzU5MDA4OTc=',
     'MTEzMzI0OTE0NTAwMDAwMDAzNjE4Nzc2Nw==',
     'MTE1NDQ5OTIwMDAwMDAwMzYyNjQ5NzE=',
+    'MTE1NDAxNzgwMDAwMDAwNDMyNDc2MDU=',
 ];
 //东东工厂
 const ddfactory = [
+    'http://api.turinglabs.net/api/v1/jd',
     'P04z54XCjVWnYaS5nRQSTOy',
     'P04z54XCjVWnYaS5mZCXjQ',
     'P04z54XCjVWnYaS5uK2s7hIbKTjK-6fud8f-Q',
@@ -68,6 +76,7 @@ const ddfactory = [
 ];
 //京喜工厂
 const jxfactory = [
+    'http://api.turinglabs.net/api/v1/jd',
     'aQ1lKXp1-Y68dsouERMI6A==',
     'IkI_Dbn9ZH-NZz68IYiyUA==',
     'rQ9y3IICZJp0aimFsMnUQg==',
@@ -76,6 +85,7 @@ const jxfactory = [
 ];
 //赚赚
 const jdzz = [
+    'https://code.chiang.fun/api/v1/jd',
     'ASm0XzOc',
     'AWH8Ayw',
     'A3IvtRx0hFZy23tpqCfbI',
@@ -91,6 +101,7 @@ const jdzz = [
 ];
 //合成joy
 const jdcrazyjoy = [
+    'https://code.chiang.fun/api/v1/jd',
     '3VqkyIMFATo=',
     '-7QOeL8rfjI=',
     'e1O0FMwde9XsAz_9lffE6w==',
@@ -99,7 +110,6 @@ const jdcrazyjoy = [
     'iguq7xHI7m74DZAG8baHtA==',
 ];
 
-//http://api.turinglabs.net/api/v1/jd/
 let url_HOST = '';
 var msgDetail = '';
 
@@ -107,9 +117,10 @@ var msgDetail = '';
     for (let i = 0; i < codeName.length; i++) {
         $.codeName = codeName[i];
         msgDetail = msgDetail + `--------${$.codeName}--------\n`;
-        for (let index = 0; index < eval($.codeName).length; index++) {
+        for (let index = 1; index < eval($.codeName).length; index++) {
+            $.url = eval($.codeName)[0];
             $.code = eval($.codeName)[index];
-            url_HOST = `https://code.chiang.fun/api/v1/jd/${$.codeName}/create/${$.code}`;
+            url_HOST = `${$.url}/${$.codeName}/create/${$.code}`;
             await upCode(url_HOST);
         }
     }
