@@ -47,7 +47,7 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
     content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
     content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
-    //content = content.replace("else if (i == 3){","else if (i == 3){console.log(dk)\n")
+    content = content.replace(/&&\n.*?nowTimes\.getHours\(\) == 23/g,"")
     
     
     //替换源脚本中推送函数阻止推送
