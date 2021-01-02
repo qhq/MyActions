@@ -46,6 +46,7 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
     content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
     content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
+    content = content.replace(`let CASH = "";`,"let CASH = 10;")
     content = content.replace(`$.getval("qeCASH");`,"10;")
     content = content.replace(`else CASH = 0;`,"else CASH = 10;")
     content = content.replace(/&&\n.*?nowTimes\.getHours\(\) == 23/g,"")
