@@ -29,8 +29,8 @@ async function downFile() {
 async function changeFiele(content, cookie) {
     //替换各种信息.
     content = content.replace(/Env\(['|"]NOW直播['|"]\)/, `Env('NOW直播');\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    content = content.replace("const nowid = $.getdata(`now_qq`)", `const nowid = JSON.stringify(cookie.split("@")[0]);`)
-    content = content.replace("const cookieVal =$.getdata(`nowqq_cookie`)", `const cookieVal = JSON.stringify(cookie.split("@")[1]);`)
+    content = content.replace("const nowid = $.getdata(`now_qq`)", `const nowid = ${JSON.stringify(cookie.split("@")[0])};`)
+    content = content.replace("const cookieVal =$.getdata(`nowqq_cookie`)", `const cookieVal = ${JSON.stringify(cookie.split("@")[1])};`)
     //content = content.replace(/require\(['|"].\/jdCookie\.js['|"]\)/, `{CookieJD:'${cookie}'}`)
     content = content.replace(/\$\.msg\(\$\.name,signres,/g, "notify.sendNotify($.name,")
     
