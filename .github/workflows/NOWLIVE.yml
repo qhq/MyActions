@@ -36,7 +36,7 @@ jobs:
           npm install
       - name: "运行 【NOW直播】"
         run: |
-          node Scripts/baidu_speed_remote.js
+          node Scripts/NOWLIVE_remote.js
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
