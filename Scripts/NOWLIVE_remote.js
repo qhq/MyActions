@@ -32,11 +32,11 @@ async function changeFiele(content, cookie) {
     content = content.replace("const nowid = $.getdata(`now_qq`)", `const nowid = ${JSON.stringify(cookie.split("@")[0])};`)
     content = content.replace("const cookieVal =$.getdata(`nowqq_cookie`)", `const cookieVal = ${JSON.stringify(cookie.split("@")[1])};`)
     //content = content.replace(/require\(['|"].\/jdCookie\.js['|"]\)/, `{CookieJD:'${cookie}'}`)
-    content = content.replace(/\$\.msg\(\$\.name,signres,/g, "notify.sendNotify($.name,")
+    content = content.replace(/\$\.msg\(\$\.name,signres,/g, "notify.sendNotify($.name,signres + \\n +")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
