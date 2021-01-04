@@ -36,7 +36,7 @@ async function changeFiele(content, cookie) {
     content = content.replace(/if \(COOKIE\.qqreadbodyVal\) \{[\s\S]*?\}/g, "")
     content = content.replace(/Length = QQ_READ_COOKIES\.qqreadbodyVal\.length[\s\S]*?\}/g, "")
     //content = content.replace(/if \(COOKIE\.qqreadbodyVal\)/,"if (!$.isNode())")
-    content = content.replace(/if \(\!COOKIE\.qqreadbodyVal\)/,"if ($.isNode())")
+    content = content.replace(/if \(\!COOKIE\.qqreadbodyVal\)/g,"if ($.isNode())")
     //content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace(/(?:^|\n)console\.log\([\s\S]*?\);/g, "")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
