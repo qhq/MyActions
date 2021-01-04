@@ -28,22 +28,20 @@ async function downFile() {
 }
 
 async function changeFiele(content, cookie) {
-    //替换各种信息.
-    //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
-    //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
-    content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
+    //替换各种信息
+    content = content.replace("const BOX = 2;","const BOX = 1;")
+    content = content.replace(/const COOKIE.*?;/,"")
+    content = content.replace(/if \(COOKIE\.qqreadbodyVal\) \{[\s\S]*?\}/g, "")
+    content = content.replace(/Length = QQ_READ_COOKIES\.qqreadbodyVal\.length[\s\S]*?\}/g, "")
+    content = content.replace(/if \(\!COOKIE\.qqreadbodyVal\)/g,"if ($.isNode())")
+    content = content.replace(/(?:^|\n)console\.log\([\s\S]*?\);/g, "")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
-    //content = content.replace(/for (let i = 0; i < 13;[\s\S]*?})(i);/g,"async (resolve, reject")
-    //content = content.replace(/\(error, response, /g,"async (error, response, ")
-    //content = content.replace(/function \(/g,"async function (")
-    //content = content.replace("function all","async function all")
-    //content = content.replace(/(qqread[a-z0-9]*?\(\);)/g,"await $1")
-    //content = content.replace("showmsg();","await showmsg();")
-    //content = content.replace(/function showmsg/, `function showmsg() {notify.sendNotify(jsname, tz)}\nfunction GG`)
-    //content = content.replace(/  console[\s\S]*?\n.*?\);/g, "//")
-    //content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
+    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
+    content = content.replace(`let CASH = 0;`,"let CASH = 10;")
+    content = content.replace(`$.getval("qeCASH");`,"10;")
+    content = content.replace(/&&\n.*?nowTimes\.getHours\(\) == 23/g,"")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
@@ -68,13 +66,12 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
-            //await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
+            //await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
+            await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
         }
         console.log("执行完毕");
-        /*
         const path = "./result.txt";
         let result = "";
         if (fs.existsSync(path)) {
@@ -85,7 +82,6 @@ async function executeOneByOne() {
         //运行完成后，删除下载的文件
         console.log('运行完成后，删除下载的文件\n')
         await deleteFile(path);
-        */
     }
 }
 /*
@@ -119,7 +115,8 @@ async function msg(content) {
 async function start() {
     //console.log(`当前执行时间:${new Date().toString()}`);
     console.log(`国际时间 (UTC+00)：${new Date().toLocaleString('chinese',{hour12:false})}`)
-    console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString('chinese',{hour12:false})}\n`)
+    console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString('chinese',{hour12:false})}`)
+    console.log(`脚本引用：${Secrets.SyncUrl}\n`)
     if (!Secrets.COOKIE_QEYD) {
         console.log("请填写 COOKIE_QEYD 后在继续");
         return;
