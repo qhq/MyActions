@@ -37,8 +37,8 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
-    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
-    content = content.replace(`let CASH = 0;`,"let CASH = 10;")
+    //content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
+    content = content.replace(`CASH = ''`,"CASH = 10")
     content = content.replace(`$.getval("qeCASH");`,"10;")
     
     //替换源脚本中推送函数阻止推送
@@ -64,8 +64,8 @@ async function executeOneByOne() {
         await changeFiele(content, Cookies[i]);
         console.log("替换变量完毕");
         try {
-            //await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
-            await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
+            await exec("node execute.js", { stdio: "inherit" });//根据源脚本进行通知
+            //await exec("node execute.js >> result.txt")//根据返回内容判断进行通知
         } catch (e) {
             console.log("执行异常:" + e);
         }
