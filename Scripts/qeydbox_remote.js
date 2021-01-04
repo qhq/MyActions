@@ -43,7 +43,7 @@ async function changeFiele(content, cookie) {
     content = content.replace(`CASH = ''`,"CASH = 10")
     content = content.replace(`$.getval("qeCASH");`,"10;")
     
-    //content = content.replace("todayAmount}金币\\n`;","")
+    content = content.replace(/ if \(task.data.invite\.nextInviteConfig\) \{\n\s+tz \+=[\s\S]*?`【现金余额】[\s\S]*?kz \+=/g, "if (task.data.invite.nextInviteConfig) {\ntz +=")
                               
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
