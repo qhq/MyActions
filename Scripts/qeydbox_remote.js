@@ -1,7 +1,7 @@
 /*
 感谢sazs34大佬的替换思路和脚本https://github.com/sazs34
 感谢ZIYE制作的企鹅阅读脚本https://github.com/18u
-https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js
+https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreadnode.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
