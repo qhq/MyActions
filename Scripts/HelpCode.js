@@ -69,13 +69,6 @@ const ddfactory = [
     'T007_6UyE1QCjVWnYaS5kRrbA',
     'T0067bclFACjVWnYaS5kRrbA',
     'T020aUPImK6oLf1p9qBmQH2ICjVWnYaS5kRrbA',
-    'P04z54XCjVWnYaS5nRQSTOy',
-    'P04z54XCjVWnYaS5mZCXjQ',
-    'P04z54XCjVWnYaS5uK2s7hIbKTjK-6fud8f-Q',
-    'P04z54XCjVWnYaS5jQLAWH53XxLkjVYgM8',
-    'P04z54XCjVWnYaS5jQNCmH42nhKl9HN',
-    'P04z54XCjVWnYaS5m9cZ2f_2SlMkygZcp2b9vs',
-    'P04z54XCjVWnYaS5kN5dByNoy0UwvVHXeyTIQ',
 ];
 //京喜工厂
 const jxfactory = [
