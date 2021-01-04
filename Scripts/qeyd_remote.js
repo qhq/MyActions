@@ -32,6 +32,7 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/const notifyInterval=\d/, `const notifyInterval=3\nconst notify = $.isNode() ? require('./sendNotify') : '';`)
     //content = content.replace(/const notifyInterval = \d/, `const notifyInterval = 4`)
     //content = content.replace("user/clock_in/page","user/clock_in")
+    content = content.replace(/const COOKIE.*?;/,"")
     content = content.replace(/if \(\$\.isNode\(\)\)/, "if (!$.isNode())")
     content = content.replace(/(?:^|\n)console\.log\([\s\S]*?\);/g, "")
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
