@@ -30,7 +30,7 @@ async function downFile() {
 async function changeFiele(content, cookie) {
     //替换各种信息
     content = content.replace("const BOX = 2;","const BOX = 1;")
-    content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nconsole.log(`【距离开箱】：${task.data.treasureBox.timeInterval+5000} ms\\n`);\nawait $.wait(task.data.treasureBox.timeInterval+5000)\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
+    content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nconsole.log(`【距离开箱】：${task.data.treasureBox.timeInterval} ms\\n`);\nawait $.wait(task.data.treasureBox.timeInterval)\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
     content = content.replace(/const COOKIE.*?;/,"")
     content = content.replace(/if \(COOKIE\.qqreadbodyVal\) \{[\s\S]*?\}/g, "")
     content = content.replace(/Length = QQ_READ_COOKIES\.qqreadbodyVal\.length[\s\S]*?\}/g, "")
