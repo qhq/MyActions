@@ -66,6 +66,9 @@ const pet = [
 //东东工厂
 const ddfactory = [
     'http://api.turinglabs.net/api/v1/jd',
+    'T007_6UyE1QCjVWnYaS5kRrbA',
+    'T0067bclFACjVWnYaS5kRrbA',
+    'T020aUPImK6oLf1p9qBmQH2ICjVWnYaS5kRrbA',
     'P04z54XCjVWnYaS5nRQSTOy',
     'P04z54XCjVWnYaS5mZCXjQ',
     'P04z54XCjVWnYaS5uK2s7hIbKTjK-6fud8f-Q',
