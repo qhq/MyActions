@@ -40,6 +40,8 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
     content = content.replace(`CASH = ''`,"CASH = 10")
     content = content.replace(`$.getval("qeCASH");`,"10;")
+    content = content.replace("tz += `\n========== 【${info.data.user.nickName}】 ==========\n`;","tz += `========== 【${info.data.user.nickName}】 ==========\n`;")
+    content = content.replace("O = (`${jsname + (i + 1)}🔔`);","O = (`${jsname}🔔`);")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
