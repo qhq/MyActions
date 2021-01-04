@@ -42,7 +42,6 @@ async function changeFiele(content, cookie) {
     content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
     content = content.replace(`let CASH = 0;`,"let CASH = 10;")
     content = content.replace(`$.getval("qeCASH");`,"10;")
-    content = content.replace(/&&\n.*?nowTimes\.getHours\(\) == 23/g,"")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
