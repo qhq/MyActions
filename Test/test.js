@@ -48,7 +48,8 @@ async function changeFiele(content, cookie) {
     content = content.replace(`$.getval("qeCASH");`,"10;")
     
     //content = content.replace(/if \(task\.data\.invite\.nextInviteConfig\) \{\n\s+tz \+=[\s\S]*?`[\s\S]*?kz \+=/g, "if (task.data.invite.nextInviteConfig) {\ntz +=")
-    //content = content.replace(/nextInviteConfig\) \{\n/g, "nextInviteConfig) {\nzz +=")
+    content = content.replace(/tz \+=$/g, "zz +=")
+    content = content.replace(/kz \+=$/g, "tz +=")
     content = content.replace(`if (box.code == 0 && box.data.amount)`,"if (box.data === null){\ntz +=`【宝箱已被其他进程打开】\\n`;}\n else")
 
     //替换源脚本中推送函数阻止推送
