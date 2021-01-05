@@ -32,8 +32,8 @@ async function changeFiele(content, cookie) {
     content = content.replace("const BOX = 2;","const BOX = 1;")
     //content = content.replace("const notifyInterval = 2;","const notifyInterval = 0;")
     //content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait $.wait(task.data.treasureBox.timeInterval)\ntz += `${JSON.parse(task.data)}\\n`;\ntz += `【距离开箱】：${task.data.treasureBox.timeInterval} ms\\n`;\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
-    //content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait $.wait(task.data.treasureBox.timeInterval)\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
-    content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
+    content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait $.wait(task.data.treasureBox.timeInterval)\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
+    //content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
 
     content = content.replace(/const COOKIE.*?;/,"")
     content = content.replace(/if \(COOKIE\.qqreadbodyVal\) \{[\s\S]*?\}/g, "")
@@ -54,7 +54,7 @@ async function changeFiele(content, cookie) {
 
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -134,7 +134,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.COOKIE_QEYD.split("\n")[0].split("\n");
+    Cookies = Secrets.COOKIE_QEYD.split("\n");
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
