@@ -43,6 +43,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
     content = content.replace(/function showmsg/, `function showmsg() {console.log(kz)}\nfunction GG`)
     
+    content = content.replace(`if (box.code == 0 && box.data.amount)`,"tz +=`${JSON.stringify(box)}\\n`;\nif (box.data === null){\ntz +=`【宝箱已被其他进程打开】\\n`;}\n else")
     content = content.replace(`if (box.code == 0 && box.data.amount)`,"if (box.data === null){\ntz +=`【宝箱已被其他进程打开】\\n`;}\n else")
 
     //替换源脚本中推送函数阻止推送
