@@ -25,6 +25,8 @@ const bean = [
     'e7lhibzb3zek3a45h7xvd2d5yojljvem4wkofuq',
     'wrqpt6mmzjh2zaetyf5qe6sp6n4nisowve5p75q',
     '4npkonnsy7xi2uf7vpunmn6viubd7axcznqkczy',
+    '2vgtxj43q3jqydbqzirnsujhtlwfkh5e5ochaaa',
+    'aogye6x4cnc3oncls3tc7bpk3234in4sd6eb53y',
 ];
 //农场
 const farm = [
@@ -45,6 +47,8 @@ const farm = [
     'cf7513fe232e4fccbf4379ebaf7aab11',
     'fe64225268674b2da19e763feddf30ce',
     'e5995d6d96664eaaa7b5cad85d238563',
+    'c159443643c84e17948601cb1739169a',
+    'c159443643c84e17948601cb1739169a',
 ];
 //萌宠
 const pet = [
@@ -62,6 +66,8 @@ const pet = [
     'MTEzMzI0OTE0NTAwMDAwMDAzNjE4Nzc2Nw==',
     'MTE1NDQ5OTIwMDAwMDAwMzYyNjQ5NzE=',
     'MTE1NDAxNzgwMDAwMDAwNDMyNDc2MDU=',
+    'MTE1NDAxNzcwMDAwMDAwNDE0MTU0NDc=',
+    'MTE1NDQ5MzYwMDAwMDAwNDE2MTQ2NzE=',
 ];
 //东东工厂
 const ddfactory = [
@@ -76,6 +82,9 @@ const ddfactory = [
     'T0225KkcREga8QGCckn1wfUDIACjVWnYaS5kRrbA',
     'T0205KkcIH5ogAmJU0uT7K90CjVWnYaS5kRrbA',
     'T0225KkcRE8Z8gbfJRrwxvALcwCjVWnYaS5kRrbA',
+    'P04z54XCjVWnYaS5m9cZz2nhQ0XzPRRDvOzfw',
+    'P04z54XCjVWnYaS5m9cZxGjlzwx18Ytc_IMsA',
+    'P04z54XCjVWnYaS5m9cZwarvjsg6J9Y2BbNmQ',
 ];
 //京喜工厂
 const jxfactory = [
@@ -86,6 +95,9 @@ const jxfactory = [
     'yU8FNMmhr9YbwYeb9eHIZg==',
     'G6oPayj9gxX12TtQEgGctA==',
     'ctqXn5qRpj2D_LmJ8Gbl5g==',
+    'Zt_HKYxXH7oIMd-TCeS9Sg==',
+    'InLeZph-bni6cXpSL6JsSg==',
+    'XgPBnWm3nfHg4jGf4y3E0A==',
 ];
 //赚赚
 const jdzz = [
@@ -102,6 +114,9 @@ const jdzz = [
     'ACjZfnqyQzTQPD2SXnQ',
     'AUWE5mKqUmDMOW2T7iX1IkA',
     'ACjBUnq2XyTUKDmQ',
+    'S5KkcHUFBhAmOXEijxYx0',
+    'S5KkcMUVTtS-VeEWH44VN',
+    'S5KkcJk16sj6qfU2o8IBd',
 ];
 //合成joy
 const jdcrazyjoy = [
@@ -113,6 +128,9 @@ const jdcrazyjoy = [
     'ddS4sfcLgkRE496sBdaey6t9zd5YaBeE',
     'iguq7xHI7m74DZAG8baHtA==',
     'uQAx1MoBpNz-FCI2vzY__6t9zd5YaBeE',
+    'I_tM_Mqc8LwU_twczJADWQ==',
+    '6cQ8iL1CoWdrGzeLGoqcIA==',
+    'W82VymcxDD4dTShIkquYLg==',
 ];
 
 let url_HOST = '';
