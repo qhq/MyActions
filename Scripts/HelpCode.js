@@ -85,6 +85,7 @@ const jxfactory = [
     'rQ9y3IICZJp0aimFsMnUQg==',
     'yU8FNMmhr9YbwYeb9eHIZg==',
     'G6oPayj9gxX12TtQEgGctA==',
+    'ctqXn5qRpj2D_LmJ8Gbl5g==',
 ];
 //赚赚
 const jdzz = [
@@ -111,6 +112,7 @@ const jdcrazyjoy = [
     'EBO23Fi9flbZPS6NbTnbkQ==',
     'ddS4sfcLgkRE496sBdaey6t9zd5YaBeE',
     'iguq7xHI7m74DZAG8baHtA==',
+    'uQAx1MoBpNz-FCI2vzY__6t9zd5YaBeE',
 ];
 
 let url_HOST = '';
