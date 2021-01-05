@@ -30,7 +30,9 @@ async function downFile() {
 async function changeFiele(content, cookie) {
     //替换各种信息
     content = content.replace("const BOX = 2;","const BOX = 1;")
-    content = content.replace("const notifyInterval = 2;","const notifyInterval = 0;")
+    content = content.replace(/tz \+=$/, "zz +=")
+    content = content.replace(/kz \+=$/, "tz +=")
+    //content = content.replace("const notifyInterval = 2;","const notifyInterval = 0;")
     //content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait $.wait(task.data.treasureBox.timeInterval)\ntz += `${JSON.parse(task.data)}\\n`;\ntz += `【距离开箱】：${task.data.treasureBox.timeInterval} ms\\n`;\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
     //content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait $.wait(task.data.treasureBox.timeInterval)\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
     content = content.replace(/if \(BOX == 1\)[\s\S]*?if \(BOX == 2\)/g,"if (BOX == 1){\nif (nowTimes.getHours() === 0 && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 59)) {\nawait qqreadtrack();//更新\n}\nawait qqreadtask();//任务列表\nif (task.data && ljyd.doneFlag == 0) {\nawait qqreaddayread();//阅读任务\n}\nawait qqreadbox();//宝箱\nawait $.wait(4000)\nawait qqreadbox2();//宝箱翻倍\n}\nif (BOX == 2)")
@@ -48,8 +50,6 @@ async function changeFiele(content, cookie) {
     content = content.replace(`$.getval("qeCASH");`,"10;")
     
     //content = content.replace(/if \(task\.data\.invite\.nextInviteConfig\) \{\n\s+tz \+=[\s\S]*?`[\s\S]*?kz \+=/g, "if (task.data.invite.nextInviteConfig) {\ntz +=")
-    content = content.replace(/tz \+=$/, "zz +=")
-    content = content.replace(/kz \+=$/, "tz +=")
     content = content.replace(`if (box.code == 0 && box.data.amount)`,"if (box.data === null){\ntz +=`【宝箱已被其他进程打开】\\n`;}\n else")
 
     //替换源脚本中推送函数阻止推送
