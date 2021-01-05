@@ -43,13 +43,13 @@ async function changeFiele(content, cookie) {
     content = content.replace("let qqreadBD = [];", `let qqreadBD = [${JSON.stringify(cookie.split("@")[0])}];`)
     content = content.replace("let qqreadtimeURL = [];", `let qqreadtimeURL = [${JSON.stringify(cookie.split("@")[1])}];`)
     content = content.replace("let qqreadtimeHD = [];", `let qqreadtimeHD = [${JSON.stringify(cookie.split("@")[2])}];`)
-    content = content.replace(/function showmsg/, `function showmsg() {console.log(tz)}\nfunction GG`)
-    content = content.replace(`CASH = ''`,"CASH = 10")
-    content = content.replace(`$.getval("qeCASH");`,"10;")
+    content = content.replace(/function showmsg/, `function showmsg() {console.log(kz)}\nfunction GG`)
+    //content = content.replace(`CASH = ''`,"CASH = 10")
+    //content = content.replace(`$.getval("qeCASH");`,"10;")
     
     //content = content.replace(/if \(task\.data\.invite\.nextInviteConfig\) \{\n\s+tz \+=[\s\S]*?`[\s\S]*?kz \+=/g, "if (task.data.invite.nextInviteConfig) {\ntz +=")
-    content = content.replace(/tz \+=\n/, "zz +=\n")
-    content = content.replace(/kz \+=\n/, "tz +=\n")
+    //content = content.replace(/tz \+=\n/, "zz +=\n")
+    //content = content.replace(/kz \+=\n/, "tz +=\n")
     content = content.replace(`if (box.code == 0 && box.data.amount)`,"if (box.data === null){\ntz +=`【宝箱已被其他进程打开】\\n`;}\n else")
 
     //替换源脚本中推送函数阻止推送
