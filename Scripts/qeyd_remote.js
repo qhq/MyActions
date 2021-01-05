@@ -1,7 +1,7 @@
 /*
 感谢sazs34大佬的替换思路和脚本https://github.com/sazs34
 感谢ZIYE制作的企鹅阅读脚本https://github.com/18u
-https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js
+https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreadnode.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
@@ -41,7 +41,8 @@ async function changeFiele(content, cookie) {
     content = content.replace(`CASH = ''`,"CASH = 10")
     content = content.replace(`$.getval("qeCASH");`,"10;")
     content = content.replace("tz += `\n========== 【${info.data.user.nickName}】 ==========\n`;","tz += `========== 【${info.data.user.nickName}】 ==========\n`;")
-    content = content.replace("O = (`${jsname + (i + 1)}🔔`);","O = (`${jsname}🔔`);")
+    content = content.replace("O = (`${jsname + (i + 1)}🔔`);","O = (`${jsname}`);")
+    content = content.replace(/\$\.msg\(O, \"\", tz\);/g,`await notify.sendNotify(O, tz);`)
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
