@@ -75,6 +75,7 @@ const ddfactory = [
     'T020yIwPPGtnpAqAdUb1lvUCCjVWnYaS5kRrbA',
     'T0225KkcREga8QGCckn1wfUDIACjVWnYaS5kRrbA',
     'T0205KkcIH5ogAmJU0uT7K90CjVWnYaS5kRrbA',
+    'T0225KkcRE8Z8gbfJRrwxvALcwCjVWnYaS5kRrbA',
 ];
 //京喜工厂
 const jxfactory = [
