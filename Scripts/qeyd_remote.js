@@ -44,7 +44,7 @@ async function changeFiele(content, cookie) {
     content = content.replace("tz += `\n========== 【${info.data.user.nickName}】 ==========\n`;","tz += `========== 【${info.data.user.nickName}】 ==========\n`;")
     content = content.replace("O = (`${jsname + (i + 1)}🔔`);","O = (`${jsname}`);")
     //content = content.replace(/\$\.msg\(O, \"\", tz\);/g,`await notify.sendNotify(O, tz);`)
-    content = content.replace(/nowTimes\.getHours\(\) >= 23 \&\& \(nowTimes\.getMinutes\(\) >= 0 \&\& nowTimes\.getMinutes\(\) <= 59\)/g,"nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 10")
+    //content = content.replace(/nowTimes\.getHours\(\) >= 23 \&\& \(nowTimes\.getMinutes\(\) >= 0 \&\& nowTimes\.getMinutes\(\) <= 59\)/g,"nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 10")
     
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
