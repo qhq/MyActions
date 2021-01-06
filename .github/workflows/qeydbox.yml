@@ -40,7 +40,7 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
-          SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreadnode.js
+          SYNCURL: https://raw.githubusercontent.com/qhq/Self/master/Scripts/qe.js
           COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
       - name: "运行 【企鹅阅读开宝箱】"
         run: |
@@ -48,7 +48,7 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
-          SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreadnode.js
+          SYNCURL: https://raw.githubusercontent.com/qhq/Self/master/Scripts/qe.js
           COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
       - name: "运行 【企鹅阅读开宝箱】"
         run: |
@@ -56,7 +56,7 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
-          SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreadnode.js
+          SYNCURL: https://raw.githubusercontent.com/qhq/Self/master/Scripts/qe.js
           COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
       - name: "运行 【企鹅阅读开宝箱】"
         run: |
@@ -64,5 +64,5 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
-          SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreadnode.js
+          SYNCURL: https://raw.githubusercontent.com/qhq/Self/master/Scripts/qe.js
           COOKIE_QEYD: ${{ secrets.COOKIE_QEYD }}
