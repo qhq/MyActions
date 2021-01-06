@@ -1,34 +1,4 @@
 /*ziye
-******************************************************************************
-⚠️可N个账号，BOX 设置为0 日常任务，设置为1 单开宝箱，设置为2 完整功能  
-
-⚠️云函数固定ck则在 qqreadCOOKIE 文件里面填写ck，多账号换行
-
-qqreadCOOKIE地址 https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreadCOOKIE.js
-github地址     https://github.com/ziye12/JavaScript
-TG频道地址     https://t.me/ziyescript
-TG交流群       https://t.me/joinchat/AAAAAE7XHm-q1-7Np-tF3g
-boxjs链接      https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/ziye.boxjs.json
-另一版         https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js
-
-本人github地址     https://github.com/ziye12/JavaScript 
-转载请备注个名字，谢谢
-
-12.28 固定ck版,增加外部通知，默认12点以及23.40通知，解决宝箱翻倍问题，解决手机端运行异常问题
-12.28 解决通知问题，notifyInterval     0为关闭通知，1为所有通知，2为12 23 点通知  ， 3为 6 12 18 23 点通知 
-12.28 增加 无通知时打印通知
-12.29 修复手机通知问题，增加外部推送开关
-1.1 修复签到问题
-1.2 增加完整功能 兼容固定ck与boxjs以及变量版 
-1.3 增加ck失效提醒，并继续执行其他账号
-1.3 增加一个独立的cookie文件
-1.3 增加cookie获取时间显示
-1.4 单开宝箱不再ck失效提示，增加6点后显示今日收益
-1.5 调整宝箱策略，20分钟运行一次就行
-
-⚠️cookie获取方法：
-
-进 https://m.q.qq.com/a/s/d3eacc70120b9a37e46bad408c0c4c2a  点我的   获取cookie
 
 进一本书 看 10秒以下 然后退出，获取阅读时长cookie，看书一定不能超过10秒
 
@@ -64,13 +34,9 @@ http-request https:\/\/mqqapi\.reader\.qq\.com\/mqq\/addReadTimeWithBid? script-
 企鹅读书获取时长cookie = type=http-request,pattern=https:\/\/mqqapi\.reader\.qq\.com\/mqq\/addReadTimeWithBid?,script-path=https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js, 
 
 
-
 */
 
 const BOX = 2;//设置为0 日常任务，设置为1 单开宝箱，设置为2 完整功能版
-
-
-
 
 const jsname = '企鹅读书'
 const $ = Env(jsname)
