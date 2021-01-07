@@ -94,6 +94,7 @@ const jxfactory = [
     'rQ9y3IICZJp0aimFsMnUQg==',
     'yU8FNMmhr9YbwYeb9eHIZg==',
     'G6oPayj9gxX12TtQEgGctA==',
+    'SLuUULb8b6Dt3JR6ye39Yg',
     'ctqXn5qRpj2D_LmJ8Gbl5g==',
     'Zt_HKYxXH7oIMd-TCeS9Sg==',
     'InLeZph-bni6cXpSL6JsSg==',
