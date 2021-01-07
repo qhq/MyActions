@@ -94,6 +94,7 @@ const jxfactory = [
     'rQ9y3IICZJp0aimFsMnUQg==',
     'yU8FNMmhr9YbwYeb9eHIZg==',
     'G6oPayj9gxX12TtQEgGctA==',
+    'SLuUULb8b6Dt3JR6ye39Yg==',
     'ctqXn5qRpj2D_LmJ8Gbl5g==',
     'Zt_HKYxXH7oIMd-TCeS9Sg==',
     'InLeZph-bni6cXpSL6JsSg==',
@@ -116,7 +117,9 @@ const jdzz = [
     'ACjBUnq2XyTUKDmQ',
     'S5KkcHUFBhAmOXEijxYx0',
     'S5KkcMUVTtS-VeEWH44VN',
-    'S5KkcJk16sj6qfU2o8IBd',
+    'Sv_56QR8Z9VXQJx6b1A',
+    'S5KkcRxkdoFLRcx73wPYIcQ',
+    'Sv_hxQR4e8VTVJh4-VeEWH44VN',
 ];
 //合成joy
 const jdcrazyjoy = [
@@ -128,6 +131,7 @@ const jdcrazyjoy = [
     'ddS4sfcLgkRE496sBdaey6t9zd5YaBeE',
     'iguq7xHI7m74DZAG8baHtA==',
     'uQAx1MoBpNz-FCI2vzY__6t9zd5YaBeE',
+    'S5KkcJk16sj6qfU2o8IBd',
     'I_tM_Mqc8LwU_twczJADWQ==',
     '6cQ8iL1CoWdrGzeLGoqcIA==',
     'W82VymcxDD4dTShIkquYLg==',
