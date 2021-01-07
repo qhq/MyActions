@@ -47,4 +47,4 @@ jobs:
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
           # SYNCURL: https://raw.githubusercontent.com/lxk0301/jd_scripts/master/jd_get_share_code.js
-          JKD_COOKIE: ${{ secrets.JKD_COOKIE }}
+          JD_COOKIE: ${{ secrets.JD_COOKIE }}
