@@ -117,7 +117,9 @@ const jdzz = [
     'ACjBUnq2XyTUKDmQ',
     'S5KkcHUFBhAmOXEijxYx0',
     'S5KkcMUVTtS-VeEWH44VN',
-    'S5KkcJk16sj6qfU2o8IBd',
+    'Sv_56QR8Z9VXQJx6b1A',
+    'S5KkcRxkdoFLRcx73wPYIcQ',
+    'Sv_hxQR4e8VTVJh4-VeEWH44VN',
 ];
 //合成joy
 const jdcrazyjoy = [
