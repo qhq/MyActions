@@ -8,7 +8,7 @@ const codeName = ['bean', 'farm', 'pet', 'ddfactory', 'jxfactory', 'jdzz','jdcra
 
 //种豆
 const bean = [
-    'http://api.turinglabs.net/api/v1/jd',
+    'https://code.chiang.fun/api/v1/jd',
     'tzyicd7vcjefooqbns6eertieu',
     'vznl6lnj45ygubawzy4sypmk3wp7qavhgsxarra',
     'tz5ip676tqe53carnornx565fa3h7wlwy7o5jii',
@@ -30,7 +30,7 @@ const bean = [
 ];
 //农场
 const farm = [
-    'http://api.turinglabs.net/api/v1/jd',
+    'https://code.chiang.fun/api/v1/jd',
     '79e494c92d1343ba8d7fbb9029a43f0b',
     '49b53d7fbc024c74bc7d2874cfe45c8c',
     'e275b3382f994bbc95a83b11b1693b29',
@@ -52,7 +52,7 @@ const farm = [
 ];
 //萌宠
 const pet = [
-    'http://api.turinglabs.net/api/v1/jd',
+    'https://code.chiang.fun/api/v1/jd',
     'MTEzMzI0OTE0NTAwMDAwMDAzNjQ0Njg0MQ==',
     'MTE1NDAxNzcwMDAwMDAwMzU4ODkwNTU=',
     'MTE1NDQ5OTIwMDAwMDAwMzkzODEyNDE=',
@@ -71,7 +71,7 @@ const pet = [
 ];
 //东东工厂
 const ddfactory = [
-    'http://api.turinglabs.net/api/v1/jd',
+    'https://code.chiang.fun/api/v1/jd',
     'T007_6UyE1QCjVWnYaS5kRrbA',
     'T0067bclFACjVWnYaS5kRrbA',
     'T020aUPImK6oLf1p9qBmQH2ICjVWnYaS5kRrbA',
@@ -88,7 +88,7 @@ const ddfactory = [
 ];
 //京喜工厂
 const jxfactory = [
-    'http://api.turinglabs.net/api/v1/jd',
+    'https://code.chiang.fun/api/v1/jd',
     'aQ1lKXp1-Y68dsouERMI6A==',
     'IkI_Dbn9ZH-NZz68IYiyUA==',
     'rQ9y3IICZJp0aimFsMnUQg==',
