@@ -26,8 +26,7 @@ async function changeFiele(content, cookie) {
     content = content.replace(/XP_iboxpayHEADER/g,"COOKIE_XIAOPU")
     content = content.replace('$.isNode() ? require("./iboxpayCOOKIE") : ``;',"''")
 
-    content = content.replace(`CASH = ''`,"CASH = 10")
-    content = content.replace("CASH = process.env.QQREAD_CASH || 0;","CASH = 10;")
+    content = content.replace(`CASH = process.env.XP_CASH || 0;`,"CASH = 10;")
 
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
