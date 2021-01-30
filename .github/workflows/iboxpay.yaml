@@ -55,3 +55,4 @@ jobs:
           # 自定义参数
           SYNCURL: https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/iboxpay.js
           COOKIE_XIAOPU: ${{ secrets.COOKIE_XIAOPU }}
+          COOKIE_XPTOKEN: ${{ secrets.COOKIE_XPTOKEN }}
