@@ -25,6 +25,7 @@ async function changeFiele(content, cookie) {
     //替换各种信息.
     content = content.replace(/XP_iboxpayHEADER/g,"COOKIE_XIAOPU")
     content = content.replace(/XP_refreshTOKEN/g,"COOKIE_XIAOPU_TOKEN")
+    content = content.replace(/\.split\(\)/g,"")
     content = content.replace('$.isNode() ? require("./iboxpayCOOKIE") : ``;',"''")
     content = content.replace(`CASH = process.env.XP_CASH || 0;`,"CASH = 10;")
     content = content.replace(`const CS=6`,"const CS=6\nvideoPublishId3 = '';\nvideoPublishId4 = '';\nvideoPublishId5 = '';\nvideoPublishId6 = '';\n")
