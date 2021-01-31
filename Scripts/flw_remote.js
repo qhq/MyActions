@@ -26,8 +26,8 @@ async function changeFiele(content, cookie) {
     //content = content.replace(/XP_iboxpayHEADER/g,"FL_flwURL")
     //content = content.replace(/XP_refreshTOKEN/g,"COOKIE_XPTOKEN")
     content = content.replace('$.isNode() ? require("./flwCOOKIE") : ``;',"''")
-    content = content.replace(`CASH = process.env.XP_CASH || 0;`,"CASH = 1;")
-    content = content.replace(`LIVE = process.env.XP_live || 0;`,"LIVE = 60;")
+    content = content.replace(`CASH = process.env.FL_CASH || 0;`,"CASH = 0;")
+    content = content.replace(`DHCASH = process.env.FL_DHCASH || 0;`,"DHCASH = 0;")
 
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
