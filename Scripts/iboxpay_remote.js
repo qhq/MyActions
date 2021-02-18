@@ -1,5 +1,5 @@
 /*
-https://raw.githubusercontent.com/ziye12/JavaScript/main/Task/iboxpay.js
+https://raw.githubusercontent.com/ziye66666/JavaScript/main/Task/iboxpay.js
 */
 const exec = require("child_process").execSync;
 const fs = require("fs");
