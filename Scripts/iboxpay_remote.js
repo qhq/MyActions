@@ -27,7 +27,7 @@ async function changeFiele(content, cookie) {
     content = content.replace(/XP_refreshTOKEN/g,"COOKIE_XPTOKEN")
     //content = content.replace(/\.split\(\)/g,".split(COOKIES_SPLIT)")
     content = content.replace('$.isNode() ? require("./iboxpayCOOKIE") : ``;',"''")
-    content = content.replace(`CASH = process.env.XP_CASH || 0;`,"CASH = 15;")
+    content = content.replace(`CASH = process.env.XP_CASH || 0;`,"CASH = 1;")
     content = content.replace(`LIVE = process.env.XP_live || 0;`,"LIVE = 60;")
     //content = content.replace(`const CS=6`,"console.log(process.env.COOKIE_XPTOKEN)\nconst CS=6\nvideoPublishId3 = '';\nvideoPublishId4 = '';\nvideoPublishId5 = '';\nvideoPublishId6 = '';\n")
 
