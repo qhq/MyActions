@@ -11,7 +11,7 @@ const notify = $.isNode() ? require('../sendNotify') : '';
 // 公共变量
 const Secrets = {
     SyncUrl: process.env.SYNCURL, //签到地址,方便随时变动
-    COOKIE_XIAOPU: process.env.COOKIE_XIAOPU,
+    XP_refreshTOKEN: process.env.XP_refreshTOKEN,
 };
 let Cookies = [];
 
@@ -23,17 +23,18 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace(/XP_iboxpayvideoHEADER/g,"COOKIE_XIAOPU")
-    content = content.replace(/XP_refreshTOKEN/g,"COOKIE_XPTOKEN")
+    //content = content.replace(/XP_iboxpayvideoHEADER/g,"COOKIE_XIAOPU")
+    //content = content.replace(/XP_refreshTOKEN/g,"COOKIE_XPTOKEN")
     //content = content.replace(/\.split\(\)/g,".split(COOKIES_SPLIT)")
-    content = content.replace('$.isNode() ? require("./iboxpayCOOKIE") : ``;',"''")
+    //content = content.replace('$.isNode() ? require("./iboxpayCOOKIE") : ``;',"''")
     content = content.replace(`CASH = process.env.XP_CASH || 0;`,"CASH = 1;")
     content = content.replace(`LIVE = process.env.XP_live || 0;`,"LIVE = 60;")
+    //content = content.replace(`sms = process.env.XP_sms || 0;`,"sms = 0;")
     //content = content.replace(`const CS=6`,"console.log(process.env.COOKIE_XPTOKEN)\nconst CS=6\nvideoPublishId3 = '';\nvideoPublishId4 = '';\nvideoPublishId5 = '';\nvideoPublishId6 = '';\n")
 
     //替换源脚本中推送函数阻止推送
     //content = content.replace("require('./sendNotify')", "{sendNotify:function(){},serverNotify:function(){},BarkNotify:function(){},tgBotNotify:function(){},ddBotNotify:function(){},iGotNotify:function(){}}")
-    console.log(content);
+    //console.log(content);
     await fs.writeFileSync('./execute.js', content, 'utf8')
 }
 
@@ -113,7 +114,7 @@ async function start() {
         console.log("请填写 SYNCURL 后在继续");
         return;
     }
-    Cookies = Secrets.COOKIE_XIAOPU.split("\n");
+    Cookies = Secrets.XP_refreshTOKEN.split("\n");
     console.log(`当前共${Cookies.length}个账号需要执行`);
     // 下载最新代码
     await downFile();
