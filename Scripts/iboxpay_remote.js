@@ -106,8 +106,8 @@ async function start() {
     console.log(`国际时间 (UTC+00)：${new Date().toLocaleString('chinese',{hour12:false})}`)
     console.log(`北京时间 (UTC+08)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString('chinese',{hour12:false})}`)
     console.log(`脚本引用：${Secrets.SyncUrl}\n`)
-    if (!Secrets.COOKIE_XIAOPU) {
-        console.log("请填写 COOKIE_XIAOPU 后在继续");
+    if (!Secrets.XP_refreshTOKEN) {
+        console.log("请填写 XP_refreshTOKEN 后在继续");
         return;
     }
     if (!Secrets.SyncUrl) {
