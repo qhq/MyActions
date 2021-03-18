@@ -55,3 +55,5 @@ jobs:
           # 自定义参数
           SYNCURL: https://raw.githubusercontent.com/6Svip120apk69/gitee_q8qsTAUA_cThxc1RBVUE/main/Task/iboxpay.js
           XP_refreshTOKEN: ${{ github.event.client_payload.XP_refreshTOKEN || secrets.XP_refreshTOKEN }}
+          XP_iboxpayvideoHEADER: ${{ github.event.client_payload.XP_iboxpayvideoHEADER || secrets.XP_iboxpayvideoHEADER }}
+          XP_iboxpayvideoBODY: ${{ github.event.client_payload.XP_iboxpayvideoBODY || secrets.XP_iboxpayvideoBODY }}
