@@ -23,7 +23,7 @@ async function downFile() {
 
 async function changeFiele(content, cookie) {
     //替换各种信息.
-    content = content.replace(/XP_iboxpayHEADER/g,"COOKIE_XIAOPU")
+    content = content.replace(/XP_iboxpayvideoHEADER/g,"COOKIE_XIAOPU")
     content = content.replace(/XP_refreshTOKEN/g,"COOKIE_XPTOKEN")
     //content = content.replace(/\.split\(\)/g,".split(COOKIES_SPLIT)")
     content = content.replace('$.isNode() ? require("./iboxpayCOOKIE") : ``;',"''")
